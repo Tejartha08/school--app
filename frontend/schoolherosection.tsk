@@ -1,0 +1,253 @@
+import React, { useRef, useEffect, useState } from 'react';
+import { Globe, ArrowRight, Instagram, Twitter } from 'lucide-react';
+
+const VIDEO_URL =
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4';
+
+export const HeroSection: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const fadeAnimRef = useRef<number | null>(null);
+  const fadingOutRef = useRef<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+
+  // Cancel any running animation frame safely
+  const cancelRunningAnimation = () => {
+    if (fadeAnimRef.current !== null) {
+      cancelAnimationFrame(fadeAnimRef.current);
+      fadeAnimRef.current = null;
+    }
+  };
+
+  // rAF-based custom fade function
+  const fadeVideo = (targetOpacity: number, duration: number, onComplete?: () => void) => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    cancelRunningAnimation();
+
+    const startOpacity = parseFloat(video.style.opacity || '0');
+    const opacityDiff = targetOpacity - startOpacity;
+
+    if (Math.abs(opacityDiff) < 0.001) {
+      video.style.opacity = targetOpacity.toString();
+      if (onComplete) onComplete();
+      return;
+    }
+
+    let startTime: number | null = null;
+
+    const animateStep = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const currentOpacity = startOpacity + opacityDiff * progress;
+      if (video) {
+        video.style.opacity = currentOpacity.toString();
+      }
+
+      if (progress < 1) {
+        fadeAnimRef.current = requestAnimationFrame(animateStep);
+      } else {
+        if (video) {
+          video.style.opacity = targetOpacity.toString();
+        }
+        fadeAnimRef.current = null;
+        if (onComplete) onComplete();
+      }
+    };
+
+    fadeAnimRef.current = requestAnimationFrame(animateStep);
+  };
+
+  // Video looping and fade listener setup
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.style.opacity = '0';
+    fadingOutRef.current = false;
+
+    const handleLoadedData = () => {
+      fadeVideo(1, 500);
+    };
+
+    const handleTimeUpdate = () => {
+      if (!video.duration || isNaN(video.duration)) return;
+
+      const timeRemaining = video.duration - video.currentTime;
+
+      // Trigger 500ms fade-out when 0.55s remain before video ends
+      if (timeRemaining <= 0.55 && !fadingOutRef.current) {
+        fadingOutRef.current = true;
+        fadeVideo(0, 500);
+      }
+    };
+
+    const handleEnded = () => {
+      cancelRunningAnimation();
+      if (video) {
+        video.style.opacity = '0';
+        setTimeout(() => {
+          if (video) {
+            video.currentTime = 0;
+            fadingOutRef.current = false;
+            video.play().catch(() => {});
+            fadeVideo(1, 500);
+          }
+        }, 100);
+      }
+    };
+
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('ended', handleEnded);
+
+    return () => {
+      cancelRunningAnimation();
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('ended', handleEnded);
+    };
+  }, []);
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    alert(`Subscribed with: ${email}`);
+    setEmail('');
+  };
+
+  return (
+    <div className="relative min-h-screen bg-black overflow-hidden flex flex-col justify-between">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          ref={videoRef}
+          src={VIDEO_URL}
+          autoPlay
+          muted
+          playsInline
+          className="w-full h-full object-cover translate-y-[17%]"
+          style={{ opacity: 0 }}
+        />
+      </div>
+
+      {/* Navigation Bar */}
+      <header className="relative z-20 pl-6 pr-6 py-6 w-full">
+        <nav className="liquid-glass rounded-full px-6 py-3 flex items-center justify-between max-w-5xl mx-auto w-full">
+          {/* Left Side: Logo & Navigation */}
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-2">
+              <Globe className="text-white w-6 h-6" size={24} />
+              <span className="text-white font-semibold text-lg">Asme</span>
+            </div>
+
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#features" className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                Features
+              </a>
+              <a href="#pricing" className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                Pricing
+              </a>
+              <a href="#about" className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                About
+              </a>
+            </div>
+          </div>
+
+          {/* Right Side: Auth Action Buttons */}
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              className="text-white text-sm font-medium hover:text-white/80 transition-colors"
+            >
+              Sign Up
+            </button>
+            <button
+              type="button"
+              className="liquid-glass rounded-full px-6 py-2 text-white text-sm font-medium hover:bg-white/5 transition-colors"
+            >
+              Login
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Hero Content Area */}
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-12 text-center -translate-y-[20%]">
+        {/* Main Heading */}
+        <h1
+          className="text-5xl md:text-6xl lg:text-7xl text-white mb-8 tracking-tight whitespace-nowrap"
+          style={{ fontFamily: "'Instrument Serif', serif" }}
+        >
+          Built for the curious
+        </h1>
+
+        {/* Input Bar & Subtitle Container */}
+        <div className="max-w-xl w-full space-y-4">
+          {/* Email Subscription Bar */}
+          <form onSubmit={handleEmailSubmit} className="liquid-glass rounded-full pl-6 pr-2 py-2 flex items-center gap-3 w-full">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="bg-transparent border-none outline-none text-white placeholder:text-white/40 text-base w-full focus:ring-0"
+              required
+            />
+            <button
+              type="submit"
+              aria-label="Submit Email"
+              className="bg-white rounded-full p-3 text-black hover:bg-white/90 transition-colors flex-shrink-0"
+            >
+              <ArrowRight size={20} />
+            </button>
+          </form>
+
+          {/* Subtitle Text */}
+          <p className="text-white text-sm leading-relaxed px-4">
+            Stay updated with the latest news and insights. Subscribe to our newsletter today and never miss out on exciting updates.
+          </p>
+
+          {/* Manifesto Button */}
+          <div className="pt-2">
+            <button
+              type="button"
+              className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors inline-block"
+            >
+              Manifesto
+            </button>
+          </div>
+        </div>
+      </main>
+
+      {/* Social Icons Footer */}
+      <footer className="relative z-10 flex justify-center gap-4 pb-12">
+        <button
+          type="button"
+          aria-label="Instagram"
+          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
+        >
+          <Instagram size={20} />
+        </button>
+        <button
+          type="button"
+          aria-label="Twitter"
+          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
+        >
+          <Twitter size={20} />
+        </button>
+        <button
+          type="button"
+          aria-label="Globe Website"
+          className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all"
+        >
+          <Globe size={20} />
+        </button>
+      </footer>
+    </div>
+  );
+};
+
+export default HeroSection;

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Jude's Academy - School ERP Portal</title>
+
+  <!-- Google Font: Instrument Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Liquid Glass UI */
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.01);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: none;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.45) 0%,
+        rgba(255, 255, 255, 0.15) 20%,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 0.15) 80%,
+        rgba(255, 255, 255, 0.45) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.75rem;
+      color: #94a3b8;
+      transition: all 0.15s;
+    }
+    .sidebar-link:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+    .sidebar-link.active {
+      background-color: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen selection:bg-indigo-500 selection:text-white font-sans">
+
+  <!-- ==================== VIEW 1: HERO LANDING PAGE ==================== -->
+  <div id="landingView" class="relative min-h-screen overflow-hidden flex flex-col justify-between">
+    
+    <!-- Background Video -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <video
+        id="bgVideo"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
+        autoplay
+        muted
+        playsinline
+        class="w-full h-full object-cover translate-y-[17%]"
+        style="opacity: 0;"
+      ></video>
+    </div>
+
+    <!-- Glassmorphic Header Navigation -->
+    <header class="relative z-20 px-6 py-6 w-full">
+      <nav class="liquid-glass rounded-full px-6 py-3 flex items-center justify-between max-w-5xl mx-auto w-full">
+        <div class="flex items-center gap-8">
+          <div class="flex items-center gap-2">
+            <i data-lucide="graduation-cap" class="text-white w-6 h-6"></i>
+            <span class="text-white font-semibold text-lg">St. Jude's Academy</span>
+          </div>
+          <div class="hidden md:flex items-center gap-8">
+            <button type="button" onclick="openAuthModal('login')" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Portals</button>
+            <button type="button" onclick="openAuthModal('signup')" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Academics</button>
+            <button type="button" onclick="openAuthModal('login')" class="text-white/80 hover:text-white transition-colors text-sm font-medium">About</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button type="button" onclick="openAuthModal('signup')" class="text-white text-sm font-medium hover:text-white/80 transition-colors">Sign Up</button>
+          <button type="button" onclick="openAuthModal('login')" class="liquid-glass rounded-full px-6 py-2 text-white text-sm font-medium hover:bg-white/5 transition-colors">Login</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Bottom-Left Hero Content -->
+    <main class="relative z-20 max-w-7xl mx-auto w-full px-6 pb-16 pt-32 flex flex-col justify-end flex-1">
+      <div class="max-w-2xl space-y-6 text-left">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold uppercase tracking-wider text-indigo-300">
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+          Unified School Management System
+        </div>
+
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-serif tracking-tight leading-[1.05]">
+          Built for student progress.
+        </h1>
+
+        <p class="text-white text-sm sm:text-base leading-relaxed max-w-xl font-light">
+          A unified school progress tracking network connecting Administrators, Teachers, Students, and Parents to monitor daily attendance, grades, and real-time growth.
+        </p>
+
+        <div class="pt-2">
+          <button type="button" onclick="openAuthModal('login')" class="liquid-glass rounded-full px-8 py-3.5 text-white text-sm font-semibold hover:bg-white/10 transition-all shadow-lg">
+            Access ERP Portal
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Social Footer -->
+    <footer class="relative z-10 flex justify-center gap-4 pb-12">
+      <button aria-label="Instagram" class="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
+        <i data-lucide="instagram" class="w-5 h-5"></i>
+      </button>
+      <button aria-label="Twitter" class="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
+        <i data-lucide="twitter" class="w-5 h-5"></i>
+      </button>
+      <button aria-label="Globe Website" class="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
+        <i data-lucide="globe" class="w-5 h-5"></i>
+      </button>
+    </footer>
+  </div>
+
+
+  <!-- ==================== VIEW 2: AUTHENTICATION MODAL ==================== -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="bg-slate-900 border border-white/10 p-8 rounded-3xl shadow-2xl w-full max-w-md relative">
+      <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Auth Tabs -->
+      <div class="flex border-b border-gray-800 mb-6">
+        <button type="button" id="loginTabBtn" onclick="switchAuthTab('login')" class="flex-1 py-2 font-semibold text-center text-indigo-400 border-b-2 border-indigo-500">Sign In</button>
+        <button type="button" id="signupTabBtn" onclick="switchAuthTab('signup')" class="flex-1 py-2 font-semibold text-center text-gray-400 border-b-2 border-transparent">Sign Up</button>
+      </div>
+
+      <!-- Login Section -->
+      <div id="loginSection" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Email / Username</label>
+          <input type="text" id="loginEmail" placeholder="e.g. Adith or admin@school.com" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Role</label>
+          <select id="loginRole" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm">
+            <option value="ADMIN">Admin / CEO (Full Access)</option>
+            <option value="TEACHER">Teacher Portal</option>
+            <option value="PARENT">Parent Portal</option>
+            <option value="STUDENT">Student Portal</option>
+          </select>
+        </div>
+        <button type="button" onclick="executeLogin()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-sm transition-all shadow-lg">Authenticate & Access</button>
+      </div>
+
+      <!-- Sign Up Section -->
+      <div id="signupSection" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Full Name</label>
+          <input type="text" id="signupName" placeholder="e.g. Adith" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Email Address</label>
+          <input type="email" id="signupEmail" placeholder="Enter any email address" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Password</label>
+          <input type="password" id="signupPassword" placeholder="Enter any password" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Role</label>
+          <select id="signupRole" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm">
+            <option value="ADMIN">Admin / CEO</option>
+            <option value="TEACHER">Teacher</option>
+            <option value="PARENT">Parent</option>
+            <option value="STUDENT">Student</option>
+          </select>
+        </div>
+        <button type="button" onclick="executeSignUp()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-sm transition-all shadow-lg">Register Account</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== VIEW 3: DYNAMIC ERP DASHBOARD ==================== -->
+  <div id="dashboardView" class="hidden min-h-screen bg-slate-950 flex flex-col">
+    <!-- Navbar Header -->
+    <header class="bg-slate-900 border-b border-slate-800 px-8 py-4 flex justify-between items-center sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <i data-lucide="graduation-cap" class="text-indigo-400 w-7 h-7"></i>
+        <div>
+          <h1 class="text-lg font-bold text-white leading-tight">School ERP Portal</h1>
+          <p id="roleBadge" class="text-xs font-semibold text-indigo-400 tracking-wider uppercase">ADMIN DASHBOARD</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <span id="userNameDisplay" class="text-sm font-medium text-slate-300">Welcome Back, User</span>
+        <button type="button" onclick="handleSignOut()" class="px-4 py-2 text-xs bg-red-600/80 hover:bg-red-600 rounded-lg text-white font-semibold transition-colors">
+          Sign Out
+        </button>
+      </div>
+    </header>
+
+    <!-- Dashboard Body -->
+    <div class="flex flex-1">
+      <!-- Sidebar Navigation -->
+      <aside class="w-64 bg-slate-900/50 border-r border-slate-800 p-4 hidden md:block shrink-0">
+        <nav class="space-y-1 text-sm" id="sidebarMenu">
+          <!-- Injected dynamically based on user role -->
+        </nav>
+      </aside>
+
+      <!-- Main Canvas -->
+      <main class="flex-1 p-8 overflow-y-auto" id="mainCanvas">
+        <!-- Rendered dynamically based on active tab -->
+      </main>
+    </div>
+  </div>
+
+
+  <!-- ==================== JAVASCRIPT SYSTEM ==================== -->
+  <script>
+    const API_BASE_URL = 'http://127.0.0.1:8000';
+    let currentUserRole = 'ADMIN';
+
+    // Shared storage for homework assignments
+    if (!localStorage.getItem('erp_homework_list')) {
+      const defaultHomework = [
+        { id: 1, title: 'Physics: Wave Optics Lab Report', teacher: 'Dr. Sarah Jenkins', dueDate: 'August 18, 2026', status: 'Pending Review' },
+        { id: 2, title: 'Calculus Worksheet Chapter 4', teacher: 'Mrs. Clara Barton', dueDate: 'August 15, 2026', status: 'Completed (Grade: A+)' }
+      ];
+      localStorage.setItem('erp_homework_list', JSON.stringify(defaultHomework));
+    }
+
+    // Shared storage for teacher exam alerts
+    if (!localStorage.getItem('erp_exam_alerts')) {
+      const defaultExams = [
+        { id: 1, title: 'Term 1 Midterm Exam', subject: 'Physics 101', date: 'August 22, 2026', teacher: 'Dr. Sarah Jenkins', status: 'Scheduled' },
+        { id: 2, title: 'FA-1 Assessment Test', subject: 'Advanced Mathematics', date: 'August 28, 2026', teacher: 'Mrs. Clara Barton', status: 'Upcoming' }
+      ];
+      localStorage.setItem('erp_exam_alerts', JSON.stringify(defaultExams));
+    }
+
+    lucide.createIcons();
+
+    // Video Fade Handler
+    const video = document.getElementById('bgVideo');
+    let fadeAnimId = null;
+    let isFadingOut = false;
+
+    function cancelRunningAnimation() {
+      if (fadeAnimId !== null) {
+        cancelAnimationFrame(fadeAnimId);
+        fadeAnimId = null;
+      }
+    }
+
+    function fadeVideo(targetOpacity, duration, onComplete) {
+      cancelRunningAnimation();
+      const startOpacity = parseFloat(video.style.opacity || '0');
+      const opacityDiff = targetOpacity - startOpacity;
+
+      if (Math.abs(opacityDiff) < 0.001) {
+        video.style.opacity = targetOpacity;
+        if (onComplete) onComplete();
+        return;
+      }
+
+      let startTime = null;
+
+      function animateStep(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        video.style.opacity = startOpacity + opacityDiff * progress;
+
+        if (progress < 1) {
+          fadeAnimId = requestAnimationFrame(animateStep);
+        } else {
+          video.style.opacity = targetOpacity;
+          fadeAnimId = null;
+          if (onComplete) onComplete();
+        }
+      }
+
+      fadeAnimId = requestAnimationFrame(animateStep);
+    }
+
+    if (video) {
+      video.addEventListener('loadeddata', () => fadeVideo(1, 500));
+      video.addEventListener('timeupdate', () => {
+        if (!video.duration || isNaN(video.duration)) return;
+        const timeRemaining = video.duration - video.currentTime;
+        if (timeRemaining <= 0.55 && !isFadingOut) {
+          isFadingOut = true;
+          fadeVideo(0, 500);
+        }
+      });
+      video.addEventListener('ended', () => {
+        cancelRunningAnimation();
+        video.style.opacity = '0';
+        setTimeout(() => {
+          video.currentTime = 0;
+          isFadingOut = false;
+          video.play().catch(() => {});
+          fadeVideo(1, 500);
+        }, 100);
+      });
+    }
+
+    function openAuthModal(tab = 'login') {
+      document.getElementById('authModal').classList.remove('hidden');
+      switchAuthTab(tab);
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.add('hidden');
+    }
+
+    function switchAuthTab(tab) {
+      const loginSec = document.getElementById('loginSection');
+      const signupSec = document.getElementById('signupSection');
+      const loginTabBtn = document.getElementById('loginTabBtn');
+      const signupTabBtn = document.getElementById('signupTabBtn');
+
+      if (tab === 'login') {
+        loginSec.classList.remove('hidden');
+        signupSec.classList.add('hidden');
+        loginTabBtn.className = 'flex-1 py-2 font-semibold text-center text-indigo-400 border-b-2 border-indigo-500';
+        signupTabBtn.className = 'flex-1 py-2 font-semibold text-center text-gray-400 border-b-2 border-transparent';
+      } else {
+        loginSec.classList.add('hidden');
+        signupSec.classList.remove('hidden');
+        signupTabBtn.className = 'flex-1 py-2 font-semibold text-center text-indigo-400 border-b-2 border-indigo-500';
+        loginTabBtn.className = 'flex-1 py-2 font-semibold text-center text-gray-400 border-b-2 border-transparent';
+      }
+    }
+
+    async function executeSignUp() {
+      const name = document.getElementById('signupName').value.trim() || 'User';
+      const role = document.getElementById('signupRole').value || 'ADMIN';
+
+      localStorage.setItem('erp_user', name);
+      localStorage.setItem('erp_role', role);
+      localStorage.setItem('erp_token', 'active-session');
+
+      closeAuthModal();
+      loadERPDashboard();
+    }
+
+    async function executeLogin() {
+      const email = document.getElementById('loginEmail').value.trim() || 'Adith';
+      const role = document.getElementById('loginRole').value || 'ADMIN';
+      const userName = email.includes('@') ? email.split('@')[0] : email;
+
+      localStorage.setItem('erp_user', userName);
+      localStorage.setItem('erp_role', role);
+      localStorage.setItem('erp_token', 'active-session');
+
+      closeAuthModal();
+      loadERPDashboard();
+    }
+
+    function handleSignOut() {
+      localStorage.clear();
+      document.getElementById('dashboardView').classList.add('hidden');
+      document.getElementById('landingView').classList.remove('hidden');
+    }
+
+    function loadERPDashboard() {
+      currentUserRole = localStorage.getItem('erp_role') || 'ADMIN';
+      const user = localStorage.getItem('erp_user') || 'User';
+
+      document.getElementById('landingView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('hidden');
+
+      document.getElementById('userNameDisplay').innerText = `Welcome Back, ${user}`;
+      document.getElementById('roleBadge').innerText = `${currentUserRole} DASHBOARD`;
+
+      buildSidebar(currentUserRole);
+    }
+
+    // Dynamic Navigation Builder
+    function buildSidebar(role) {
+      const menu = document.getElementById('sidebarMenu');
+      let links = [];
+
+      if (role === 'ADMIN') {
+        links = [
+          { key: 'dashboard', label: 'Dashboard Overview', icon: 'layout-dashboard' },
+          { key: 'students_grade', label: 'Grade-Wise Students', icon: 'users' },
+          { key: 'student_info_search', label: 'Student Information Search', icon: 'search' },
+          { key: 'teachers', label: 'Teachers Directory', icon: 'user-check' },
+          { key: 'teacher_attendance', label: 'Teacher Attendance Tracking', icon: 'calendar-check' },
+          { key: 'admin_fees_grade', label: 'Grade-Wise Fees & Revenue', icon: 'credit-card' },
+          { key: 'exams_reports', label: 'Exams & Teacher Alerts', icon: 'file-spreadsheet' }
+        ];
+      } else if (role === 'TEACHER') {
+        links = [
+          { key: 'dashboard', label: 'Teacher Overview', icon: 'layout-dashboard' },
+          { key: 'assigned_classes', label: 'Assigned Classes & Timings', icon: 'clock' },
+          { key: 'attendance_select', label: 'Class Attendance Register', icon: 'calendar-check' },
+          { key: 'marks_grades', label: 'Marks & Student Gradebook', icon: 'file-text' },
+          { key: 'teacher_reports', label: 'Reports & Student Performance', icon: 'line-chart' },
+          { key: 'fa_sa_cards', label: 'FA/SA & Annual Report Cards', icon: 'award' },
+          { key: 'homework_assign', label: 'Assign Homework & Alerts', icon: 'briefcase' }
+        ];
+      } else if (role === 'PARENT') {
+        links = [
+          { key: 'dashboard', label: 'Child Overview', icon: 'layout-dashboard' },
+          { key: 'parent_performance', label: 'Reports & Student Performance', icon: 'activity' },
+          { key: 'term_fees', label: 'Term-Wise Fees & Payments', icon: 'credit-card' },
+          { key: 'fa_sa_parent', label: 'FA, SA & Annual Report Cards', icon: 'award' },
+          { key: 'homework_projects', label: 'Homework & Projects', icon: 'briefcase' }
+        ];
+      } else { // STUDENT - Homework Removed
+        links = [
+          { key: 'dashboard', label: 'Student Overview', icon: 'layout-dashboard' },
+          { key: 'subject_courses', label: 'Subject Courses', icon: 'book-open' },
+          { key: 'fa_sa_parent', label: 'My Report Card & Grades', icon: 'award' }
+        ];
+      }
+
+      menu.innerHTML = links.map(link => `
+        <button onclick="renderView('${link.key}')" id="nav_${link.key}" class="sidebar-link w-full text-left">
+          <i data-lucide="${link.icon}" class="w-4 h-4"></i>
+          <span>${link.label}</span>
+        </button>
+      `).join('');
+
+      lucide.createIcons();
+      renderView('dashboard');
+    }
+
+    // Canvas Engine
+    function renderView(viewKey) {
+      document.querySelectorAll('.sidebar-link').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`nav_${viewKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const canvas = document.getElementById('mainCanvas');
+      const user = localStorage.getItem('erp_user') || 'User';
+
+      // 1. OVERVIEW SCREENS
+      if (viewKey === 'dashboard') {
+        if (currentUserRole === 'STUDENT') {
+          canvas.innerHTML = `
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">Student Progress & Learning Portal</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Academic Attendance</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">96.5%</p></div>
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Enrolled Subjects</p><p class="text-3xl font-extrabold text-indigo-400 mt-1">6 Courses</p></div>
+                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+              </div>
+            </div>
+          `;
+        } else if (currentUserRole === 'TEACHER') {
+          canvas.innerHTML = `
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">Faculty Instruction Panel (Grade 5 to Grade 10)</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Assigned Classes</p><p class="text-3xl font-extrabold text-white mt-1">6 Active Sections</p></div>
+                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Today's Class Schedule</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">Up to Date</p></div>
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="clock" class="w-6 h-6"></i></div>
+              </div>
+            </div>
+          `;
+        } else if (currentUserRole === 'PARENT') {
+          canvas.innerHTML = `
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">Parent Overview for Marcus Jenkins (Grade 10-A)</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <span class="text-xs font-semibold uppercase text-slate-400">Child Attendance</span>
+                <p class="text-3xl font-extrabold text-emerald-400 mt-2">98.5% Present</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <span class="text-xs font-semibold uppercase text-slate-400">Term Academic Standing</span>
+                <p class="text-3xl font-extrabold text-indigo-400 mt-2">GPA 9.25 / 10.0</p>
+              </div>
+            </div>
+          `;
+        } else { // ADMIN
+          canvas.innerHTML = `
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">School Management Administration Panel</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Students Enrolled</p><p class="text-3xl font-extrabold text-white mt-1">1,500</p></div>
+                <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Teachers On Duty</p><p class="text-3xl font-extrabold text-white mt-1">120</p></div>
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-3xl font-extrabold text-white mt-1">₹12,50,000</p></div>
+                <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-6 h-6"></i></div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // 2. TEACHER: ASSIGNED CLASSES & DAILY TIMINGS
+      else if (viewKey === 'assigned_classes') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Daily Schedule</h2><p class="text-xs text-slate-400 mt-1">Up-to-date daily timetable for Grade 5 to Grade 10</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 5 - Section A</h3><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-semibold">Completed Today</span></div>
+              <p class="text-xs text-slate-400">Subject: Science & General Knowledge</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Daily Timing: 08:30 AM - 09:30 AM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 8 - Section B</h3><span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-semibold">Next Session</span></div>
+              <p class="text-xs text-slate-400">Subject: Physics Fundamentals</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Daily Timing: 10:00 AM - 11:00 AM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 10 - Section A</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Afternoon Session</span></div>
+              <p class="text-xs text-slate-400">Subject: Advanced Wave Optics</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Daily Timing: 01:30 PM - 02:30 PM</p>
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. TEACHER: SEPARATE DROPDOWNS (GRADE, SECTION, SUBJECT)
+      else if (viewKey === 'attendance_select') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Classroom Attendance Register</h2><p class="text-xs text-slate-400 mt-1">Separate dropdown filters for Grade (5-10), Section, and Subject</p></div>
+          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl mb-6 flex flex-wrap gap-4 items-center">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Select Grade</label>
+              <select class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option>Grade 5</option><option>Grade 6</option><option>Grade 7</option>
+                <option>Grade 8</option><option>Grade 9</option><option selected>Grade 10</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Select Section</label>
+              <select class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option>Section A</option><option>Section B</option><option>Section C</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Select Subject</label>
+              <select class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option>Physics 101</option><option>Mathematics</option><option>General Science</option>
+              </select>
+            </div>
+            <button class="mt-5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 font-semibold text-white rounded-xl text-xs">Load Student List</button>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No.</th><th class="p-3">Student Name</th><th class="p-3">Grade & Section</th><th class="p-3">Status</th><th class="p-3">Action</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-mono">101</td><td class="p-3 font-bold text-white">Marcus Jenkins</td><td class="p-3">Grade 10 - Sec A</td><td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-semibold">Present</span></td><td class="p-3"><button class="px-3 py-1 bg-slate-800 text-xs rounded-lg text-slate-300">Toggle</button></td></tr>
+                <tr><td class="p-3 font-mono">102</td><td class="p-3 font-bold text-white">Raju Baithi</td><td class="p-3">Grade 10 - Sec A</td><td class="p-3"><span class="px-2.5 py-1 bg-red-500/20 text-red-400 rounded-full font-semibold">Absent</span></td><td class="p-3"><button class="px-3 py-1 bg-slate-800 text-xs rounded-lg text-slate-300">Toggle</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 4. TEACHER: MARKS & GRADES (GRADE 5 TO 10 DROPDOWN)
+      else if (viewKey === 'marks_grades') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Gradebook (Grade 5 to Grade 10)</h2><p class="text-xs text-slate-400 mt-1">Open student list to evaluate and assign marks</p></div>
+          
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl mb-6 flex flex-wrap gap-4">
+            <select class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+              <option>Grade 5</option><option>Grade 6</option><option>Grade 7</option>
+              <option>Grade 8</option><option>Grade 9</option><option selected>Grade 10</option>
+            </select>
+            <select class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option>Section A</option><option>Section B</option></select>
+            <select class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option>Physics 101</option><option>Mathematics</option></select>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 class="font-bold text-white text-sm">Students Marks Allocation List</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Marks (Out of 100)</th><th class="p-3">Grade</th><th class="p-3">Action</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr>
+                  <td class="p-3 font-mono">101</td>
+                  <td class="p-3 font-bold text-white">Marcus Jenkins</td>
+                  <td class="p-3"><input type="number" value="95" class="w-20 p-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white" /></td>
+                  <td class="p-3"><input type="text" value="A+" class="w-16 p-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white" /></td>
+                  <td class="p-3"><button class="px-3 py-1 bg-indigo-600 text-white rounded-lg text-xs">Save Grade</button></td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-mono">102</td>
+                  <td class="p-3 font-bold text-white">Raju Baithi</td>
+                  <td class="p-3"><input type="number" value="88" class="w-20 p-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white" /></td>
+                  <td class="p-3"><input type="text" value="A" class="w-16 p-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white" /></td>
+                  <td class="p-3"><button class="px-3 py-1 bg-indigo-600 text-white rounded-lg text-xs">Save Grade</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 5. TEACHER & PARENT: REPORTS & PERFORMANCE (ACCURACY REMOVED)
+      else if (viewKey === 'teacher_reports' || viewKey === 'parent_performance') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Reports & Student Performance</h2><p class="text-xs text-slate-400 mt-1">Detailed cumulative reports and performance analytics</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Cumulative Academic Standing</p><p class="text-4xl font-extrabold text-indigo-400 mt-2">GPA 9.25</p><p class="text-xs text-slate-500 mt-1">Rank 1 in Section A</p></div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Attendance Consistency</p><p class="text-4xl font-extrabold text-white mt-1">98.5%</p><p class="text-xs text-slate-500 mt-1">1 Excused Absence</p></div>
+          </div>
+        `;
+      }
+
+      // 6. FA, SA & ANNUAL REPORT CARDS
+      else if (viewKey === 'fa_sa_cards' || viewKey === 'fa_sa_parent') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">FA, SA & Annual Report Cards</h2><p class="text-xs text-slate-400 mt-1">Formative Assessments (FA), Summative Assessments (SA) & Final Annual Report Card</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Assessment Type</th><th class="p-3">Physics</th><th class="p-3">Mathematics</th><th class="p-3">Computer Science</th><th class="p-3">Overall Result</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">FA - 1 (Formative Assessment)</td><td class="p-3">24 / 25</td><td class="p-3">23 / 25</td><td class="p-3">25 / 25</td><td class="p-3 text-emerald-400 font-bold">Grade A+</td></tr>
+                <tr><td class="p-3 font-bold text-white">FA - 2 (Formative Assessment)</td><td class="p-3">23 / 25</td><td class="p-3">24 / 25</td><td class="p-3">24 / 25</td><td class="p-3 text-emerald-400 font-bold">Grade A+</td></tr>
+                <tr><td class="p-3 font-bold text-white">SA - 1 (Summative Assessment)</td><td class="p-3">94 / 100</td><td class="p-3">91 / 100</td><td class="p-3">98 / 100</td><td class="p-3 text-emerald-400 font-bold">Grade A+</td></tr>
+                <tr class="bg-indigo-950/40"><td class="p-3 font-bold text-indigo-300">Annual Report Card Result</td><td class="p-3 font-bold text-white">94%</td><td class="p-3 font-bold text-white">92%</td><td class="p-3 font-bold text-white">98%</td><td class="p-3 text-emerald-400 font-black text-sm">PASSED (Distinction)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 7. TEACHER ASSIGN HOMEWORK
+      else if (viewKey === 'homework_assign') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assign Homework & Post Exam Alerts</h2><p class="text-xs text-slate-400 mt-1">Assignments created here immediately sync to Parent and Student dashboards</p></div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+              <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-2">Assign Homework</h3>
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Homework Title</label><input type="text" id="hwTitleInput" placeholder="e.g. Optics Wave Equation Problems" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" /></div>
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Due Date</label><input type="text" id="hwDueInput" placeholder="August 25, 2026" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" /></div>
+              <button onclick="postTeacherHomework()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 font-semibold text-white rounded-xl text-xs">Assign & Sync</button>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+              <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-2">Post Teacher Exam Alert (Syncs with Admin)</h3>
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Exam Title</label><input type="text" id="examTitleInput" placeholder="e.g. Physics SA-2 Exam" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" /></div>
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Scheduled Date</label><input type="text" id="examDateInput" placeholder="September 10, 2026" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" /></div>
+              <button onclick="postTeacherExamAlert()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 font-semibold text-white rounded-xl text-xs">Publish Exam Alert</button>
+            </div>
+          </div>
+        `;
+      }
+
+      // 8. PARENT: HOMEWORK & PROJECTS
+      else if (viewKey === 'homework_projects') {
+        const homeworkList = JSON.parse(localStorage.getItem('erp_homework_list') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Homework & Projects</h2><p class="text-xs text-slate-400 mt-1">Live active tasks assigned by subject teachers</p></div>
+          <div class="space-y-4">
+            ${homeworkList.map(hw => `
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex justify-between items-center shadow-xl">
+                <div>
+                  <h4 class="font-bold text-white text-base">${hw.title}</h4>
+                  <p class="text-xs text-slate-400 mt-1">Instructor: ${hw.teacher} • Due: ${hw.dueDate}</p>
+                </div>
+                <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-xs font-semibold">${hw.status}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 9. PARENT: TERM-WISE FEES
+      else if (viewKey === 'term_fees') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Tuition Fees</h2><p class="text-xs text-slate-400 mt-1">Structured term payment records and outstanding dues</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <h3 class="font-bold text-white text-base">Term 1 Fees</h3>
+              <p class="text-2xl font-extrabold text-emerald-400 mt-2">₹15,000</p>
+              <span class="inline-block mt-3 px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">Paid (Receipt #402)</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <h3 class="font-bold text-white text-base">Term 2 Fees</h3>
+              <p class="text-2xl font-extrabold text-amber-400 mt-2">₹15,000</p>
+              <span class="inline-block mt-3 px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full">Due: August 30, 2026</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <h3 class="font-bold text-white text-base">Term 3 Fees</h3>
+              <p class="text-2xl font-extrabold text-slate-400 mt-2">₹15,000</p>
+              <span class="inline-block mt-3 px-3 py-1 bg-slate-800 text-slate-400 text-xs font-semibold rounded-full">Upcoming (Dec 2026)</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 10. ADMIN: GRADE-WISE FEES & REVENUE COLLECTION (UPDATED ONLY THIS)
+      else if (viewKey === 'admin_fees_grade') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Fees & Revenue Collection</h2><p class="text-xs text-slate-400 mt-1">Breakdown of grade collection, overall collection, actual revenue due, and pending balances</p></div>
+          
+          <!-- Top Overall Summary Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+              <p class="text-xs text-slate-400 font-bold uppercase">Overall Collection</p>
+              <p class="text-4xl font-extrabold text-emerald-400 mt-2">₹12,50,000</p>
+              <p class="text-xs text-slate-500 mt-1">Realized payments in bank account</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+              <p class="text-xs text-slate-400 font-bold uppercase">Actual Revenue Due</p>
+              <p class="text-4xl font-extrabold text-indigo-400 mt-2">₹15,00,000</p>
+              <p class="text-xs text-slate-500 mt-1">Total billed fees across Grade 5 to Grade 10</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+              <p class="text-xs text-slate-400 font-bold uppercase">Pending to be Collected</p>
+              <p class="text-4xl font-extrabold text-red-400 mt-2">₹2,50,000</p>
+              <p class="text-xs text-slate-500 mt-1">Remaining balance to be settled</p>
+            </div>
+          </div>
+
+          <!-- Grade-Wise Fee Breakdown Table -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h3 class="font-bold text-white text-sm mb-4">Grade-Wise Fee Collection Breakdown</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Grade</th><th class="p-3">Students Count</th><th class="p-3">Actual Revenue Due</th><th class="p-3">Collection Realized</th><th class="p-3">Pending Balance</th><th class="p-3">Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">Grade 5</td><td class="p-3">250</td><td class="p-3">₹2,50,000</td><td class="p-3 text-emerald-400 font-bold">₹2,20,000</td><td class="p-3 text-red-400 font-bold">₹30,000</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">88% Paid</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 6</td><td class="p-3">250</td><td class="p-3">₹2,50,000</td><td class="p-3 text-emerald-400 font-bold">₹2,10,000</td><td class="p-3 text-red-400 font-bold">₹40,000</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">84% Paid</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 7</td><td class="p-3">250</td><td class="p-3">₹2,50,000</td><td class="p-3 text-emerald-400 font-bold">₹2,05,000</td><td class="p-3 text-red-400 font-bold">₹45,000</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">82% Paid</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 8</td><td class="p-3">250</td><td class="p-3">₹2,50,000</td><td class="p-3 text-emerald-400 font-bold">₹2,15,000</td><td class="p-3 text-red-400 font-bold">₹35,000</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">86% Paid</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 9</td><td class="p-3">250</td><td class="p-3">₹2,50,000</td><td class="p-3 text-emerald-400 font-bold">₹2,00,000</td><td class="p-3 text-red-400 font-bold">₹50,000</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">80% Paid</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 10</td><td class="p-3">250</td><td class="p-3">₹2,50,000</td><td class="p-3 text-emerald-400 font-bold">₹2,00,000</td><td class="p-3 text-red-400 font-bold">₹50,000</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">80% Paid</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 11. ADMIN: GRADE-WISE STUDENTS
+      else if (viewKey === 'students_grade') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Students Directory</h2><p class="text-xs text-slate-400 mt-1">Filter and view enrolled students by grade and section</p></div>
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl mb-6 flex gap-4">
+            <select class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option>Grade 10 - Sec A</option><option>Grade 10 - Sec B</option></select>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Grade & Section</th><th class="p-3">Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-mono">101</td><td class="p-3 font-bold text-white">Marcus Jenkins</td><td class="p-3">Grade 10 - Sec A</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">Active</span></td></tr>
+                <tr><td class="p-3 font-mono">102</td><td class="p-3 font-bold text-white">Raju Baithi</td><td class="p-3">Grade 10 - Sec A</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">Active</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 12. ADMIN: STUDENT INFORMATION SEARCH
+      else if (viewKey === 'student_info_search') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Information Search</h2><p class="text-xs text-slate-400 mt-1">Select grade and section followed by roll number to fetch detailed record</p></div>
+          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 max-w-2xl">
+            <div class="grid grid-cols-3 gap-4">
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Select Grade</label><select class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option>Grade 10</option></select></div>
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Select Section</label><select class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option>Section A</option></select></div>
+              <div><label class="block text-xs font-semibold text-slate-400 mb-1">Roll Number</label><input type="text" placeholder="101" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" /></div>
+            </div>
+            <button class="px-5 py-2.5 bg-indigo-600 font-semibold text-white rounded-xl text-xs">Search Student Record</button>
+          </div>
+        `;
+      }
+
+      // 13. ADMIN: TEACHER ATTENDANCE TRACKING
+      else if (viewKey === 'teacher_attendance') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Attendance Tracking</h2><p class="text-xs text-slate-400 mt-1">Monitor daily presence logs for faculty members</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Faculty Name</th><th class="p-3">Department</th><th class="p-3">Today Status</th><th class="p-3">Punch In Time</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">Dr. Sarah Jenkins</td><td class="p-3">Physics Department</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">On Duty</span></td><td class="p-3">08:45 AM</td></tr>
+                <tr><td class="p-3 font-bold text-white">Prof. Alan Turing</td><td class="p-3">Computer Science</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">On Duty</span></td><td class="p-3">08:50 AM</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 14. ADMIN: EXAMS & TEACHER ALERTS SYNC
+      else if (viewKey === 'exams_reports') {
+        const examAlerts = JSON.parse(localStorage.getItem('erp_exam_alerts') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Exams & Teacher Alerts</h2><p class="text-xs text-slate-400 mt-1">Live updates posted by teachers automatically sync here</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Exam Title</th><th class="p-3">Subject</th><th class="p-3">Posted By Teacher</th><th class="p-3">Scheduled Date</th><th class="p-3">Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${examAlerts.map(ex => `
+                  <tr>
+                    <td class="p-3 font-bold text-white">${ex.title}</td>
+                    <td class="p-3">${ex.subject}</td>
+                    <td class="p-3 text-indigo-300 font-medium">${ex.teacher}</td>
+                    <td class="p-3">${ex.date}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">${ex.status}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'teachers') {
+        canvas.innerHTML = `<div class="mb-6"><h2 class="text-2xl font-bold text-white">Teachers Directory</h2></div>`;
+      }
+      else {
+        canvas.innerHTML = `<div class="p-8 text-center text-slate-400"><h2 class="text-xl font-bold text-white mb-2">${viewKey.toUpperCase()} Module</h2><p class="text-xs text-slate-500">Access granted under ${currentUserRole} portal permissions.</p></div>`;
+      }
+
+      lucide.createIcons();
+    }
+
+    // Post handlers
+    function postTeacherHomework() {
+      const title = document.getElementById('hwTitleInput').value || 'New Assignment Task';
+      const dueDate = document.getElementById('hwDueInput').value || 'August 28, 2026';
+      const teacher = localStorage.getItem('erp_user') || 'Dr. Sarah Jenkins';
+
+      const homeworkList = JSON.parse(localStorage.getItem('erp_homework_list') || '[]');
+      homeworkList.unshift({ id: Date.now(), title, teacher, dueDate, status: 'Pending Review' });
+      localStorage.setItem('erp_homework_list', JSON.stringify(homeworkList));
+
+      alert('Homework posted! Synchronized on Parent and Student dashboards.');
+      renderView('homework_assign');
+    }
+
+    function postTeacherExamAlert() {
+      const title = document.getElementById('examTitleInput').value || 'Midterm Assessment';
+      const date = document.getElementById('examDateInput').value || 'September 15, 2026';
+      const teacher = localStorage.getItem('erp_user') || 'Dr. Sarah Jenkins';
+
+      const examAlerts = JSON.parse(localStorage.getItem('erp_exam_alerts') || '[]');
+      examAlerts.unshift({ id: Date.now(), title, subject: 'Physics & Science', date, teacher, status: 'Scheduled' });
+      localStorage.setItem('erp_exam_alerts', JSON.stringify(examAlerts));
+
+      alert('Exam alert posted! Updated in Admin Exams & Reports section.');
+      renderView('homework_assign');
+    }
+
+    if (localStorage.getItem('erp_token')) {
+      loadERPDashboard();
+    }
+  </script>
+</body>
+</html>
