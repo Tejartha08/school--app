@@ -90,29 +90,31 @@
       ></video>
     </div>
 
-    <!-- Glassmorphic Header Navigation -->
-    <header class="relative z-20 px-4 sm:px-6 py-4 sm:py-6 w-full">
-      <nav class="liquid-glass rounded-full px-4 sm:px-6 py-3 flex items-center justify-between max-w-5xl mx-auto w-full">
-        <div class="flex items-center gap-4 sm:gap-8">
+    <!-- Glassmorphic Header Navigation (Fully Visible on Mobile & Desktop) -->
+    <header class="relative z-20 px-3 sm:px-6 py-4 sm:py-6 w-full">
+      <nav class="liquid-glass rounded-3xl sm:rounded-full px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center justify-between max-w-5xl mx-auto w-full gap-3 sm:gap-0">
+        <div class="flex items-center justify-between w-full sm:w-auto">
           <div class="flex items-center gap-2">
             <i data-lucide="graduation-cap" class="text-white w-5 h-5 sm:w-6 sm:h-6"></i>
-            <span class="text-white font-semibold text-base sm:text-lg">St. Jude's Academy</span>
+            <span class="text-white font-semibold text-sm sm:text-lg">St. Jude's Academy</span>
           </div>
-          <div class="hidden md:flex items-center gap-8">
-            <button type="button" onclick="openAuthModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Portals</button>
-            <button type="button" onclick="openAcademicsModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Academics</button>
-            <button type="button" onclick="openAboutModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">About</button>
-          </div>
+          <button type="button" onclick="openAuthModal()" class="sm:hidden liquid-glass rounded-full px-3 py-1.5 text-white text-[11px] font-medium">Portal Login</button>
         </div>
 
-        <div class="flex items-center gap-2 sm:gap-4">
+        <div class="flex items-center justify-center gap-4 sm:gap-8 w-full sm:w-auto text-xs sm:text-sm font-medium">
+          <button type="button" onclick="openAuthModal()" class="text-white/80 hover:text-white transition-colors">Portals</button>
+          <button type="button" onclick="openAcademicsModal()" class="text-white/80 hover:text-white transition-colors">Academics</button>
+          <button type="button" onclick="openAboutModal()" class="text-white/80 hover:text-white transition-colors">About</button>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2 sm:gap-4">
           <button type="button" onclick="openAuthModal()" class="liquid-glass rounded-full px-4 sm:px-6 py-2 text-white text-xs sm:text-sm font-medium hover:bg-white/5 transition-colors">Portal Login</button>
         </div>
       </nav>
     </header>
 
     <!-- Hero Content -->
-    <main class="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pb-12 sm:pb-16 pt-20 sm:pt-32 flex flex-col justify-end flex-1">
+    <main class="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pb-12 sm:pb-16 pt-12 sm:pt-32 flex flex-col justify-end flex-1">
       <div class="max-w-2xl space-y-4 sm:space-y-6 text-left">
         <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-indigo-300">
           <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
@@ -197,7 +199,7 @@
       <div class="flex items-center gap-3 mb-4">
         <i data-lucide="book-open" class="text-indigo-400 w-8 h-8"></i>
         <div>
-          <h2 class="text-2xl font-bold text-white">Academic Program & Curriculum</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Academic Program & Curriculum</h2>
           <p class="text-xs text-slate-400">St. Jude's Academy Educational Framework (Grades 5–10)</p>
         </div>
       </div>
@@ -231,7 +233,7 @@
       <div class="flex items-center gap-3 mb-4">
         <i data-lucide="award" class="text-amber-400 w-8 h-8"></i>
         <div>
-          <h2 class="text-2xl font-bold text-white">About St. Jude's Academy</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">About St. Jude's Academy</h2>
           <p class="text-xs text-slate-400">Our Heritage, Vision & Leadership History</p>
         </div>
       </div>
@@ -249,7 +251,7 @@
 
         <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
           <h3 class="font-bold text-sm text-amber-300 mb-1">Campus Infrastructure</h3>
-          <p>Equipped with state-of-the-art computer labs, digital smart classrooms, modern science facilities, and a integrated ERP tracking system connecting parents, teachers, and administration.</p>
+          <p>Equipped with state-of-the-art computer labs, digital smart classrooms, modern science facilities, and an integrated ERP tracking system connecting parents, teachers, and administration.</p>
         </div>
       </div>
     </div>
@@ -645,7 +647,6 @@
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Complaints</h2><p class="text-xs text-slate-400 mt-1">Submit disciplinary or academic complaints directly to parents.</p></div>
           
-          <!-- Add Complaint Form -->
           <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
             <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="alert-circle" class="w-4 h-4"></i> Issue New Complaint</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -663,7 +664,6 @@
             <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Submit Complaint to Parent</button>
           </div>
 
-          <!-- Existing Complaints Log -->
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
             <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Active Complaints Log</h3>
             <table class="w-full text-left text-xs text-slate-300">
@@ -688,7 +688,7 @@
       // ================= PARENT COMPLAINTS & REPLIES MODULE =================
       else if (viewKey === 'parent_complaints') {
         const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
-        const childComplaints = complaintList.filter(c => c.rollNo === '101'); // Filtered for Marcus Jenkins (Parent P-101)
+        const childComplaints = complaintList.filter(c => c.rollNo === '101');
 
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers and reply directly.</p></div>
@@ -718,7 +718,6 @@
         `;
       }
 
-      // Admin, Parent, Student views
       else if (viewKey === 'students_grade') {
         const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
         canvas.innerHTML = `
