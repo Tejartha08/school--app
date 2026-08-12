@@ -100,8 +100,8 @@
           </div>
           <div class="hidden md:flex items-center gap-8">
             <button type="button" onclick="openAuthModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Portals</button>
-            <button type="button" onclick="openAuthModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Academics</button>
-            <button type="button" onclick="openAuthModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">About</button>
+            <button type="button" onclick="openAcademicsModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Academics</button>
+            <button type="button" onclick="openAboutModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">About</button>
           </div>
         </div>
 
@@ -111,7 +111,7 @@
       </nav>
     </header>
 
-    <!-- Bottom-Left Hero Content -->
+    <!-- Hero Content -->
     <main class="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pb-12 sm:pb-16 pt-20 sm:pt-32 flex flex-col justify-end flex-1">
       <div class="max-w-2xl space-y-4 sm:space-y-6 text-left">
         <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-indigo-300">
@@ -150,20 +150,20 @@
   </div>
 
 
-  <!-- ==================== VIEW 2: MOBILE-OPTIMIZED LOGIN MODAL ==================== -->
+  <!-- ==================== VIEW 2: MODALS ==================== -->
+
+  <!-- LOGIN MODAL -->
   <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md">
     <div class="bg-slate-900 border border-white/10 p-5 sm:p-8 rounded-3xl shadow-2xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
       <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
       </button>
 
-      <!-- Single Sign In Header -->
       <div class="mb-4 sm:mb-6">
         <h3 class="text-xl sm:text-2xl font-bold text-white">ERP Portal Login</h3>
         <p class="text-xs text-slate-400 mt-1">Sign in with your Roll No, ID Number, Parent ID, or Admin Email.</p>
       </div>
 
-      <!-- Single Login Form -->
       <div class="space-y-3 sm:space-y-4">
         <div>
           <label class="block text-[11px] sm:text-xs font-semibold text-gray-400 uppercase mb-1">ID Number / Roll No / Email</label>
@@ -174,7 +174,6 @@
           <input type="password" id="loginPassword" placeholder="••••••••" class="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-xs sm:text-sm" />
         </div>
         
-        <!-- Role Credential Guide Box -->
         <div class="p-3 sm:p-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-[11px] sm:text-xs text-slate-300 space-y-1.5">
           <p class="font-bold text-white text-[11px] sm:text-xs border-b border-slate-700 pb-1">Role Login Credentials:</p>
           <p>• <strong class="text-amber-400">Admin/CEO:</strong> <span class="font-mono text-slate-200">admin@school.com</span> (<span class="font-mono text-slate-400">admin123</span>)</p>
@@ -184,6 +183,74 @@
         </div>
 
         <button type="button" onclick="executeLogin()" class="w-full py-3 sm:py-3.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-xs sm:text-sm transition-all shadow-lg">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACADEMICS MODAL -->
+  <div id="academicsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl w-full max-w-2xl relative max-h-[85vh] overflow-y-auto">
+      <button type="button" onclick="closeAcademicsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <i data-lucide="book-open" class="text-indigo-400 w-8 h-8"></i>
+        <div>
+          <h2 class="text-2xl font-bold text-white">Academic Program & Curriculum</h2>
+          <p class="text-xs text-slate-400">St. Jude's Academy Educational Framework (Grades 5–10)</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
+          <h3 class="font-bold text-sm text-indigo-300 mb-1">General Science & Practical Labs</h3>
+          <p>Comprehensive curriculum covering Physics, Chemistry, and Biology fundamentals with hands-on weekly laboratory sessions designed for Grades 5 through 10.</p>
+        </div>
+
+        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
+          <h3 class="font-bold text-sm text-indigo-300 mb-1">Social Studies & Civics</h3>
+          <p>Focused on Modern History, World Geography, Constitutional Civics, and Environmental Studies to nurture responsible global citizens.</p>
+        </div>
+
+        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
+          <h3 class="font-bold text-sm text-indigo-300 mb-1">Assessment System (FA & SA)</h3>
+          <p>Continuous evaluation combining 4 Formative Assessments (FA1–FA4) and 2 Summative Assessments (SA1, SA2) to measure conceptual clarity and academic mastery.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT MODAL -->
+  <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="bg-slate-900 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl w-full max-w-2xl relative max-h-[85vh] overflow-y-auto">
+      <button type="button" onclick="closeAboutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <i data-lucide="award" class="text-amber-400 w-8 h-8"></i>
+        <div>
+          <h2 class="text-2xl font-bold text-white">About St. Jude's Academy</h2>
+          <p class="text-xs text-slate-400">Our Heritage, Vision & Leadership History</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
+          <h3 class="font-bold text-sm text-amber-300 mb-1">Establishment & Legacy (1995)</h3>
+          <p>Founded in 1995, St. Jude's Academy has spent over three decades delivering holistic education, fostering academic excellence, and developing leadership capabilities across thousands of students.</p>
+        </div>
+
+        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
+          <h3 class="font-bold text-sm text-amber-300 mb-1">Our Core Mission</h3>
+          <p>To empower every young learner with critical thinking, ethical integrity, and modern technological tools needed to excel in higher education and global careers.</p>
+        </div>
+
+        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
+          <h3 class="font-bold text-sm text-amber-300 mb-1">Campus Infrastructure</h3>
+          <p>Equipped with state-of-the-art computer labs, digital smart classrooms, modern science facilities, and a integrated ERP tracking system connecting parents, teachers, and administration.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -211,17 +278,17 @@
 
     <!-- Dashboard Body -->
     <div class="flex flex-col md:flex-row flex-1">
-      <!-- Mobile Sub-Menu Navigation -->
+      <!-- Mobile Navigation -->
       <div class="md:hidden bg-slate-900/80 border-b border-slate-800 p-2 overflow-x-auto whitespace-nowrap">
         <div class="flex gap-2 text-xs" id="mobileSidebarMenu">
-          <!-- Mobile links injected dynamically -->
+          <!-- Mobile links -->
         </div>
       </div>
 
       <!-- Desktop Sidebar Navigation -->
       <aside class="w-64 bg-slate-900/50 border-r border-slate-800 p-4 hidden md:block shrink-0">
         <nav class="space-y-1 text-sm" id="sidebarMenu">
-          <!-- Desktop links injected dynamically -->
+          <!-- Desktop links -->
         </nav>
       </aside>
 
@@ -237,7 +304,39 @@
   <script>
     let currentUserRole = 'ADMIN';
 
-    // System Credentials Mapping Specific Credentials for Each Role
+    // Preloaded Local Databases
+    if (!localStorage.getItem('erp_students')) {
+      const initialStudents = [
+        { id: "101", name: "Marcus Jenkins", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Robert Jenkins" },
+        { id: "102", name: "Sophia Miller", grade: "10", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "David Miller" },
+        { id: "103", name: "Ethan Davis", grade: "9", section: "A", attendance: "94.2%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Sarah Davis" },
+        { id: "104", name: "Ava Wilson", grade: "8", section: "A", attendance: "97.1%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "James Wilson" },
+        { id: "105", name: "Liam Brown", grade: "7", section: "B", attendance: "92.8%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "Michael Brown" },
+        { id: "106", name: "Olivia Taylor", grade: "6", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Emma Taylor" },
+        { id: "107", name: "Noah Anderson", grade: "5", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Daniel Anderson" },
+        { id: "108", name: "Raju B", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Raju" }
+      ];
+      localStorage.setItem('erp_students', JSON.stringify(initialStudents));
+    }
+
+    if (!localStorage.getItem('erp_teachers')) {
+      const initialTeachers = [
+        { id: "T-501", name: "Dr. Sarah Jenkins", subject: "Science & Physics", grade: "Grade 8 - 10", email: "sarah.j@school.com" },
+        { id: "T-502", name: "Mrs. Clara Barton", subject: "Mathematics", grade: "Grade 9 - 10", email: "clara.b@school.com" },
+        { id: "T-503", name: "Mr. Arthur Pendelton", subject: "Social Studies & History", grade: "Grade 5 - 8", email: "arthur.p@school.com" },
+        { id: "T-504", name: "Ms. Elena Rostova", subject: "English Literature", grade: "Grade 5 - 10", email: "elena.r@school.com" }
+      ];
+      localStorage.setItem('erp_teachers', JSON.stringify(initialTeachers));
+    }
+
+    if (!localStorage.getItem('erp_complaints')) {
+      const initialComplaints = [
+        { id: 1, rollNo: "101", studentName: "Marcus Jenkins", teacherName: "Dr. Sarah Jenkins", date: "August 10, 2026", issue: "Incomplete Physics homework submission for Chapter 3.", parentReply: "Apologies, Dr. Sarah. Marcus will complete and submit it by tomorrow morning." },
+        { id: 2, rollNo: "102", studentName: "Sophia Miller", teacherName: "Mrs. Clara Barton", date: "August 11, 2026", issue: "Arrived 20 minutes late for class assessment.", parentReply: "" }
+      ];
+      localStorage.setItem('erp_complaints', JSON.stringify(initialComplaints));
+    }
+
     const credentialDirectory = [
       { id: "admin@school.com", alias: "ceo@school.com", name: "Executive Admin / CEO", role: "ADMIN" },
       { id: "t-501", alias: "teacher@school.com", name: "Dr. Sarah Jenkins (ID: T-501)", role: "TEACHER" },
@@ -247,7 +346,7 @@
 
     lucide.createIcons();
 
-    // Video Fade Handler
+    // Video Handler
     const video = document.getElementById('bgVideo');
     let fadeAnimId = null;
     let isFadingOut = false;
@@ -312,15 +411,16 @@
       });
     }
 
-    function openAuthModal() {
-      document.getElementById('authModal').classList.remove('hidden');
-    }
+    // Modal Triggers
+    function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
+    function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+    
+    function openAcademicsModal() { document.getElementById('academicsModal').classList.remove('hidden'); }
+    function closeAcademicsModal() { document.getElementById('academicsModal').classList.add('hidden'); }
 
-    function closeAuthModal() {
-      document.getElementById('authModal').classList.add('hidden');
-    }
+    function openAboutModal() { document.getElementById('aboutModal').classList.remove('hidden'); }
+    function closeAboutModal() { document.getElementById('aboutModal').classList.add('hidden'); }
 
-    // Role Lookup Logic
     async function executeLogin() {
       const input = (document.getElementById('loginIdentifier').value || '').trim().toLowerCase();
       const match = credentialDirectory.find(u => u.id.toLowerCase() === input || u.alias.toLowerCase() === input);
@@ -360,7 +460,6 @@
       buildSidebar(currentUserRole);
     }
 
-    // Dynamic Navigation Builder
     function buildSidebar(role) {
       const menu = document.getElementById('sidebarMenu');
       const mobileMenu = document.getElementById('mobileSidebarMenu');
@@ -369,9 +468,9 @@
       if (role === 'ADMIN') {
         links = [
           { key: 'dashboard', label: 'Admin/CEO Overview', icon: 'layout-dashboard' },
-          { key: 'students_grade', label: 'Grade-Wise Students', icon: 'users' },
-          { key: 'student_info_search', label: 'Student Search', icon: 'search' },
-          { key: 'teachers', label: 'Faculty Directory', icon: 'user-check' },
+          { key: 'students_grade', label: 'Grade-Wise Students (5-10)', icon: 'users' },
+          { key: 'student_info_search', label: 'Student Search & Admission', icon: 'search' },
+          { key: 'teachers', label: 'Faculty Directory & Hiring', icon: 'user-check' },
           { key: 'admin_fees_grade', label: 'Revenue & Fees', icon: 'credit-card' }
         ];
       } else if (role === 'TEACHER') {
@@ -379,23 +478,24 @@
           { key: 'dashboard', label: 'Teacher Overview', icon: 'layout-dashboard' },
           { key: 'assigned_classes', label: 'Assigned Classes', icon: 'clock' },
           { key: 'attendance_select', label: 'Attendance Register', icon: 'calendar-check' },
-          { key: 'marks_grades', label: 'Student Gradebook', icon: 'file-text' }
+          { key: 'marks_grades', label: 'Student Gradebook', icon: 'file-text' },
+          { key: 'teacher_complaints', label: 'Student Complaints', icon: 'alert-triangle' }
         ];
       } else if (role === 'PARENT') {
         links = [
           { key: 'dashboard', label: 'Child Overview', icon: 'layout-dashboard' },
           { key: 'parent_performance', label: 'Student Performance', icon: 'activity' },
-          { key: 'term_fees', label: 'Term Fees & Receipts', icon: 'credit-card' }
+          { key: 'term_fees', label: 'Term Fees & Receipts', icon: 'credit-card' },
+          { key: 'parent_complaints', label: 'Teacher Complaints & Replies', icon: 'message-square' }
         ];
       } else { // STUDENT
         links = [
           { key: 'dashboard', label: 'Student Overview', icon: 'layout-dashboard' },
-          { key: 'subject_courses', label: 'Enrolled Courses', icon: 'book-open' },
-          { key: 'fa_sa_parent', label: 'Report Cards & Marks', icon: 'award' }
+          { key: 'subject_courses', label: 'Enrolled Courses & Portions', icon: 'book-open' },
+          { key: 'report_cards_marks', label: 'Report Cards & Marks', icon: 'award' }
         ];
       }
 
-      // Desktop sidebar
       menu.innerHTML = links.map(link => `
         <button onclick="renderView('${link.key}')" id="nav_${link.key}" class="sidebar-link w-full text-left">
           <i data-lucide="${link.icon}" class="w-4 h-4"></i>
@@ -403,7 +503,6 @@
         </button>
       `).join('');
 
-      // Mobile horizontal menu
       mobileMenu.innerHTML = links.map(link => `
         <button onclick="renderView('${link.key}')" class="px-3 py-1.5 bg-slate-800 text-slate-300 rounded-lg flex items-center gap-1.5 shrink-0">
           <i data-lucide="${link.icon}" class="w-3.5 h-3.5"></i>
@@ -427,82 +526,520 @@
       if (viewKey === 'dashboard') {
         if (currentUserRole === 'ADMIN') {
           canvas.innerHTML = `
-            <div class="mb-4 sm:mb-6">
-              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
-              <p class="text-xs text-slate-400 mt-1">Executive Administration & Financial Dashboard</p>
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">Executive Administration Panel (Grades 5 to 10)</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Students Enrolled</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">1,500</p></div>
-                <div class="p-2.5 sm:p-3 bg-blue-500/20 text-blue-400 rounded-xl"><i data-lucide="users" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Total Students (5-10)</p><p class="text-3xl font-extrabold text-white mt-1">1,500</p></div>
+                <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Teachers On Duty</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">120</p></div>
-                <div class="p-2.5 sm:p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Faculty Members</p><p class="text-3xl font-extrabold text-white mt-1">120</p></div>
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">₹12,50,000</p></div>
-                <div class="p-2.5 sm:p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Total Revenue</p><p class="text-3xl font-extrabold text-amber-400 mt-1">₹12,50,000</p></div>
+                <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-6 h-6"></i></div>
               </div>
             </div>
           `;
         } else if (currentUserRole === 'TEACHER') {
           canvas.innerHTML = `
-            <div class="mb-4 sm:mb-6">
-              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Faculty Instruction Panel</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Assigned Classes</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">6 Active Sections</p></div>
-                <div class="p-2.5 sm:p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="users" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Assigned Sections</p><p class="text-3xl font-extrabold text-white mt-1">6 Sections</p></div>
+                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Class Schedule</p><p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">Up to Date</p></div>
-                <div class="p-2.5 sm:p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="clock" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Today's Register</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">Up to Date</p></div>
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="clock" class="w-6 h-6"></i></div>
               </div>
             </div>
           `;
         } else if (currentUserRole === 'PARENT') {
+          const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+          const marcus = studentList.find(s => s.id === '101') || { attendance: '98.5%', attendanceStatus: 'PRESENT' };
+
           canvas.innerHTML = `
-            <div class="mb-4 sm:mb-6">
-              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
-              <p class="text-xs text-slate-400 mt-1">Parent Overview for Marcus Jenkins (Grade 10-A)</p>
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">Parent Portal for Marcus Jenkins (Grade 10-A)</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl">
-                <span class="text-[10px] sm:text-xs font-semibold uppercase text-slate-400">Child Attendance</span>
-                <p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1 sm:mt-2">98.5% Present</p>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <span class="text-xs font-semibold uppercase text-slate-400">Live Attendance Status</span>
+                <p class="text-3xl font-extrabold text-emerald-400 mt-2">${marcus.attendance} (${marcus.attendanceStatus})</p>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl">
-                <span class="text-[10px] sm:text-xs font-semibold uppercase text-slate-400">Term Academic GPA</span>
-                <p class="text-2xl sm:text-3xl font-extrabold text-indigo-400 mt-1 sm:mt-2">9.25 / 10.0</p>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <span class="text-xs font-semibold uppercase text-slate-400">Term GPA</span>
+                <p class="text-3xl font-extrabold text-indigo-400 mt-2">9.25 / 10.0</p>
               </div>
             </div>
           `;
         } else { // STUDENT
+          const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+          const marcus = studentList.find(s => s.id === '101') || { attendance: '96.5%', attendanceStatus: 'PRESENT' };
+
           canvas.innerHTML = `
-            <div class="mb-4 sm:mb-6">
-              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
-              <p class="text-xs text-slate-400 mt-1">Student Learning & Progress Portal</p>
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+              <p class="text-xs text-slate-400 mt-1">Student Progress & Learning Portal</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Attendance Percentage</p><p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">96.5%</p></div>
-                <div class="p-2.5 sm:p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Attendance Percentage</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">${marcus.attendance}</p></div>
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Enrolled Courses</p><p class="text-2xl sm:text-3xl font-extrabold text-indigo-400 mt-1">6 Courses</p></div>
-                <div class="p-2.5 sm:p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="book-open" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-xs text-slate-400 font-bold uppercase">Enrolled Subjects</p><p class="text-3xl font-extrabold text-indigo-400 mt-1">6 Courses</p></div>
+                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="book-open" class="w-6 h-6"></i></div>
               </div>
             </div>
           `;
         }
-      } else {
+      }
+
+      // ================= TEACHER ATTENDANCE REGISTER MODULE =================
+      else if (viewKey === 'attendance_select') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Classroom Attendance Register</h2><p class="text-xs text-slate-400 mt-1">Mark Present or Absent for each student. Updates automatically sync to Student and Parent dashboards.</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Grade & Sec</th><th class="p-3">Status</th><th class="p-3">Live Attendance</th><th class="p-3">Mark Attendance</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${studentList.map(s => {
+                  const currentStatus = s.attendanceStatus || "PRESENT";
+                  return `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
+                    <td class="p-3 font-bold text-white">${s.name}</td>
+                    <td class="p-3">Grade ${s.grade}-${s.section}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 ${currentStatus === 'PRESENT' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'} rounded-full font-bold text-[10px]">${currentStatus}</span></td>
+                    <td class="p-3 font-semibold text-slate-300">${s.attendance || '95.0%'}</td>
+                    <td class="p-3 flex items-center gap-2">
+                      <button onclick="setStudentAttendance('${s.id}', 'PRESENT')" class="px-3 py-1 ${currentStatus === 'PRESENT' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} font-bold rounded-lg text-[10px]">Present</button>
+                      <button onclick="setStudentAttendance('${s.id}', 'ABSENT')" class="px-3 py-1 ${currentStatus === 'ABSENT' ? 'bg-red-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} font-bold rounded-lg text-[10px]">Absent</button>
+                    </td>
+                  </tr>
+                `}).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // ================= TEACHER COMPLAINTS MODULE =================
+      else if (viewKey === 'teacher_complaints') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Complaints</h2><p class="text-xs text-slate-400 mt-1">Submit disciplinary or academic complaints directly to parents.</p></div>
+          
+          <!-- Add Complaint Form -->
+          <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="alert-circle" class="w-4 h-4"></i> Issue New Complaint</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Select Student</label>
+                <select id="complaintRollNo" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                  ${studentList.map(s => `<option value="${s.id}">${s.name} (Roll No: ${s.id} - Grade ${s.grade})</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Complaint / Issue Note</label>
+                <input type="text" id="complaintText" placeholder="e.g. Incomplete lab work, repeated tardiness" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              </div>
+            </div>
+            <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Submit Complaint to Parent</button>
+          </div>
+
+          <!-- Existing Complaints Log -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Active Complaints Log</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Date</th><th class="p-3">Student Name</th><th class="p-3">Issue Raised</th><th class="p-3">Parent Reply Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${complaintList.map(c => `
+                  <tr>
+                    <td class="p-3 text-slate-400 font-mono">${c.date}</td>
+                    <td class="p-3 font-bold text-white">${c.studentName} (${c.rollNo})</td>
+                    <td class="p-3 text-slate-300">${c.issue}</td>
+                    <td class="p-3">${c.parentReply ? `<span class="text-emerald-400 font-semibold">" ${c.parentReply} "</span>` : `<span class="text-amber-400 italic">Awaiting parent reply...</span>`}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // ================= PARENT COMPLAINTS & REPLIES MODULE =================
+      else if (viewKey === 'parent_complaints') {
+        const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+        const childComplaints = complaintList.filter(c => c.rollNo === '101'); // Filtered for Marcus Jenkins (Parent P-101)
+
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers and reply directly.</p></div>
+          <div class="space-y-4">
+            ${childComplaints.length > 0 ? childComplaints.map(c => `
+              <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                  <div>
+                    <h3 class="text-sm font-bold text-white">${c.teacherName}</h3>
+                    <p class="text-[10px] text-slate-400">Date: ${c.date} • Student: ${c.studentName} (Roll No: ${c.rollNo})</p>
+                  </div>
+                  <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase rounded-full">Teacher Complaint</span>
+                </div>
+                <div class="p-3 bg-slate-800/60 rounded-xl text-xs text-slate-200 border border-slate-700/50">
+                  <strong class="text-amber-300">Complaint Note:</strong> ${c.issue}
+                </div>
+                <div>
+                  <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Your Reply to Teacher</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="replyInput_${c.id}" value="${c.parentReply}" placeholder="Type your response to the teacher..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+                    <button onclick="sendParentReply(${c.id})" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Send Reply</button>
+                  </div>
+                </div>
+              </div>
+            `).join('') : `<div class="p-8 text-center text-slate-500">No complaints reported for your child.</div>`}
+          </div>
+        `;
+      }
+
+      // Admin, Parent, Student views
+      else if (viewKey === 'students_grade') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Students (Grades 5 to 10)</h2><p class="text-xs text-slate-400 mt-1">Filter and review active enrollments across middle & high school grades.</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Grade & Sec</th><th class="p-3">Guardian</th><th class="p-3">Attendance</th><th class="p-3">Fee Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${studentList.map(s => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
+                    <td class="p-3 font-bold text-white">${s.name}</td>
+                    <td class="p-3">Grade ${s.grade}-${s.section}</td>
+                    <td class="p-3">${s.guardian}</td>
+                    <td class="p-3 text-emerald-400 font-semibold">${s.attendance}</td>
+                    <td class="p-3"><span class="px-2.5 py-1 ${s.feeStatus === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'} rounded-full text-[10px] font-bold uppercase">${s.feeStatus}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'student_info_search') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Information Search & Admission</h2><p class="text-xs text-slate-400 mt-1">Search student records or enroll a new student into the school directory (Admin Only).</p></div>
+          
+          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Student Entry</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <input type="text" id="addRollNo" placeholder="Roll No (e.g. 108)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addStudentName" placeholder="Full Student Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <select id="addStudentGrade" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10" selected>Grade 10</option></select>
+              <input type="text" id="addStudentSec" placeholder="Section (A/B)" value="A" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addGuardian" placeholder="Parent/Guardian Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <button onclick="saveNewStudent()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Save Student Record</button>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'teachers') {
+        const teacherList = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members and add new teacher entries (Admin Only).</p></div>
+          
+          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Faculty Member</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <input type="text" id="addTeacherID" placeholder="Teacher ID (e.g. T-505)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherName" placeholder="Faculty Full Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherSubject" placeholder="Assigned Subject (e.g. Mathematics)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherGrade" placeholder="Assigned Grade (e.g. Grade 5-10)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="email" id="addTeacherEmail" placeholder="Faculty Email" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <button onclick="saveNewTeacher()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Add Faculty Member</button>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">ID No</th><th class="p-3">Faculty Name</th><th class="p-3">Department/Subject</th><th class="p-3">Assigned Grade</th><th class="p-3">Email Address</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${teacherList.map(t => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${t.id}</td>
+                    <td class="p-3 font-bold text-white">${t.name}</td>
+                    <td class="p-3 text-slate-300">${t.subject}</td>
+                    <td class="p-3">${t.grade}</td>
+                    <td class="p-3 text-slate-400">${t.email}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'admin_fees_grade') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Collections</h2><p class="text-xs text-slate-400 mt-1">Financial stats and collection targets across Grades 5 through 10.</p></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"><p class="text-xs text-slate-400 font-bold uppercase">Overall Collection</p><p class="text-3xl font-extrabold text-emerald-400 mt-2">₹12,50,000</p></div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"><p class="text-xs text-slate-400 font-bold uppercase">Actual Revenue Due</p><p class="text-3xl font-extrabold text-indigo-400 mt-2">₹15,00,000</p></div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"><p class="text-xs text-slate-400 font-bold uppercase">Pending Outstanding</p><p class="text-3xl font-extrabold text-red-400 mt-2">₹2,50,000</p></div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'assigned_classes') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Timetable</h2><p class="text-xs text-slate-400 mt-1">Active assigned teaching periods and sections.</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 10 - Section A</h3><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-semibold">Active Session</span></div>
+              <p class="text-xs text-slate-400">Subject: Science & Wave Optics</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 08:30 AM - 09:30 AM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 8 - Section B</h3><span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-semibold">Next Period</span></div>
+              <p class="text-xs text-slate-400">Subject: Physics Fundamentals</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 10:00 AM - 11:00 AM</p>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'marks_grades') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Gradebook</h2><p class="text-xs text-slate-400 mt-1">Assign and edit marks for FA1, FA2, SA1, FA3, FA4, and SA2 assessments.</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">FA-1 (50)</th><th class="p-3">FA-2 (50)</th><th class="p-3">SA-1 (100)</th><th class="p-3">Action</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${studentList.map(s => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
+                    <td class="p-3 font-bold text-white">${s.name}</td>
+                    <td class="p-3"><input type="number" value="48" class="w-16 bg-slate-800 border border-slate-700 p-1 rounded text-white" /></td>
+                    <td class="p-3"><input type="number" value="46" class="w-16 bg-slate-800 border border-slate-700 p-1 rounded text-white" /></td>
+                    <td class="p-3"><input type="number" value="92" class="w-16 bg-slate-800 border border-slate-700 p-1 rounded text-white" /></td>
+                    <td class="p-3"><button class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-[10px] font-bold">Save Grade</button></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'parent_performance') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Performance (Marcus Jenkins)</h2><p class="text-xs text-slate-400 mt-1">Comprehensive academic and behavioral analytics for Grade 10-A.</p></div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Overall GPA</p><p class="text-3xl font-bold text-indigo-400 mt-1">9.25 / 10</p></div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Attendance</p><p class="text-3xl font-bold text-emerald-400 mt-1">98.5%</p></div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Class Rank</p><p class="text-3xl font-bold text-amber-400 mt-1">2nd / 45</p></div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'term_fees') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Fees & Payment Receipts</h2><p class="text-xs text-slate-400 mt-1">Review term payments, due dates, and official fee receipts.</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Term Particulars</th><th class="p-3">Amount</th><th class="p-3">Due Date</th><th class="p-3">Payment Status</th><th class="p-3">Receipt</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">Term 1 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3">June 15, 2026</td><td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">PAID</span></td><td class="p-3"><button class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded font-semibold text-[10px]">Download Receipt</button></td></tr>
+                <tr><td class="p-3 font-bold text-white">Term 2 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3">October 15, 2026</td><td class="p-3"><span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 rounded-full font-bold text-[10px]">UPCOMING</span></td><td class="p-3"><button class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-semibold text-[10px]">Pay Online</button></td></tr>
+                <tr><td class="p-3 font-bold text-white">Term 3 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3">February 15, 2027</td><td class="p-3"><span class="px-2.5 py-1 bg-slate-800 text-slate-400 rounded-full font-bold text-[10px]">SCHEDULED</span></td><td class="p-3"><span class="text-slate-500">-</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'subject_courses') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Enrolled Courses & Subject Portions</h2><p class="text-xs text-slate-400 mt-1">Overview of your current syllabus and subject topics.</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">General Science</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
+              <p class="text-xs text-slate-400">• Physics: Wave Optics, Electricity & Magnetism<br>• Chemistry: Chemical Reactions & Periodic Table<br>• Biology: Cellular Respiration & Genetics</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Social Studies</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
+              <p class="text-xs text-slate-400">• History: Modern World History & Freedom Movement<br>• Geography: Natural Resources & Agriculture<br>• Civics: Democratic Rights & Indian Constitution</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Mathematics</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
+              <p class="text-xs text-slate-400">• Algebra: Quadratic Equations & Progressions<br>• Geometry: Triangles, Circles & Coordinate Geometry</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">English Literature</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
+              <p class="text-xs text-slate-400">• Prose & Poetry Analysis, Advanced Grammar & Essays</p>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'report_cards_marks') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Report Cards & Assessment Marks</h2><p class="text-xs text-slate-400 mt-1">Official marksheet breakdown for Formative (FA) and Summative (SA) assessments.</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Subject</th><th class="p-3">FA-1 (50)</th><th class="p-3">FA-2 (50)</th><th class="p-3">SA-1 (100)</th><th class="p-3">FA-3 (50)</th><th class="p-3">FA-4 (50)</th><th class="p-3">SA-2 (100)</th><th class="p-3">Grade</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">General Science</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">92</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">95</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Social Studies</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">88</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">91</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Mathematics</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">96</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">98</td><td class="p-3"><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 rounded font-bold">O (Outstanding)</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">English Literature</td><td class="p-3 font-mono">44</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">85</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">89</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else {
         canvas.innerHTML = `<div class="p-6 sm:p-8 text-center text-slate-400"><h2 class="text-lg sm:text-xl font-bold text-white mb-2">${viewKey.toUpperCase()} Module</h2><p class="text-xs text-slate-500">Access granted under ${currentUserRole} portal permissions.</p></div>`;
       }
 
       lucide.createIcons();
+    }
+
+    // Set Present / Absent Explicitly
+    function setStudentAttendance(rollNo, status) {
+      const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const index = students.findIndex(s => s.id === rollNo);
+
+      if (index !== -1) {
+        students[index].attendanceStatus = status;
+        students[index].attendance = status === 'PRESENT' ? '98.5%' : '92.0%';
+        localStorage.setItem('erp_students', JSON.stringify(students));
+        renderView('attendance_select');
+      }
+    }
+
+    // Submit Teacher Complaint
+    function submitTeacherComplaint() {
+      const rollNo = document.getElementById('complaintRollNo').value;
+      const issue = document.getElementById('complaintText').value.trim();
+      const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const student = students.find(s => s.id === rollNo);
+
+      if (!issue) {
+        alert('Please enter complaint details before submitting.');
+        return;
+      }
+
+      const complaints = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+      const newEntry = {
+        id: Date.now(),
+        rollNo: rollNo,
+        studentName: student ? student.name : "Student",
+        teacherName: "Dr. Sarah Jenkins (T-501)",
+        date: "August 12, 2026",
+        issue: issue,
+        parentReply: ""
+      };
+
+      complaints.push(newEntry);
+      localStorage.setItem('erp_complaints', JSON.stringify(complaints));
+      alert(`Complaint for ${student ? student.name : 'Student'} submitted and sent to parent!`);
+      renderView('teacher_complaints');
+    }
+
+    // Send Parent Reply to Complaint
+    function sendParentReply(complaintId) {
+      const inputVal = document.getElementById(`replyInput_${complaintId}`).value.trim();
+      if (!inputVal) {
+        alert('Please write a reply message.');
+        return;
+      }
+
+      const complaints = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+      const index = complaints.findIndex(c => c.id === complaintId);
+
+      if (index !== -1) {
+        complaints[index].parentReply = inputVal;
+        localStorage.setItem('erp_complaints', JSON.stringify(complaints));
+        alert('Your response has been sent to the teacher!');
+        renderView('parent_complaints');
+      }
+    }
+
+    // Admin Add Student
+    function saveNewStudent() {
+      const id = document.getElementById('addRollNo').value.trim();
+      const name = document.getElementById('addStudentName').value.trim();
+      const grade = document.getElementById('addStudentGrade').value;
+      const section = document.getElementById('addStudentSec').value.trim() || 'A';
+      const guardian = document.getElementById('addGuardian').value.trim() || 'Parent/Guardian';
+
+      if (!id || !name) {
+        alert('Please fill in Roll No and Student Name.');
+        return;
+      }
+
+      const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      students.push({ id, name, grade, section, attendance: '100%', attendanceStatus: 'PRESENT', feeStatus: 'Paid', guardian });
+      localStorage.setItem('erp_students', JSON.stringify(students));
+
+      alert(`Student ${name} successfully enrolled into Grade ${grade}-${section}!`);
+      renderView('students_grade');
+    }
+
+    // Admin Add Teacher
+    function saveNewTeacher() {
+      const id = document.getElementById('addTeacherID').value.trim();
+      const name = document.getElementById('addTeacherName').value.trim();
+      const subject = document.getElementById('addTeacherSubject').value.trim();
+      const grade = document.getElementById('addTeacherGrade').value.trim() || 'Grade 5 - 10';
+      const email = document.getElementById('addTeacherEmail').value.trim();
+
+      if (!id || !name || !subject) {
+        alert('Please fill in Teacher ID, Name, and Subject.');
+        return;
+      }
+
+      const teachers = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
+      teachers.push({ id, name, subject, grade, email });
+      localStorage.setItem('erp_teachers', JSON.stringify(teachers));
+
+      alert(`Faculty member ${name} (${subject}) successfully added!`);
+      renderView('teachers');
     }
 
     if (localStorage.getItem('erp_token')) {
