@@ -91,12 +91,12 @@
     </div>
 
     <!-- Glassmorphic Header Navigation -->
-    <header class="relative z-20 px-6 py-6 w-full">
-      <nav class="liquid-glass rounded-full px-6 py-3 flex items-center justify-between max-w-5xl mx-auto w-full">
-        <div class="flex items-center gap-8">
+    <header class="relative z-20 px-4 sm:px-6 py-4 sm:py-6 w-full">
+      <nav class="liquid-glass rounded-full px-4 sm:px-6 py-3 flex items-center justify-between max-w-5xl mx-auto w-full">
+        <div class="flex items-center gap-4 sm:gap-8">
           <div class="flex items-center gap-2">
-            <i data-lucide="graduation-cap" class="text-white w-6 h-6"></i>
-            <span class="text-white font-semibold text-lg">St. Jude's Academy</span>
+            <i data-lucide="graduation-cap" class="text-white w-5 h-5 sm:w-6 sm:h-6"></i>
+            <span class="text-white font-semibold text-base sm:text-lg">St. Jude's Academy</span>
           </div>
           <div class="hidden md:flex items-center gap-8">
             <button type="button" onclick="openAuthModal()" class="text-white/80 hover:text-white transition-colors text-sm font-medium">Portals</button>
@@ -105,30 +105,30 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-4">
-          <button type="button" onclick="openAuthModal()" class="liquid-glass rounded-full px-6 py-2 text-white text-sm font-medium hover:bg-white/5 transition-colors">Portal Login</button>
+        <div class="flex items-center gap-2 sm:gap-4">
+          <button type="button" onclick="openAuthModal()" class="liquid-glass rounded-full px-4 sm:px-6 py-2 text-white text-xs sm:text-sm font-medium hover:bg-white/5 transition-colors">Portal Login</button>
         </div>
       </nav>
     </header>
 
     <!-- Bottom-Left Hero Content -->
-    <main class="relative z-20 max-w-7xl mx-auto w-full px-6 pb-16 pt-32 flex flex-col justify-end flex-1">
-      <div class="max-w-2xl space-y-6 text-left">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold uppercase tracking-wider text-indigo-300">
+    <main class="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 pb-12 sm:pb-16 pt-20 sm:pt-32 flex flex-col justify-end flex-1">
+      <div class="max-w-2xl space-y-4 sm:space-y-6 text-left">
+        <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-indigo-300">
           <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
           Unified School Management System
         </div>
 
-        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-serif tracking-tight leading-[1.05]">
+        <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-serif tracking-tight leading-[1.08]">
           Built for student progress.
         </h1>
 
-        <p class="text-white text-sm sm:text-base leading-relaxed max-w-xl font-light">
+        <p class="text-white text-xs sm:text-base leading-relaxed max-w-xl font-light">
           A unified school progress tracking network connecting Administrators, Teachers, Students, and Parents to monitor daily attendance, grades, and real-time growth.
         </p>
 
         <div class="pt-2">
-          <button type="button" onclick="openAuthModal()" class="liquid-glass rounded-full px-8 py-3.5 text-white text-sm font-semibold hover:bg-white/10 transition-all shadow-lg">
+          <button type="button" onclick="openAuthModal()" class="liquid-glass rounded-full px-6 sm:px-8 py-3 sm:py-3.5 text-white text-xs sm:text-sm font-semibold hover:bg-white/10 transition-all shadow-lg">
             Access ERP Portal
           </button>
         </div>
@@ -136,91 +136,98 @@
     </main>
 
     <!-- Social Footer -->
-    <footer class="relative z-10 flex justify-center gap-4 pb-12">
-      <button aria-label="Instagram" class="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
-        <i data-lucide="instagram" class="w-5 h-5"></i>
+    <footer class="relative z-10 flex justify-center gap-3 sm:gap-4 pb-8 sm:pb-12">
+      <button aria-label="Instagram" class="liquid-glass rounded-full p-3 sm:p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
+        <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5"></i>
       </button>
-      <button aria-label="Twitter" class="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
-        <i data-lucide="twitter" class="w-5 h-5"></i>
+      <button aria-label="Twitter" class="liquid-glass rounded-full p-3 sm:p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
+        <i data-lucide="twitter" class="w-4 h-4 sm:w-5 sm:h-5"></i>
       </button>
-      <button aria-label="Globe Website" class="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
-        <i data-lucide="globe" class="w-5 h-5"></i>
+      <button aria-label="Globe Website" class="liquid-glass rounded-full p-3 sm:p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
+        <i data-lucide="globe" class="w-4 h-4 sm:w-5 sm:h-5"></i>
       </button>
     </footer>
   </div>
 
 
-  <!-- ==================== VIEW 2: SINGLE LOGIN AUTHENTICATION MODAL ==================== -->
-  <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-    <div class="bg-slate-900 border border-white/10 p-8 rounded-3xl shadow-2xl w-full max-w-md relative">
+  <!-- ==================== VIEW 2: MOBILE-OPTIMIZED LOGIN MODAL ==================== -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md">
+    <div class="bg-slate-900 border border-white/10 p-5 sm:p-8 rounded-3xl shadow-2xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
       <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-        <i data-lucide="x" class="w-6 h-6"></i>
+        <i data-lucide="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
       </button>
 
       <!-- Single Sign In Header -->
-      <div class="mb-6">
-        <h3 class="text-2xl font-bold text-white">ERP Portal Login</h3>
+      <div class="mb-4 sm:mb-6">
+        <h3 class="text-xl sm:text-2xl font-bold text-white">ERP Portal Login</h3>
         <p class="text-xs text-slate-400 mt-1">Sign in with your Roll No, ID Number, Parent ID, or Admin Email.</p>
       </div>
 
       <!-- Single Login Form -->
-      <div class="space-y-4">
+      <div class="space-y-3 sm:space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">ID Number / Roll No / Email</label>
-          <input type="text" id="loginIdentifier" placeholder="e.g. 101, T-501, P-101, or admin@school.com" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+          <label class="block text-[11px] sm:text-xs font-semibold text-gray-400 uppercase mb-1">ID Number / Roll No / Email</label>
+          <input type="text" id="loginIdentifier" placeholder="e.g. 101, T-501, P-101, or admin@school.com" class="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-xs sm:text-sm" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Password</label>
-          <input type="password" id="loginPassword" placeholder="••••••••" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-sm" />
+          <label class="block text-[11px] sm:text-xs font-semibold text-gray-400 uppercase mb-1">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" class="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-xs sm:text-sm" />
         </div>
         
         <!-- Role Credential Guide Box -->
-        <div class="p-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-xs text-slate-300 space-y-2">
-          <p class="font-bold text-white text-xs border-b border-slate-700 pb-1">Role Login Credentials:</p>
-          <p>• <strong class="text-amber-400">Admin/CEO (Personal Email):</strong> <span class="font-mono text-slate-200">admin@school.com</span> (Pass: <span class="font-mono text-slate-400">admin123</span>)</p>
-          <p>• <strong class="text-indigo-400">Teacher (ID Number):</strong> <span class="font-mono text-slate-200">T-501</span> (Pass: <span class="font-mono text-slate-400">teacher123</span>)</p>
-          <p>• <strong class="text-emerald-400">Parent (Parent ID / Email):</strong> <span class="font-mono text-slate-200">P-101</span> or <span class="font-mono text-slate-200">parent@school.com</span> (Pass: <span class="font-mono text-slate-400">parent123</span>)</p>
-          <p>• <strong class="text-blue-400">Student (Roll Number):</strong> <span class="font-mono text-slate-200">101</span> (Pass: <span class="font-mono text-slate-400">student123</span>)</p>
+        <div class="p-3 sm:p-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-[11px] sm:text-xs text-slate-300 space-y-1.5">
+          <p class="font-bold text-white text-[11px] sm:text-xs border-b border-slate-700 pb-1">Role Login Credentials:</p>
+          <p>• <strong class="text-amber-400">Admin/CEO:</strong> <span class="font-mono text-slate-200">admin@school.com</span> (<span class="font-mono text-slate-400">admin123</span>)</p>
+          <p>• <strong class="text-indigo-400">Teacher:</strong> <span class="font-mono text-slate-200">T-501</span> (<span class="font-mono text-slate-400">teacher123</span>)</p>
+          <p>• <strong class="text-emerald-400">Parent:</strong> <span class="font-mono text-slate-200">P-101</span> (<span class="font-mono text-slate-400">parent123</span>)</p>
+          <p>• <strong class="text-blue-400">Student:</strong> <span class="font-mono text-slate-200">101</span> (<span class="font-mono text-slate-400">student123</span>)</p>
         </div>
 
-        <button type="button" onclick="executeLogin()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-sm transition-all shadow-lg">Login</button>
+        <button type="button" onclick="executeLogin()" class="w-full py-3 sm:py-3.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-xs sm:text-sm transition-all shadow-lg">Login</button>
       </div>
     </div>
   </div>
 
 
-  <!-- ==================== VIEW 3: DYNAMIC ERP DASHBOARD ==================== -->
+  <!-- ==================== VIEW 3: RESPONSIVE ERP DASHBOARD ==================== -->
   <div id="dashboardView" class="hidden min-h-screen bg-slate-950 flex flex-col">
     <!-- Navbar Header -->
-    <header class="bg-slate-900 border-b border-slate-800 px-8 py-4 flex justify-between items-center sticky top-0 z-30">
-      <div class="flex items-center gap-3">
-        <i data-lucide="graduation-cap" class="text-indigo-400 w-7 h-7"></i>
+    <header class="bg-slate-900 border-b border-slate-800 px-4 sm:px-8 py-3.5 sm:py-4 flex justify-between items-center sticky top-0 z-30">
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <i data-lucide="graduation-cap" class="text-indigo-400 w-6 h-6 sm:w-7 sm:h-7"></i>
         <div>
-          <h1 class="text-lg font-bold text-white leading-tight">School ERP Portal</h1>
-          <p id="roleBadge" class="text-xs font-semibold text-indigo-400 tracking-wider uppercase">ADMIN / CEO DASHBOARD</p>
+          <h1 class="text-sm sm:text-lg font-bold text-white leading-tight">School ERP Portal</h1>
+          <p id="roleBadge" class="text-[10px] sm:text-xs font-semibold text-indigo-400 tracking-wider uppercase">ADMIN / CEO DASHBOARD</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-6">
-        <span id="userNameDisplay" class="text-sm font-medium text-slate-300">Welcome Back, User</span>
-        <button type="button" onclick="handleSignOut()" class="px-4 py-2 text-xs bg-red-600/80 hover:bg-red-600 rounded-lg text-white font-semibold transition-colors">
+      <div class="flex items-center gap-3 sm:gap-6">
+        <span id="userNameDisplay" class="text-xs sm:text-sm font-medium text-slate-300 hidden sm:inline">Welcome Back, User</span>
+        <button type="button" onclick="handleSignOut()" class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs bg-red-600/80 hover:bg-red-600 rounded-lg text-white font-semibold transition-colors">
           Sign Out
         </button>
       </div>
     </header>
 
     <!-- Dashboard Body -->
-    <div class="flex flex-1">
-      <!-- Sidebar Navigation -->
+    <div class="flex flex-col md:flex-row flex-1">
+      <!-- Mobile Sub-Menu Navigation -->
+      <div class="md:hidden bg-slate-900/80 border-b border-slate-800 p-2 overflow-x-auto whitespace-nowrap">
+        <div class="flex gap-2 text-xs" id="mobileSidebarMenu">
+          <!-- Mobile links injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Desktop Sidebar Navigation -->
       <aside class="w-64 bg-slate-900/50 border-r border-slate-800 p-4 hidden md:block shrink-0">
         <nav class="space-y-1 text-sm" id="sidebarMenu">
-          <!-- Injected dynamically based on user role -->
+          <!-- Desktop links injected dynamically -->
         </nav>
       </aside>
 
-      <!-- Main Canvas -->
-      <main class="flex-1 p-8 overflow-y-auto" id="mainCanvas">
-        <!-- Rendered dynamically based on active tab -->
+      <!-- Main Canvas Area -->
+      <main class="flex-1 p-4 sm:p-8 overflow-y-auto" id="mainCanvas">
+        <!-- Content rendered dynamically -->
       </main>
     </div>
   </div>
@@ -232,16 +239,9 @@
 
     // System Credentials Mapping Specific Credentials for Each Role
     const credentialDirectory = [
-      // Admin / CEO (Only Personal Emails permitted)
       { id: "admin@school.com", alias: "ceo@school.com", name: "Executive Admin / CEO", role: "ADMIN" },
-      
-      // Teachers (Teacher ID Number)
       { id: "t-501", alias: "teacher@school.com", name: "Dr. Sarah Jenkins (ID: T-501)", role: "TEACHER" },
-      
-      // Parents (Parent ID / Parent Email)
       { id: "p-101", alias: "parent@school.com", name: "Robert Jenkins (Parent ID: P-101)", role: "PARENT" },
-      
-      // Students (Student Roll Number)
       { id: "101", alias: "student@school.com", name: "Marcus Jenkins (Roll No: 101)", role: "STUDENT" }
     ];
 
@@ -320,18 +320,15 @@
       document.getElementById('authModal').classList.add('hidden');
     }
 
-    // Role Lookup Logic (Handles Roll No, Teacher ID, Parent ID, Admin Email)
+    // Role Lookup Logic
     async function executeLogin() {
       const input = (document.getElementById('loginIdentifier').value || '').trim().toLowerCase();
-
-      // Find user matching Roll No / Teacher ID / Parent ID / Email
       const match = credentialDirectory.find(u => u.id.toLowerCase() === input || u.alias.toLowerCase() === input);
 
       if (match) {
         localStorage.setItem('erp_user', match.name);
         localStorage.setItem('erp_role', match.role);
       } else {
-        // Any custom input defaults safely to Student view (Restricts Admin privileges)
         const displayName = input ? `Student (${input.toUpperCase()})` : 'Student';
         localStorage.setItem('erp_user', displayName);
         localStorage.setItem('erp_role', 'STUDENT');
@@ -363,9 +360,10 @@
       buildSidebar(currentUserRole);
     }
 
-    // Dynamic Sidebar Navigation Builder
+    // Dynamic Navigation Builder
     function buildSidebar(role) {
       const menu = document.getElementById('sidebarMenu');
+      const mobileMenu = document.getElementById('mobileSidebarMenu');
       let links = [];
 
       if (role === 'ADMIN') {
@@ -374,9 +372,7 @@
           { key: 'students_grade', label: 'Grade-Wise Students', icon: 'users' },
           { key: 'student_info_search', label: 'Student Search', icon: 'search' },
           { key: 'teachers', label: 'Faculty Directory', icon: 'user-check' },
-          { key: 'teacher_attendance', label: 'Teacher Attendance', icon: 'calendar-check' },
-          { key: 'admin_fees_grade', label: 'Revenue & Fees', icon: 'credit-card' },
-          { key: 'exams_reports', label: 'School Reports', icon: 'file-spreadsheet' }
+          { key: 'admin_fees_grade', label: 'Revenue & Fees', icon: 'credit-card' }
         ];
       } else if (role === 'TEACHER') {
         links = [
@@ -399,9 +395,18 @@
         ];
       }
 
+      // Desktop sidebar
       menu.innerHTML = links.map(link => `
         <button onclick="renderView('${link.key}')" id="nav_${link.key}" class="sidebar-link w-full text-left">
           <i data-lucide="${link.icon}" class="w-4 h-4"></i>
+          <span>${link.label}</span>
+        </button>
+      `).join('');
+
+      // Mobile horizontal menu
+      mobileMenu.innerHTML = links.map(link => `
+        <button onclick="renderView('${link.key}')" class="px-3 py-1.5 bg-slate-800 text-slate-300 rounded-lg flex items-center gap-1.5 shrink-0">
+          <i data-lucide="${link.icon}" class="w-3.5 h-3.5"></i>
           <span>${link.label}</span>
         </button>
       `).join('');
@@ -422,79 +427,79 @@
       if (viewKey === 'dashboard') {
         if (currentUserRole === 'ADMIN') {
           canvas.innerHTML = `
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+            <div class="mb-4 sm:mb-6">
+              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Executive Administration & Financial Dashboard</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Students Enrolled</p><p class="text-3xl font-extrabold text-white mt-1">1,500</p></div>
-                <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Students Enrolled</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">1,500</p></div>
+                <div class="p-2.5 sm:p-3 bg-blue-500/20 text-blue-400 rounded-xl"><i data-lucide="users" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Teachers On Duty</p><p class="text-3xl font-extrabold text-white mt-1">120</p></div>
-                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Teachers On Duty</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">120</p></div>
+                <div class="p-2.5 sm:p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-3xl font-extrabold text-white mt-1">₹12,50,000</p></div>
-                <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-6 h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">₹12,50,000</p></div>
+                <div class="p-2.5 sm:p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
             </div>
           `;
         } else if (currentUserRole === 'TEACHER') {
           canvas.innerHTML = `
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+            <div class="mb-4 sm:mb-6">
+              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Faculty Instruction Panel</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Assigned Classes</p><p class="text-3xl font-extrabold text-white mt-1">6 Active Sections</p></div>
-                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Assigned Classes</p><p class="text-2xl sm:text-3xl font-extrabold text-white mt-1">6 Active Sections</p></div>
+                <div class="p-2.5 sm:p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="users" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Class Schedule</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">Up to Date</p></div>
-                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="clock" class="w-6 h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Class Schedule</p><p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">Up to Date</p></div>
+                <div class="p-2.5 sm:p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="clock" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
             </div>
           `;
         } else if (currentUserRole === 'PARENT') {
           canvas.innerHTML = `
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+            <div class="mb-4 sm:mb-6">
+              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Parent Overview for Marcus Jenkins (Grade 10-A)</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-                <span class="text-xs font-semibold uppercase text-slate-400">Child Attendance</span>
-                <p class="text-3xl font-extrabold text-emerald-400 mt-2">98.5% Present</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl">
+                <span class="text-[10px] sm:text-xs font-semibold uppercase text-slate-400">Child Attendance</span>
+                <p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1 sm:mt-2">98.5% Present</p>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-                <span class="text-xs font-semibold uppercase text-slate-400">Term Academic GPA</span>
-                <p class="text-3xl font-extrabold text-indigo-400 mt-2">9.25 / 10.0</p>
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl">
+                <span class="text-[10px] sm:text-xs font-semibold uppercase text-slate-400">Term Academic GPA</span>
+                <p class="text-2xl sm:text-3xl font-extrabold text-indigo-400 mt-1 sm:mt-2">9.25 / 10.0</p>
               </div>
             </div>
           `;
         } else { // STUDENT
           canvas.innerHTML = `
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
+            <div class="mb-4 sm:mb-6">
+              <h2 class="text-xl sm:text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Student Learning & Progress Portal</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Attendance Percentage</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">96.5%</p></div>
-                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Attendance Percentage</p><p class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">96.5%</p></div>
+                <div class="p-2.5 sm:p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Enrolled Courses</p><p class="text-3xl font-extrabold text-indigo-400 mt-1">6 Courses</p></div>
-                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+              <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase">Enrolled Courses</p><p class="text-2xl sm:text-3xl font-extrabold text-indigo-400 mt-1">6 Courses</p></div>
+                <div class="p-2.5 sm:p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="book-open" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
               </div>
             </div>
           `;
         }
       } else {
-        canvas.innerHTML = `<div class="p-8 text-center text-slate-400"><h2 class="text-xl font-bold text-white mb-2">${viewKey.toUpperCase()} Module</h2><p class="text-xs text-slate-500">Access granted under ${currentUserRole} portal permissions.</p></div>`;
+        canvas.innerHTML = `<div class="p-6 sm:p-8 text-center text-slate-400"><h2 class="text-lg sm:text-xl font-bold text-white mb-2">${viewKey.toUpperCase()} Module</h2><p class="text-xs text-slate-500">Access granted under ${currentUserRole} portal permissions.</p></div>`;
       }
 
       lucide.createIcons();
