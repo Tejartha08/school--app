@@ -90,7 +90,7 @@
       ></video>
     </div>
 
-    <!-- Glassmorphic Header Navigation (Fully Visible on Mobile & Desktop) -->
+    <!-- Glassmorphic Header Navigation -->
     <header class="relative z-20 px-3 sm:px-6 py-4 sm:py-6 w-full">
       <nav class="liquid-glass rounded-3xl sm:rounded-full px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center justify-between max-w-5xl mx-auto w-full gap-3 sm:gap-0">
         <div class="flex items-center justify-between w-full sm:w-auto">
@@ -136,19 +136,6 @@
         </div>
       </div>
     </main>
-
-    <!-- Social Footer -->
-    <footer class="relative z-10 flex justify-center gap-3 sm:gap-4 pb-8 sm:pb-12">
-      <button aria-label="Instagram" class="liquid-glass rounded-full p-3 sm:p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
-        <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-      </button>
-      <button aria-label="Twitter" class="liquid-glass rounded-full p-3 sm:p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
-        <i data-lucide="twitter" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-      </button>
-      <button aria-label="Globe Website" class="liquid-glass rounded-full p-3 sm:p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">
-        <i data-lucide="globe" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-      </button>
-    </footer>
   </div>
 
 
@@ -306,17 +293,86 @@
   <script>
     let currentUserRole = 'ADMIN';
 
-    // Preloaded Local Databases
+    // Preloaded Database with 10-15 Students Per Grade (Grades 5 to 10)
     if (!localStorage.getItem('erp_students')) {
       const initialStudents = [
+        // GRADE 10 (12 Students)
         { id: "101", name: "Marcus Jenkins", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Robert Jenkins" },
-        { id: "102", name: "Sophia Miller", grade: "10", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "David Miller" },
-        { id: "103", name: "Ethan Davis", grade: "9", section: "A", attendance: "94.2%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Sarah Davis" },
-        { id: "104", name: "Ava Wilson", grade: "8", section: "A", attendance: "97.1%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "James Wilson" },
-        { id: "105", name: "Liam Brown", grade: "7", section: "B", attendance: "92.8%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "Michael Brown" },
-        { id: "106", name: "Olivia Taylor", grade: "6", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Emma Taylor" },
-        { id: "107", name: "Noah Anderson", grade: "5", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Daniel Anderson" },
-        { id: "108", name: "Raju B", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Raju" }
+        { id: "102", name: "Sophia Miller", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "David Miller" },
+        { id: "108", name: "Raju B", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Raju" },
+        { id: "221", name: "manideep", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "M. Rao" },
+        { id: "109", name: "Aarav Sharma", grade: "10", section: "A", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "S. Sharma" },
+        { id: "110", name: "Priya Patel", grade: "10", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "K. Patel" },
+        { id: "111", name: "Siddharth Verma", grade: "10", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Verma" },
+        { id: "112", name: "Ananya Iyer", grade: "10", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "V. Iyer" },
+        { id: "113", name: "Karan Gupta", grade: "10", section: "B", attendance: "91.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "N. Gupta" },
+        { id: "114", name: "Neha Singh", grade: "10", section: "B", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "A. Singh" },
+        { id: "115", name: "Vikram Malhotra", grade: "10", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Malhotra" },
+        { id: "116", name: "Diya Reddy", grade: "10", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "M. Reddy" },
+
+        // GRADE 9 (11 Students)
+        { id: "103", name: "Ethan Davis", grade: "9", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Sarah Davis" },
+        { id: "117", name: "Rohan Kapoor", grade: "9", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "H. Kapoor" },
+        { id: "118", name: "Tanvi Joshi", grade: "9", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "S. Joshi" },
+        { id: "119", name: "Aditya Nair", grade: "9", section: "A", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "G. Nair" },
+        { id: "120", name: "Sneha Roy", grade: "9", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Roy" },
+        { id: "121", name: "Rahul Deshmukh", grade: "9", section: "A", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "M. Deshmukh" },
+        { id: "122", name: "Ishaan Mehta", grade: "9", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "T. Mehta" },
+        { id: "123", name: "Kavya Saxena", grade: "9", section: "B", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "L. Saxena" },
+        { id: "124", name: "Arjun Banerjee", grade: "9", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "C. Banerjee" },
+        { id: "125", name: "Riya Sen", grade: "9", section: "B", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Sen" },
+        { id: "126", name: "Devansh Rastogi", grade: "9", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Rastogi" },
+
+        // GRADE 8 (11 Students)
+        { id: "104", name: "Ava Wilson", grade: "8", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "James Wilson" },
+        { id: "127", name: "Kabir Khan", grade: "8", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Z. Khan" },
+        { id: "128", name: "Shruti Rao", grade: "8", section: "A", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "V. Rao" },
+        { id: "129", name: "Yash Agarwal", grade: "8", section: "A", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Agarwal" },
+        { id: "130", name: "Anish Kulkarni", grade: "8", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Kulkarni" },
+        { id: "131", name: "Avani Bhat", grade: "8", section: "A", attendance: "91.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "N. Bhat" },
+        { id: "132", name: "Manish Pandey", grade: "8", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "D. Pandey" },
+        { id: "133", name: "Nisha Pillai", grade: "8", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "S. Pillai" },
+        { id: "134", name: "Pranav Menon", grade: "8", section: "B", attendance: "93.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "M. Menon" },
+        { id: "135", name: "Tarun Chawla", grade: "8", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Chawla" },
+        { id: "136", name: "Simran Gill", grade: "8", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "J. Gill" },
+
+        // GRADE 7 (11 Students)
+        { id: "105", name: "Liam Brown", grade: "7", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "Michael Brown" },
+        { id: "137", name: "Aman Tripathi", grade: "7", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "S. Tripathi" },
+        { id: "138", name: "Meera Das", grade: "7", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "A. Das" },
+        { id: "139", name: "Varun Nambiar", grade: "7", section: "A", attendance: "94.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "K. Nambiar" },
+        { id: "140", name: "Sanya Dutta", grade: "7", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Dutta" },
+        { id: "141", name: "Sahil Bose", grade: "7", section: "A", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "T. Bose" },
+        { id: "142", name: "Bhavya Trivedi", grade: "7", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "H. Trivedi" },
+        { id: "143", name: "Chirag Hegde", grade: "7", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Hegde" },
+        { id: "144", name: "Deepak Saini", grade: "7", section: "B", attendance: "91.5%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "M. Saini" },
+        { id: "145", name: "Esha Fernandez", grade: "7", section: "B", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Fernandez" },
+        { id: "146", name: "Farhan Qureshi", grade: "7", section: "B", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "A. Qureshi" },
+
+        // GRADE 6 (11 Students)
+        { id: "106", name: "Olivia Taylor", grade: "6", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Emma Taylor" },
+        { id: "223", name: "Raju Reddy", grade: "6", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Reddy" },
+        { id: "147", name: "Gaurav Solanki", grade: "6", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "L. Solanki" },
+        { id: "148", name: "Harini Sundaram", grade: "6", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "M. Sundaram" },
+        { id: "149", name: "Inderpal Singh", grade: "6", section: "A", attendance: "92.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "G. Singh" },
+        { id: "150", name: "Jahnvi Kaushik", grade: "6", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Kaushik" },
+        { id: "151", name: "Kunal Ahuja", grade: "6", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "S. Ahuja" },
+        { id: "152", name: "Lavanya Reddy", grade: "6", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "D. Reddy" },
+        { id: "153", name: "Mohit Bansal", grade: "6", section: "B", attendance: "91.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "C. Bansal" },
+        { id: "154", name: "Nidhi Chaudhury", grade: "6", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "V. Chaudhury" },
+        { id: "155", name: "Omkar Kadam", grade: "6", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Y. Kadam" },
+
+        // GRADE 5 (10 Students)
+        { id: "107", name: "Noah Anderson", grade: "5", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Daniel Anderson" },
+        { id: "156", name: "Parth Somani", grade: "5", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Somani" },
+        { id: "157", name: "Rachna Prasad", grade: "5", section: "A", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "G. Prasad" },
+        { id: "158", name: "Samarth Shukla", grade: "5", section: "A", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "N. Shukla" },
+        { id: "159", name: "Trisha Madhav", grade: "5", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Madhav" },
+        { id: "160", name: "Utkarsh Vats", grade: "5", section: "B", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "R. Vats" },
+        { id: "161", name: "Vanshika Tandon", grade: "5", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Tandon" },
+        { id: "162", name: "Yashwant Rao", grade: "5", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "M. Rao" },
+        { id: "163", name: "Zoya Siddiqui", grade: "5", section: "B", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "H. Siddiqui" },
+        { id: "164", name: "Aarohi Kulkarni", grade: "5", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "T. Kulkarni" }
       ];
       localStorage.setItem('erp_students', JSON.stringify(initialStudents));
     }
@@ -337,6 +393,14 @@
         { id: 2, rollNo: "102", studentName: "Sophia Miller", teacherName: "Mrs. Clara Barton", date: "August 11, 2026", issue: "Arrived 20 minutes late for class assessment.", parentReply: "" }
       ];
       localStorage.setItem('erp_complaints', JSON.stringify(initialComplaints));
+    }
+
+    if (!localStorage.getItem('erp_alerts')) {
+      const initialAlerts = [
+        { id: 1, title: "Mid-Term Examination Schedule Out", target: "ALL", date: "August 12, 2026" },
+        { id: 2, title: "Parent-Teacher Meeting (PTM) Scheduled for Grade 10", target: "PARENTS", date: "August 14, 2026" }
+      ];
+      localStorage.setItem('erp_alerts', JSON.stringify(initialAlerts));
     }
 
     const credentialDirectory = [
@@ -471,22 +535,23 @@
         links = [
           { key: 'dashboard', label: 'Admin/CEO Overview', icon: 'layout-dashboard' },
           { key: 'students_grade', label: 'Grade-Wise Students (5-10)', icon: 'users' },
-          { key: 'student_info_search', label: 'Student Search & Admission', icon: 'search' },
+          { key: 'student_info_search', label: 'Student Search & Academic Details', icon: 'search' },
           { key: 'teachers', label: 'Faculty Directory & Hiring', icon: 'user-check' },
-          { key: 'admin_fees_grade', label: 'Revenue & Fees', icon: 'credit-card' }
+          { key: 'admin_fees_grade', label: 'Revenue & Fees', icon: 'credit-card' },
+          { key: 'important_alerts', label: 'Important Alerts', icon: 'bell' }
         ];
       } else if (role === 'TEACHER') {
         links = [
           { key: 'dashboard', label: 'Teacher Overview', icon: 'layout-dashboard' },
           { key: 'assigned_classes', label: 'Assigned Classes', icon: 'clock' },
-          { key: 'attendance_select', label: 'Attendance Register', icon: 'calendar-check' },
+          { key: 'attendance_select', label: 'Class & Section Attendance', icon: 'calendar-check' },
           { key: 'marks_grades', label: 'Student Gradebook', icon: 'file-text' },
           { key: 'teacher_complaints', label: 'Student Complaints', icon: 'alert-triangle' }
         ];
       } else if (role === 'PARENT') {
         links = [
           { key: 'dashboard', label: 'Child Overview', icon: 'layout-dashboard' },
-          { key: 'parent_performance', label: 'Student Performance', icon: 'activity' },
+          { key: 'parent_performance', label: 'Student Performance Graphs', icon: 'activity' },
           { key: 'term_fees', label: 'Term Fees & Receipts', icon: 'credit-card' },
           { key: 'parent_complaints', label: 'Teacher Complaints & Replies', icon: 'message-square' }
         ];
@@ -517,7 +582,7 @@
     }
 
     // Canvas Engine
-    function renderView(viewKey) {
+    function renderView(viewKey, gradeFilter = '10', secFilter = 'A') {
       document.querySelectorAll('.sidebar-link').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.getElementById(`nav_${viewKey}`);
       if (activeBtn) activeBtn.classList.add('active');
@@ -525,25 +590,92 @@
       const canvas = document.getElementById('mainCanvas');
       const user = localStorage.getItem('erp_user') || 'User';
 
+      // ================= OVERVIEW SCREENS =================
       if (viewKey === 'dashboard') {
         if (currentUserRole === 'ADMIN') {
           canvas.innerHTML = `
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
-              <p class="text-xs text-slate-400 mt-1">Executive Administration Panel (Grades 5 to 10)</p>
+            <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h2 class="text-2xl font-bold text-white">Welcome Back, Executive Admin / CEO 👋</h2>
+                <p class="text-xs text-slate-400 mt-1">Executive Administration Panel (Grades 5 to 10)</p>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="renderView('student_info_search')" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-xs font-bold text-white flex items-center gap-2">
+                  <i data-lucide="user-plus" class="w-4 h-4"></i> Add Student
+                </button>
+                <button onclick="renderView('teachers')" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-bold text-white flex items-center gap-2">
+                  <i data-lucide="user-check" class="w-4 h-4"></i> Add Faculty
+                </button>
+              </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Total Students (5-10)</p><p class="text-3xl font-extrabold text-white mt-1">1,500</p></div>
+                <div><p class="text-[10px] text-slate-400 font-bold uppercase">Total Students (5-10)</p><p class="text-3xl font-extrabold text-white mt-1">1,500</p></div>
                 <div class="p-3 bg-blue-500/20 text-blue-400 rounded-xl"><i data-lucide="users" class="w-6 h-6"></i></div>
               </div>
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Faculty Members</p><p class="text-3xl font-extrabold text-white mt-1">120</p></div>
+                <div><p class="text-[10px] text-slate-400 font-bold uppercase">Faculty Members</p><p class="text-3xl font-extrabold text-white mt-1">120</p></div>
                 <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
               </div>
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Total Revenue</p><p class="text-3xl font-extrabold text-amber-400 mt-1">₹12,50,000</p></div>
+                <div><p class="text-[10px] text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-3xl font-extrabold text-amber-400 mt-1">₹12,50,000</p></div>
                 <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-6 h-6"></i></div>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
+                <div><p class="text-[10px] text-slate-400 font-bold uppercase">Today's Attendance</p><p class="text-3xl font-extrabold text-indigo-400 mt-1">96.8%</p></div>
+                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="activity" class="w-6 h-6"></i></div>
+              </div>
+            </div>
+
+            <!-- ADMIN GRAPHS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <i data-lucide="pie-chart" class="w-4 h-4 text-amber-400"></i> Fees Revenue Analytics
+                </h3>
+                <div class="space-y-3 text-xs">
+                  <div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Collected Revenue</span><span class="text-amber-400 font-mono font-bold">₹12,50,000 (83%)</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-amber-400 h-2 rounded-full" style="width: 83%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Pending Dues</span><span class="text-red-400 font-mono font-bold">₹2,50,000 (17%)</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-red-500 h-2 rounded-full" style="width: 17%"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-400"></i> Overall Attendance Trend
+                </h3>
+                <div class="space-y-3 text-xs">
+                  <div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Grade 10 Attendance</span><span class="text-emerald-400 font-bold">98.5%</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-400 h-2 rounded-full" style="width: 98.5%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Grade 9 Attendance</span><span class="text-indigo-400 font-bold">94.2%</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-indigo-400 h-2 rounded-full" style="width: 94.2%"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <i data-lucide="award" class="w-4 h-4 text-indigo-400"></i> Academic Pass Rate
+                </h3>
+                <div class="space-y-3 text-xs">
+                  <div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Pass Percentage</span><span class="text-indigo-400 font-bold">96.5%</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-indigo-500 h-2 rounded-full" style="width: 96.5%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Distinction Rate</span><span class="text-emerald-400 font-bold">42.0%</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-400 h-2 rounded-full" style="width: 42%"></div></div>
+                  </div>
+                </div>
               </div>
             </div>
           `;
@@ -551,8 +683,9 @@
           canvas.innerHTML = `
             <div class="mb-6">
               <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
-              <p class="text-xs text-slate-400 mt-1">Faculty Instruction Panel</p>
+              <p class="text-xs text-slate-400 mt-1">Faculty Instruction Panel & Daily Schedule</p>
             </div>
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
                 <div><p class="text-xs text-slate-400 font-bold uppercase">Assigned Sections</p><p class="text-3xl font-extrabold text-white mt-1">6 Sections</p></div>
@@ -561,6 +694,30 @@
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
                 <div><p class="text-xs text-slate-400 font-bold uppercase">Today's Register</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">Up to Date</p></div>
                 <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="clock" class="w-6 h-6"></i></div>
+              </div>
+            </div>
+
+            <!-- Daily Teaching Timetable -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                <i data-lucide="calendar" class="w-4 h-4 text-indigo-400"></i> Daily Teaching Timetable
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl">
+                  <span class="text-[10px] font-bold text-indigo-400 uppercase">Period 1 • 08:30 AM - 09:30 AM</span>
+                  <p class="font-bold text-white text-sm mt-1">Grade 10 - Section A</p>
+                  <p class="text-xs text-slate-400">Physics & Wave Optics</p>
+                </div>
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl">
+                  <span class="text-[10px] font-bold text-amber-400 uppercase">Period 2 • 09:45 AM - 10:45 AM</span>
+                  <p class="font-bold text-white text-sm mt-1">Grade 9 - Section B</p>
+                  <p class="text-xs text-slate-400">General Chemistry Labs</p>
+                </div>
+                <div class="p-4 bg-slate-800/60 border border-slate-700/50 rounded-xl">
+                  <span class="text-[10px] font-bold text-emerald-400 uppercase">Period 3 • 11:15 AM - 12:15 PM</span>
+                  <p class="font-bold text-white text-sm mt-1">Grade 8 - Section A</p>
+                  <p class="text-xs text-slate-400">Biological Sciences</p>
+                </div>
               </div>
             </div>
           `;
@@ -586,67 +743,463 @@
           `;
         } else { // STUDENT
           const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-          const marcus = studentList.find(s => s.id === '101') || { attendance: '96.5%', attendanceStatus: 'PRESENT' };
+          const marcus = studentList.find(s => s.id === '101') || { attendance: '98.5%', attendanceStatus: 'PRESENT' };
 
           canvas.innerHTML = `
             <div class="mb-6">
               <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Student Progress & Learning Portal</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Attendance Percentage</p><p class="text-3xl font-extrabold text-emerald-400 mt-1">${marcus.attendance}</p></div>
-                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl mb-8">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Overall Attendance Representation</h3>
+                <span class="text-2xl font-extrabold text-emerald-400">${marcus.attendance}</span>
               </div>
-              <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-xs text-slate-400 font-bold uppercase">Enrolled Subjects</p><p class="text-3xl font-extrabold text-indigo-400 mt-1">6 Courses</p></div>
-                <div class="p-3 bg-indigo-500/20 text-indigo-400 rounded-xl"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+              <div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden mb-6">
+                <div class="bg-gradient-to-r from-emerald-500 to-indigo-500 h-full rounded-full" style="width: 98.5%"></div>
+              </div>
+
+              <h4 class="text-xs font-bold text-slate-300 uppercase mb-3">Subject-Wise Attendance Breakdown</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <div class="p-3.5 bg-slate-800/60 rounded-xl border border-slate-700/50">
+                  <div class="flex justify-between mb-1"><span class="font-bold text-white">General Science</span><span class="text-emerald-400 font-mono">99%</span></div>
+                  <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-emerald-400 h-1.5 rounded-full" style="width: 99%"></div></div>
+                </div>
+                <div class="p-3.5 bg-slate-800/60 rounded-xl border border-slate-700/50">
+                  <div class="flex justify-between mb-1"><span class="font-bold text-white">Mathematics</span><span class="text-indigo-400 font-mono">98%</span></div>
+                  <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-indigo-400 h-1.5 rounded-full" style="width: 98%"></div></div>
+                </div>
+                <div class="p-3.5 bg-slate-800/60 rounded-xl border border-slate-700/50">
+                  <div class="flex justify-between mb-1"><span class="font-bold text-white">Social Studies</span><span class="text-emerald-400 font-mono">97%</span></div>
+                  <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-emerald-400 h-1.5 rounded-full" style="width: 97%"></div></div>
+                </div>
+                <div class="p-3.5 bg-slate-800/60 rounded-xl border border-slate-700/50">
+                  <div class="flex justify-between mb-1"><span class="font-bold text-white">English Literature</span><span class="text-amber-400 font-mono">96%</span></div>
+                  <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-amber-400 h-1.5 rounded-full" style="width: 96%"></div></div>
+                </div>
               </div>
             </div>
           `;
         }
       }
 
-      // ================= TEACHER ATTENDANCE REGISTER MODULE =================
+      // ================= CLASS & SECTION ATTENDANCE WITH DYNAMIC ROSTER FILTER =================
       else if (viewKey === 'attendance_select') {
         const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        
+        // Filter students dynamically based on selected grade and section
+        const filteredStudents = studentList.filter(s => 
+          String(s.grade) === String(gradeFilter) && 
+          String(s.section).toUpperCase() === String(secFilter).toUpperCase()
+        );
+
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Classroom Attendance Register</h2><p class="text-xs text-slate-400 mt-1">Mark Present or Absent for each student. Updates automatically sync to Student and Parent dashboards.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Classroom Attendance Register</h2><p class="text-xs text-slate-400 mt-1">Select class and section to load and mark daily student attendance.</p></div>
+
+          <!-- Class and Section Filters -->
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl mb-6 flex flex-wrap gap-4 items-center">
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Class Grade</label>
+              <select id="filterGrade" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option value="10" ${gradeFilter === '10' ? 'selected' : ''}>Grade 10</option>
+                <option value="9" ${gradeFilter === '9' ? 'selected' : ''}>Grade 9</option>
+                <option value="8" ${gradeFilter === '8' ? 'selected' : ''}>Grade 8</option>
+                <option value="7" ${gradeFilter === '7' ? 'selected' : ''}>Grade 7</option>
+                <option value="6" ${gradeFilter === '6' ? 'selected' : ''}>Grade 6</option>
+                <option value="5" ${gradeFilter === '5' ? 'selected' : ''}>Grade 5</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Section</label>
+              <select id="filterSection" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option value="A" ${secFilter === 'A' ? 'selected' : ''}>Section A</option>
+                <option value="B" ${secFilter === 'B' ? 'selected' : ''}>Section B</option>
+              </select>
+            </div>
+            <div class="self-end">
+              <button onclick="applyAttendanceFilter()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg transition-all">Load Roster</button>
+            </div>
+          </div>
+
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Roster for Grade ${gradeFilter} - Section ${secFilter}</h3>
+              <span class="text-xs text-slate-400 font-semibold">${filteredStudents.length} Students Listed</span>
+            </div>
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Grade & Sec</th><th class="p-3">Status</th><th class="p-3">Live Attendance</th><th class="p-3">Mark Attendance</th></tr>
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Grade</th><th class="p-3">Section</th><th class="p-3">Status</th><th class="p-3">Live Attendance</th><th class="p-3">Mark Attendance</th></tr>
               </thead>
               <tbody class="divide-y divide-slate-800">
-                ${studentList.map(s => {
+                ${filteredStudents.length > 0 ? filteredStudents.map(s => {
                   const currentStatus = s.attendanceStatus || "PRESENT";
                   return `
                   <tr>
                     <td class="p-3 font-mono text-indigo-400">${s.id}</td>
                     <td class="p-3 font-bold text-white">${s.name}</td>
-                    <td class="p-3">Grade ${s.grade}-${s.section}</td>
+                    <td class="p-3">Grade ${s.grade}</td>
+                    <td class="p-3 font-bold text-indigo-300">Section ${s.section}</td>
                     <td class="p-3"><span class="px-2.5 py-1 ${currentStatus === 'PRESENT' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'} rounded-full font-bold text-[10px]">${currentStatus}</span></td>
                     <td class="p-3 font-semibold text-slate-300">${s.attendance || '95.0%'}</td>
                     <td class="p-3 flex items-center gap-2">
-                      <button onclick="setStudentAttendance('${s.id}', 'PRESENT')" class="px-3 py-1 ${currentStatus === 'PRESENT' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} font-bold rounded-lg text-[10px]">Present</button>
-                      <button onclick="setStudentAttendance('${s.id}', 'ABSENT')" class="px-3 py-1 ${currentStatus === 'ABSENT' ? 'bg-red-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} font-bold rounded-lg text-[10px]">Absent</button>
+                      <button onclick="setStudentAttendance('${s.id}', 'PRESENT', '${gradeFilter}', '${secFilter}')" class="px-3 py-1 ${currentStatus === 'PRESENT' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} font-bold rounded-lg text-[10px]">Present</button>
+                      <button onclick="setStudentAttendance('${s.id}', 'ABSENT', '${gradeFilter}', '${secFilter}')" class="px-3 py-1 ${currentStatus === 'ABSENT' ? 'bg-red-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'} font-bold rounded-lg text-[10px]">Absent</button>
                     </td>
                   </tr>
-                `}).join('')}
+                `}).join('') : `<tr><td colspan="7" class="p-4 text-center text-slate-500 italic">No students registered in Grade ${gradeFilter} - Section ${secFilter}.</td></tr>`}
               </tbody>
             </table>
           </div>
         `;
       }
 
-      // ================= TEACHER COMPLAINTS MODULE =================
+      // ================= ADMIN GRADE-WISE STUDENTS =================
+      else if (viewKey === 'students_grade') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        const grades = ["10", "9", "8", "7", "6", "5"];
+
+        canvas.innerHTML = `
+          <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h2 class="text-2xl font-bold text-white">Grade-Wise Students (Grades 5 to 10)</h2>
+              <p class="text-xs text-slate-400 mt-1">Review active student enrollments grouped strictly into separate grade levels.</p>
+            </div>
+            <div class="relative w-full sm:w-72">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input type="text" id="gradeStudentSearch" onkeyup="filterGradeStudents()" placeholder="Search Name or Roll No..." class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </div>
+          </div>
+
+          <div class="space-y-6" id="gradeWiseContainer">
+            ${grades.map(g => {
+              const studentsInGrade = studentList.filter(s => String(s.grade) === String(g));
+              return `
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl grade-block" data-grade="${g}">
+                  <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+                    <h3 class="text-base font-bold text-indigo-400 flex items-center gap-2">
+                      <i data-lucide="users" class="w-4 h-4"></i> Grade ${g} Students
+                    </h3>
+                    <span class="px-2.5 py-0.5 bg-slate-800 text-slate-300 rounded-full text-xs font-semibold">${studentsInGrade.length} Enrolled</span>
+                  </div>
+
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                      <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                        <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Section</th><th class="p-3">Guardian</th><th class="p-3">Attendance</th><th class="p-3">Fee Status</th></tr>
+                      </thead>
+                      <tbody class="divide-y divide-slate-800">
+                        ${studentsInGrade.length > 0 ? studentsInGrade.map(s => `
+                          <tr class="student-row" data-name="${s.name.toLowerCase()}" data-roll="${s.id}">
+                            <td class="p-3 font-mono text-indigo-400">${s.id}</td>
+                            <td class="p-3 font-bold text-white">${s.name}</td>
+                            <td class="p-3">Section ${s.section}</td>
+                            <td class="p-3">${s.guardian}</td>
+                            <td class="p-3 text-emerald-400 font-semibold">${s.attendance}</td>
+                            <td class="p-3"><span class="px-2.5 py-1 ${s.feeStatus === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'} rounded-full text-[10px] font-bold uppercase">${s.feeStatus}</span></td>
+                          </tr>
+                        `).join('') : `<tr><td colspan="6" class="p-3 text-center text-slate-500 italic">No students registered in Grade ${g} yet.</td></tr>`}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      // Remaining view implementations
+      else if (viewKey === 'assigned_classes') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Periods</h2><p class="text-xs text-slate-400 mt-1">Review active assigned teaching periods across all assigned grade sections.</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 10 - Section A</h3><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-semibold">Period 1</span></div>
+              <p class="text-xs text-slate-300 font-semibold mt-1">Physics & Wave Optics</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 08:30 AM - 09:30 AM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 9 - Section B</h3><span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-semibold">Period 2</span></div>
+              <p class="text-xs text-slate-300 font-semibold mt-1">General Chemistry Practical</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 09:45 AM - 10:45 AM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 8 - Section A</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 3</span></div>
+              <p class="text-xs text-slate-300 font-semibold mt-1">Biological Sciences</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 11:15 AM - 12:15 PM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 7 - Section B</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 4</span></div>
+              <p class="text-xs text-slate-300 font-semibold mt-1">Environmental Science</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 01:00 PM - 02:00 PM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 6 - Section A</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 5</span></div>
+              <p class="text-xs text-slate-300 font-semibold mt-1">Basic Science Fundamentals</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 02:15 PM - 03:15 PM</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 5 - Section B</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 6</span></div>
+              <p class="text-xs text-slate-300 font-semibold mt-1">Science Experiments & Activity</p>
+              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 03:30 PM - 04:15 PM</p>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'marks_grades') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Gradebook (Teacher Edit Portal)</h2><p class="text-xs text-slate-400 mt-1">Input, modify, and save evaluation marks for Formative (FA1-4) and Summative (SA1-2) assessments.</p></div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">FA-1 (50)</th><th class="p-3">FA-2 (50)</th><th class="p-3">SA-1 (100)</th><th class="p-3">FA-3 (50)</th><th class="p-3">FA-4 (50)</th><th class="p-3">SA-2 (100)</th><th class="p-3">Action</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${studentList.map(s => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
+                    <td class="p-3 font-bold text-white">${s.name}</td>
+                    <td class="p-3"><input type="number" id="fa1_${s.id}" value="48" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="fa2_${s.id}" value="46" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="sa1_${s.id}" value="92" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="fa3_${s.id}" value="47" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="fa4_${s.id}" value="49" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="sa2_${s.id}" value="95" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
+                    <td class="p-3"><button onclick="saveStudentGrade('${s.id}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-[10px] font-bold">Save Grade</button></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'subject_courses') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Enrolled Courses & Subject Portions</h2><p class="text-xs text-slate-400 mt-1">Complete syllabus coverage across 7 core academic subjects.</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">General Science</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• Physics: Optics & Magnetism<br>• Chemistry: Chemical Reactions<br>• Biology: Respiration & Genetics</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Social Studies</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• History: Freedom Movement<br>• Geography: Natural Resources<br>• Civics: Indian Constitution</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Mathematics</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• Algebra: Quadratic Progressions<br>• Geometry: Triangles & Coordinate</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">English Literature</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• Prose & Poetry Analysis, Grammar, Essays</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Computer Science</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• Python Programming & HTML5/CSS Basics</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Environmental Studies</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• Ecosystems & Sustainable Development</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Second Language</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
+              <p class="text-xs text-slate-400">• Grammar, Prose Comprehension & Writing</p>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'important_alerts') {
+        const alertList = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Important Alerts & System Circulars</h2><p class="text-xs text-slate-400 mt-1">Broadcast key announcements to Students, Teachers, and Parents.</p></div>
+
+          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="bell-plus" class="w-4 h-4"></i> Add New Important Alert</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <input type="text" id="alertTitleInput" placeholder="Alert Name / Title" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <select id="alertTargetSelect" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option value="ALL">Alert For: All Users</option>
+                <option value="STUDENTS">Alert For: Students Only</option>
+                <option value="TEACHERS">Alert For: Teachers Only</option>
+                <option value="PARENTS">Alert For: Parents Only</option>
+              </select>
+              <button onclick="createNewAlert()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Publish Alert</button>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Published Circulars</h3>
+            <div class="space-y-3">
+              ${alertList.map(a => `
+                <div class="p-4 bg-slate-800/60 rounded-xl border border-slate-700/50 flex justify-between items-center">
+                  <div>
+                    <h4 class="font-bold text-white text-sm">${a.title}</h4>
+                    <p class="text-[10px] text-slate-400 mt-0.5">Published on: ${a.date}</p>
+                  </div>
+                  <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[10px] font-bold uppercase">For: ${a.target}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'admin_fees_grade') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Analytics</h2><p class="text-xs text-slate-400 mt-1">Financial stats, latest collected fees, and upcoming transactions across Grades 5 through 10.</p></div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl mb-8 overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Grade-Wise Fee Collection Breakdown</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Grade</th><th class="p-3">Total Students</th><th class="p-3">Fees Collected</th><th class="p-3">Pending Amount</th><th class="p-3">Upcoming Latest Target</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">Grade 10</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,45,000</td><td class="p-3 text-red-400 font-mono">₹5,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 9</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,30,000</td><td class="p-3 text-red-400 font-mono">₹20,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 8</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,40,000</td><td class="p-3 text-red-400 font-mono">₹10,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 7</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,20,000</td><td class="p-3 text-red-400 font-mono">₹30,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 6</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,35,000</td><td class="p-3 text-red-400 font-mono">₹15,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 5</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,10,000</td><td class="p-3 text-red-400 font-mono">₹40,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recent Transactions & Student Fee Details</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Transaction ID</th><th class="p-3">Student Name</th><th class="p-3">Roll No</th><th class="p-3">Amount Paid</th><th class="p-3">Payment Date</th><th class="p-3">Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-mono text-indigo-400">TXN-8801</td><td class="p-3 font-bold text-white">Marcus Jenkins</td><td class="p-3 font-mono">101</td><td class="p-3 font-mono text-emerald-400">₹25,000</td><td class="p-3">August 10, 2026</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">SUCCESS</span></td></tr>
+                <tr><td class="p-3 font-mono text-indigo-400">TXN-8802</td><td class="p-3 font-bold text-white">Ethan Davis</td><td class="p-3 font-mono">103</td><td class="p-3 font-mono text-emerald-400">₹25,000</td><td class="p-3">August 11, 2026</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">SUCCESS</span></td></tr>
+                <tr><td class="p-3 font-mono text-indigo-400">TXN-8803</td><td class="p-3 font-bold text-white">Ava Wilson</td><td class="p-3 font-mono">104</td><td class="p-3 font-mono text-emerald-400">₹25,000</td><td class="p-3">August 12, 2026</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">SUCCESS</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'parent_performance') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Performance Graphs & Analytics</h2><p class="text-xs text-slate-400 mt-1">Graphical analytics for Marcus Jenkins (Grade 10-A).</p></div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <h3 class="text-xs font-bold text-slate-300 uppercase mb-4 flex items-center gap-2">
+                <i data-lucide="line-chart" class="w-4 h-4 text-emerald-400"></i> Attendance Graphical Trend (Term-Wise)
+              </h3>
+              <div class="space-y-4 text-xs">
+                <div>
+                  <div class="flex justify-between mb-1"><span class="text-slate-400">Term 1 Attendance</span><span class="text-emerald-400 font-bold">98.5%</span></div>
+                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-400 h-2.5 rounded-full" style="width: 98.5%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span class="text-slate-400">Term 2 Attendance</span><span class="text-indigo-400 font-bold">96.0%</span></div>
+                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-400 h-2.5 rounded-full" style="width: 96%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span class="text-slate-400">Term 3 Target</span><span class="text-amber-400 font-bold">99.0%</span></div>
+                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-amber-400 h-2.5 rounded-full" style="width: 99%"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
+              <h3 class="text-xs font-bold text-slate-300 uppercase mb-4 flex items-center gap-2">
+                <i data-lucide="bar-chart-2" class="w-4 h-4 text-indigo-400"></i> Overall Subject Performance (GPA & Marks)
+              </h3>
+              <div class="space-y-4 text-xs">
+                <div>
+                  <div class="flex justify-between mb-1"><span class="text-slate-400">General Science</span><span class="text-indigo-400 font-bold">95 / 100 (A+)</span></div>
+                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 95%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span class="text-slate-400">Mathematics</span><span class="text-emerald-400 font-bold">98 / 100 (Outstanding)</span></div>
+                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-500 h-2.5 rounded-full" style="width: 98%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1"><span class="text-slate-400">Social Studies</span><span class="text-indigo-400 font-bold">91 / 100 (A+)</span></div>
+                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 91%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'student_info_search') {
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Search & Comprehensive Academic Details</h2><p class="text-xs text-slate-400 mt-1">Search student records or enroll a new student into the school directory (Admin Only).</p></div>
+          
+          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Student Entry</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <input type="text" id="addRollNo" placeholder="Roll No (e.g. 108)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addStudentName" placeholder="Full Student Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <select id="addStudentGrade" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10" selected>Grade 10</option></select>
+              <input type="text" id="addStudentSec" placeholder="Section (A/B)" value="A" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addGuardian" placeholder="Parent/Guardian Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <button onclick="saveNewStudent()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Save Student Record</button>
+            </div>
+          </div>
+        `;
+      }
+
+      else if (viewKey === 'teachers') {
+        const teacherList = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
+        canvas.innerHTML = `
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members and add new teacher entries (Admin Only).</p></div>
+          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Faculty Member</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <input type="text" id="addTeacherID" placeholder="Teacher ID (e.g. T-505)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherName" placeholder="Faculty Full Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherSubject" placeholder="Assigned Subject (e.g. Mathematics)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherGrade" placeholder="Assigned Grade (e.g. Grade 5-10)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="email" id="addTeacherEmail" placeholder="Faculty Email" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <button onclick="saveNewTeacher()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Add Faculty Member</button>
+            </div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">ID No</th><th class="p-3">Faculty Name</th><th class="p-3">Department/Subject</th><th class="p-3">Assigned Grade</th><th class="p-3">Email Address</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${teacherList.map(t => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${t.id}</td>
+                    <td class="p-3 font-bold text-white">${t.name}</td>
+                    <td class="p-3 text-slate-300">${t.subject}</td>
+                    <td class="p-3">${t.grade}</td>
+                    <td class="p-3 text-slate-400">${t.email}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
       else if (viewKey === 'teacher_complaints') {
         const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
         const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
-
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Complaints</h2><p class="text-xs text-slate-400 mt-1">Submit disciplinary or academic complaints directly to parents.</p></div>
-          
           <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
             <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="alert-circle" class="w-4 h-4"></i> Issue New Complaint</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -663,7 +1216,6 @@
             </div>
             <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Submit Complaint to Parent</button>
           </div>
-
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
             <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Active Complaints Log</h3>
             <table class="w-full text-left text-xs text-slate-300">
@@ -685,11 +1237,9 @@
         `;
       }
 
-      // ================= PARENT COMPLAINTS & REPLIES MODULE =================
       else if (viewKey === 'parent_complaints') {
         const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
         const childComplaints = complaintList.filter(c => c.rollNo === '101');
-
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers and reply directly.</p></div>
           <div class="space-y-4">
@@ -718,154 +1268,6 @@
         `;
       }
 
-      else if (viewKey === 'students_grade') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Students (Grades 5 to 10)</h2><p class="text-xs text-slate-400 mt-1">Filter and review active enrollments across middle & high school grades.</p></div>
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Grade & Sec</th><th class="p-3">Guardian</th><th class="p-3">Attendance</th><th class="p-3">Fee Status</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                ${studentList.map(s => `
-                  <tr>
-                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
-                    <td class="p-3 font-bold text-white">${s.name}</td>
-                    <td class="p-3">Grade ${s.grade}-${s.section}</td>
-                    <td class="p-3">${s.guardian}</td>
-                    <td class="p-3 text-emerald-400 font-semibold">${s.attendance}</td>
-                    <td class="p-3"><span class="px-2.5 py-1 ${s.feeStatus === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'} rounded-full text-[10px] font-bold uppercase">${s.feeStatus}</span></td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
-      else if (viewKey === 'student_info_search') {
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Information Search & Admission</h2><p class="text-xs text-slate-400 mt-1">Search student records or enroll a new student into the school directory (Admin Only).</p></div>
-          
-          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
-            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Student Entry</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-              <input type="text" id="addRollNo" placeholder="Roll No (e.g. 108)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addStudentName" placeholder="Full Student Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <select id="addStudentGrade" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10" selected>Grade 10</option></select>
-              <input type="text" id="addStudentSec" placeholder="Section (A/B)" value="A" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addGuardian" placeholder="Parent/Guardian Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <button onclick="saveNewStudent()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Save Student Record</button>
-            </div>
-          </div>
-        `;
-      }
-
-      else if (viewKey === 'teachers') {
-        const teacherList = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members and add new teacher entries (Admin Only).</p></div>
-          
-          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
-            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Faculty Member</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-              <input type="text" id="addTeacherID" placeholder="Teacher ID (e.g. T-505)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addTeacherName" placeholder="Faculty Full Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addTeacherSubject" placeholder="Assigned Subject (e.g. Mathematics)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addTeacherGrade" placeholder="Assigned Grade (e.g. Grade 5-10)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="email" id="addTeacherEmail" placeholder="Faculty Email" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <button onclick="saveNewTeacher()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Add Faculty Member</button>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">ID No</th><th class="p-3">Faculty Name</th><th class="p-3">Department/Subject</th><th class="p-3">Assigned Grade</th><th class="p-3">Email Address</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                ${teacherList.map(t => `
-                  <tr>
-                    <td class="p-3 font-mono text-indigo-400">${t.id}</td>
-                    <td class="p-3 font-bold text-white">${t.name}</td>
-                    <td class="p-3 text-slate-300">${t.subject}</td>
-                    <td class="p-3">${t.grade}</td>
-                    <td class="p-3 text-slate-400">${t.email}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
-      else if (viewKey === 'admin_fees_grade') {
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Collections</h2><p class="text-xs text-slate-400 mt-1">Financial stats and collection targets across Grades 5 through 10.</p></div>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"><p class="text-xs text-slate-400 font-bold uppercase">Overall Collection</p><p class="text-3xl font-extrabold text-emerald-400 mt-2">₹12,50,000</p></div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"><p class="text-xs text-slate-400 font-bold uppercase">Actual Revenue Due</p><p class="text-3xl font-extrabold text-indigo-400 mt-2">₹15,00,000</p></div>
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"><p class="text-xs text-slate-400 font-bold uppercase">Pending Outstanding</p><p class="text-3xl font-extrabold text-red-400 mt-2">₹2,50,000</p></div>
-          </div>
-        `;
-      }
-
-      else if (viewKey === 'assigned_classes') {
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Timetable</h2><p class="text-xs text-slate-400 mt-1">Active assigned teaching periods and sections.</p></div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 10 - Section A</h3><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-semibold">Active Session</span></div>
-              <p class="text-xs text-slate-400">Subject: Science & Wave Optics</p>
-              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 08:30 AM - 09:30 AM</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 8 - Section B</h3><span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-semibold">Next Period</span></div>
-              <p class="text-xs text-slate-400">Subject: Physics Fundamentals</p>
-              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 10:00 AM - 11:00 AM</p>
-            </div>
-          </div>
-        `;
-      }
-
-      else if (viewKey === 'marks_grades') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Gradebook</h2><p class="text-xs text-slate-400 mt-1">Assign and edit marks for FA1, FA2, SA1, FA3, FA4, and SA2 assessments.</p></div>
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">FA-1 (50)</th><th class="p-3">FA-2 (50)</th><th class="p-3">SA-1 (100)</th><th class="p-3">Action</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                ${studentList.map(s => `
-                  <tr>
-                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
-                    <td class="p-3 font-bold text-white">${s.name}</td>
-                    <td class="p-3"><input type="number" value="48" class="w-16 bg-slate-800 border border-slate-700 p-1 rounded text-white" /></td>
-                    <td class="p-3"><input type="number" value="46" class="w-16 bg-slate-800 border border-slate-700 p-1 rounded text-white" /></td>
-                    <td class="p-3"><input type="number" value="92" class="w-16 bg-slate-800 border border-slate-700 p-1 rounded text-white" /></td>
-                    <td class="p-3"><button class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-[10px] font-bold">Save Grade</button></td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
-      else if (viewKey === 'parent_performance') {
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Performance (Marcus Jenkins)</h2><p class="text-xs text-slate-400 mt-1">Comprehensive academic and behavioral analytics for Grade 10-A.</p></div>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Overall GPA</p><p class="text-3xl font-bold text-indigo-400 mt-1">9.25 / 10</p></div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Attendance</p><p class="text-3xl font-bold text-emerald-400 mt-1">98.5%</p></div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><p class="text-xs text-slate-400 font-bold uppercase">Class Rank</p><p class="text-3xl font-bold text-amber-400 mt-1">2nd / 45</p></div>
-          </div>
-        `;
-      }
-
       else if (viewKey === 'term_fees') {
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Fees & Payment Receipts</h2><p class="text-xs text-slate-400 mt-1">Review term payments, due dates, and official fee receipts.</p></div>
@@ -884,34 +1286,6 @@
         `;
       }
 
-      else if (viewKey === 'subject_courses') {
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Enrolled Courses & Subject Portions</h2><p class="text-xs text-slate-400 mt-1">Overview of your current syllabus and subject topics.</p></div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">General Science</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
-              <p class="text-xs text-slate-400">• Physics: Wave Optics, Electricity & Magnetism<br>• Chemistry: Chemical Reactions & Periodic Table<br>• Biology: Cellular Respiration & Genetics</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Social Studies</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
-              <p class="text-xs text-slate-400">• History: Modern World History & Freedom Movement<br>• Geography: Natural Resources & Agriculture<br>• Civics: Democratic Rights & Indian Constitution</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Mathematics</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
-              <p class="text-xs text-slate-400">• Algebra: Quadratic Equations & Progressions<br>• Geometry: Triangles, Circles & Coordinate Geometry</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">English Literature</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion/Syllabus Coverage:</p>
-              <p class="text-xs text-slate-400">• Prose & Poetry Analysis, Advanced Grammar & Essays</p>
-            </div>
-          </div>
-        `;
-      }
-
       else if (viewKey === 'report_cards_marks') {
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Report Cards & Assessment Marks</h2><p class="text-xs text-slate-400 mt-1">Official marksheet breakdown for Formative (FA) and Summative (SA) assessments.</p></div>
@@ -924,7 +1298,6 @@
                 <tr><td class="p-3 font-bold text-white">General Science</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">92</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">95</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
                 <tr><td class="p-3 font-bold text-white">Social Studies</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">88</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">91</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
                 <tr><td class="p-3 font-bold text-white">Mathematics</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">96</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">98</td><td class="p-3"><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 rounded font-bold">O (Outstanding)</span></td></tr>
-                <tr><td class="p-3 font-bold text-white">English Literature</td><td class="p-3 font-mono">44</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">85</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">89</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -938,8 +1311,67 @@
       lucide.createIcons();
     }
 
-    // Set Present / Absent Explicitly
-    function setStudentAttendance(rollNo, status) {
+    // Apply Filter Function for Attendance Roster
+    function applyAttendanceFilter() {
+      const g = document.getElementById('filterGrade').value;
+      const s = document.getElementById('filterSection').value;
+      renderView('attendance_select', g, s);
+    }
+
+    // Filter Grade-Wise Students Search Bar
+    function filterGradeStudents() {
+      const query = (document.getElementById('gradeStudentSearch').value || '').toLowerCase().trim();
+      const studentRows = document.querySelectorAll('.student-row');
+
+      studentRows.forEach(row => {
+        const name = row.getAttribute('data-name') || '';
+        const roll = row.getAttribute('data-roll') || '';
+
+        if (name.includes(query) || roll.includes(query)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Save Student Grade (Teacher Edit Portal)
+    function saveStudentGrade(rollNo) {
+      const fa1 = document.getElementById(`fa1_${rollNo}`).value;
+      const fa2 = document.getElementById(`fa2_${rollNo}`).value;
+      const sa1 = document.getElementById(`sa1_${rollNo}`).value;
+      const fa3 = document.getElementById(`fa3_${rollNo}`).value;
+      const fa4 = document.getElementById(`fa4_${rollNo}`).value;
+      const sa2 = document.getElementById(`sa2_${rollNo}`).value;
+
+      alert(`Grade updated for Roll No ${rollNo}!\nFA1: ${fa1}, FA2: ${fa2}, SA1: ${sa1}, FA3: ${fa3}, FA4: ${fa4}, SA2: ${sa2}`);
+    }
+
+    // Admin Create New Alert
+    function createNewAlert() {
+      const title = document.getElementById('alertTitleInput').value.trim();
+      const target = document.getElementById('alertTargetSelect').value;
+
+      if (!title) {
+        alert('Please enter an alert name/title.');
+        return;
+      }
+
+      const alerts = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
+      alerts.push({
+        id: Date.now(),
+        title: title,
+        target: target,
+        date: "August 13, 2026"
+      });
+
+      localStorage.setItem('erp_alerts', JSON.stringify(alerts));
+      alert(`Alert "${title}" published for ${target}!`);
+      renderView('important_alerts');
+    }
+
+    // Set Present / Absent Explicitly with Roster Filter Retention
+    function setStudentAttendance(rollNo, status, currentGrade = '10', currentSec = 'A') {
       const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
       const index = students.findIndex(s => s.id === rollNo);
 
@@ -947,7 +1379,7 @@
         students[index].attendanceStatus = status;
         students[index].attendance = status === 'PRESENT' ? '98.5%' : '92.0%';
         localStorage.setItem('erp_students', JSON.stringify(students));
-        renderView('attendance_select');
+        renderView('attendance_select', currentGrade, currentSec);
       }
     }
 
@@ -969,7 +1401,7 @@
         rollNo: rollNo,
         studentName: student ? student.name : "Student",
         teacherName: "Dr. Sarah Jenkins (T-501)",
-        date: "August 12, 2026",
+        date: "August 13, 2026",
         issue: issue,
         parentReply: ""
       };
