@@ -74,6 +74,21 @@
 </head>
 <body class="bg-black text-white min-h-screen selection:bg-indigo-500 selection:text-white font-sans">
 
+  <!-- Floating Mobile SMS Notification Simulation Toast -->
+  <div id="smsToast" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-slate-900 border border-emerald-500/50 p-4 rounded-2xl shadow-2xl transition-all">
+    <div class="flex items-start gap-3">
+      <div class="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl shrink-0">
+        <i data-lucide="smartphone" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> SMS Alert Sent to Parent
+        </p>
+        <p id="smsToastText" class="text-xs text-slate-200 mt-1 leading-relaxed">Parent notification dispatched.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== VIEW 1: HERO LANDING PAGE ==================== -->
   <div id="landingView" class="relative min-h-screen overflow-hidden flex flex-col justify-between">
     
@@ -1407,7 +1422,21 @@
       renderView('important_alerts');
     }
 
-    // Set Present / Absent Explicitly with Roster Filter Retention
+    // Trigger Simulated Parent SMS Alert Notification Toast
+    function triggerParentSMSAlert(studentName, rollNo, guardian) {
+      const toast = document.getElementById('smsToast');
+      const toastText = document.getElementById('smsToastText');
+      if (!toast || !toastText) return;
+
+      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 13-Aug-2026 at St. Jude's Academy."`;
+      
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 6000);
+    }
+
+    // Set Present / Absent Explicitly with Roster Filter Retention & Parent SMS Trigger
     function setStudentAttendance(rollNo, status, currentGrade = '10', currentSec = 'A') {
       const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
       const index = students.findIndex(s => s.id === rollNo);
@@ -1416,6 +1445,12 @@
         students[index].attendanceStatus = status;
         students[index].attendance = status === 'PRESENT' ? '98.5%' : '92.0%';
         localStorage.setItem('erp_students', JSON.stringify(students));
+        
+        // Trigger Parent SMS Simulation if marked ABSENT
+        if (status === 'ABSENT') {
+          triggerParentSMSAlert(students[index].name, students[index].id, students[index].guardian);
+        }
+
         renderView('attendance_select', currentGrade, currentSec);
       }
     }
