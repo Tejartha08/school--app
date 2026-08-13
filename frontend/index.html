@@ -412,6 +412,33 @@
 
     lucide.createIcons();
 
+    // Helper to generate dynamic alert banners for Student, Parent, and Teacher dashboards
+    function getAlertsHTMLForRole(role) {
+      const alertList = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
+      const filteredAlerts = alertList.filter(a => a.target === 'ALL' || a.target === `${role}S`);
+
+      if (filteredAlerts.length === 0) return '';
+
+      return `
+        <div class="bg-indigo-950/60 border border-indigo-500/40 p-4 rounded-2xl mb-6 shadow-xl">
+          <h3 class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+            <i data-lucide="bell" class="w-4 h-4 text-indigo-400 animate-bounce"></i> Important Announcements & Alerts
+          </h3>
+          <div class="space-y-2">
+            ${filteredAlerts.map(a => `
+              <div class="p-3 bg-slate-900/80 rounded-xl border border-indigo-500/20 flex justify-between items-center text-xs">
+                <div>
+                  <p class="font-bold text-white">${a.title}</p>
+                  <p class="text-[10px] text-slate-400 mt-0.5">Date: ${a.date}</p>
+                </div>
+                <span class="px-2.5 py-0.5 bg-indigo-500/20 text-indigo-300 rounded font-bold text-[10px] uppercase">Alert</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
     // Video Handler
     const video = document.getElementById('bgVideo');
     let fadeAnimId = null;
@@ -686,6 +713,9 @@
               <p class="text-xs text-slate-400 mt-1">Faculty Instruction Panel & Daily Schedule</p>
             </div>
             
+            <!-- DISPLAY IMPORTANT ALERTS FOR TEACHERS -->
+            ${getAlertsHTMLForRole('TEACHER')}
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
                 <div><p class="text-xs text-slate-400 font-bold uppercase">Assigned Sections</p><p class="text-3xl font-extrabold text-white mt-1">6 Sections</p></div>
@@ -730,6 +760,10 @@
               <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Parent Portal for Marcus Jenkins (Grade 10-A)</p>
             </div>
+
+            <!-- DISPLAY IMPORTANT ALERTS FOR PARENTS -->
+            ${getAlertsHTMLForRole('PARENT')}
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
                 <span class="text-xs font-semibold uppercase text-slate-400">Live Attendance Status</span>
@@ -750,6 +784,9 @@
               <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
               <p class="text-xs text-slate-400 mt-1">Student Progress & Learning Portal</p>
             </div>
+
+            <!-- DISPLAY IMPORTANT ALERTS FOR STUDENTS -->
+            ${getAlertsHTMLForRole('STUDENT')}
 
             <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl mb-8">
               <div class="flex justify-between items-center mb-4">
