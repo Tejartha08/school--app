@@ -309,7 +309,7 @@
     const API_BASE_URL = 'http://127.0.0.1:8000';
     let currentUserRole = 'ADMIN';
 
-    // 1. DOM Listeners for API Token & Sign Up Form Submissions
+    // 1. DOM Listeners for Login Form Submissions
     document.addEventListener('DOMContentLoaded', () => {
       const loginForm = document.getElementById('loginForm');
       if (loginForm) {
@@ -339,7 +339,6 @@
             loadERPDashboard();
 
           } catch (err) {
-            // Fallback for local demo credentials lookup
             executeLoginDemoFallback(input);
           }
         });
@@ -368,7 +367,7 @@
       loadERPDashboard();
     }
 
-    // Preloaded Database with 10-15 Students Per Grade (Grades 5 to 10)
+    // Preloaded Database with Students Per Grade (Grades 5 to 10)
     if (!localStorage.getItem('erp_students')) {
       const initialStudents = [
         // GRADE 10 (12 Students)
@@ -476,6 +475,15 @@
         { id: 2, title: "Parent-Teacher Meeting (PTM) Scheduled for Grade 10", target: "PARENTS", date: "August 14, 2026" }
       ];
       localStorage.setItem('erp_alerts', JSON.stringify(initialAlerts));
+    }
+
+    if (!localStorage.getItem('erp_transactions')) {
+      const initialTxns = [
+        { id: "TXN-8801", name: "Marcus Jenkins", rollNo: "101", amount: "₹25,000", date: "August 10, 2026", status: "SUCCESS", mode: "Online Portal" },
+        { id: "TXN-8802", name: "Ethan Davis", rollNo: "103", amount: "₹25,000", date: "August 11, 2026", status: "SUCCESS", mode: "Net Banking" },
+        { id: "TXN-8803", name: "Ava Wilson", rollNo: "104", amount: "₹25,000", date: "August 12, 2026", status: "SUCCESS", mode: "Cash / Counter" }
+      ];
+      localStorage.setItem('erp_transactions', JSON.stringify(initialTxns));
     }
 
     const credentialDirectory = [
@@ -689,8 +697,8 @@
                 <button onclick="renderView('student_info_search')" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-xs font-bold text-white flex items-center gap-2">
                   <i data-lucide="user-plus" class="w-4 h-4"></i> Add Student
                 </button>
-                <button onclick="renderView('teachers')" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-bold text-white flex items-center gap-2">
-                  <i data-lucide="user-check" class="w-4 h-4"></i> Add Faculty
+                <button onclick="renderView('admin_fees_grade')" class="px-3.5 py-2 bg-amber-600 hover:bg-amber-500 rounded-xl text-xs font-bold text-white flex items-center gap-2">
+                  <i data-lucide="credit-card" class="w-4 h-4"></i> Collect Fee
                 </button>
               </div>
             </div>
@@ -705,7 +713,7 @@
                 <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-xl"><i data-lucide="user-check" class="w-6 h-6"></i></div>
               </div>
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
-                <div><p class="text-[10px] text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-3xl font-extrabold text-amber-400 mt-1">₹12,50,000</p></div>
+                <div><p class="text-[10px] text-slate-400 font-bold uppercase">Total Revenue Collected</p><p class="text-3xl font-extrabold text-amber-400 mt-1">₹12,75,000</p></div>
                 <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl"><i data-lucide="credit-card" class="w-6 h-6"></i></div>
               </div>
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-xl">
@@ -722,12 +730,12 @@
                 </h3>
                 <div class="space-y-3 text-xs">
                   <div>
-                    <div class="flex justify-between mb-1"><span class="text-slate-400">Collected Revenue</span><span class="text-amber-400 font-mono font-bold">₹12,50,000 (83%)</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-amber-400 h-2 rounded-full" style="width: 83%"></div></div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Collected Revenue</span><span class="text-amber-400 font-mono font-bold">₹12,75,000 (85%)</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-amber-400 h-2 rounded-full" style="width: 85%"></div></div>
                   </div>
                   <div>
-                    <div class="flex justify-between mb-1"><span class="text-slate-400">Pending Dues</span><span class="text-red-400 font-mono font-bold">₹2,50,000 (17%)</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-red-500 h-2 rounded-full" style="width: 17%"></div></div>
+                    <div class="flex justify-between mb-1"><span class="text-slate-400">Pending Dues</span><span class="text-red-400 font-mono font-bold">₹2,25,000 (15%)</span></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-red-500 h-2 rounded-full" style="width: 15%"></div></div>
                   </div>
                 </div>
               </div>
@@ -739,11 +747,11 @@
                 <div class="space-y-3 text-xs">
                   <div>
                     <div class="flex justify-between mb-1"><span class="text-slate-400">Grade 10 Attendance</span><span class="text-emerald-400 font-bold">98.5%</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-400 h-2.5 rounded-full" style="width: 98.5%"></div></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-400 h-2 rounded-full" style="width: 98.5%"></div></div>
                   </div>
                   <div>
                     <div class="flex justify-between mb-1"><span class="text-slate-400">Grade 9 Attendance</span><span class="text-indigo-400 font-bold">94.2%</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-indigo-400 h-2.5 rounded-full" style="width: 94.2%"></div></div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-indigo-400 h-2 rounded-full" style="width: 94.2%"></div></div>
                   </div>
                 </div>
               </div>
@@ -902,11 +910,10 @@
         }
       }
 
-      // ================= CLASS & SECTION ATTENDANCE WITH DYNAMIC ROSTER FILTER =================
+      // ================= CLASS & SECTION ATTENDANCE =================
       else if (viewKey === 'attendance_select') {
         const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
         
-        // Filter students dynamically based on selected grade and section
         const filteredStudents = studentList.filter(s => 
           String(s.grade) === String(gradeFilter) && 
           String(s.section).toUpperCase() === String(secFilter).toUpperCase()
@@ -915,7 +922,6 @@
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Classroom Attendance Register</h2><p class="text-xs text-slate-400 mt-1">Select class and section to load and mark daily student attendance.</p></div>
 
-          <!-- Class and Section Filters -->
           <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl mb-6 flex flex-wrap gap-4 items-center">
             <div>
               <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Class Grade</label>
@@ -1027,7 +1033,95 @@
         `;
       }
 
-      // Remaining view implementations
+      // ================= REVENUE & FEES WITH INTERACTIVE PAYMENT RECORDING =================
+      else if (viewKey === 'admin_fees_grade') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        const txns = JSON.parse(localStorage.getItem('erp_transactions') || '[]');
+
+        canvas.innerHTML = `
+          <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Analytics</h2>
+              <p class="text-xs text-slate-400 mt-1">Financial stats, latest collected fees, and incoming student fee submissions.</p>
+            </div>
+          </div>
+
+          <!-- Interactive Record Fee Payment Form -->
+          <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i> Record Student Fee Payment
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4">
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Select Student</label>
+                <select id="feeStudentSelect" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                  ${studentList.map(s => `<option value="${s.id}">${s.name} (Roll No: ${s.id} - Grade ${s.grade} • Fee: ${s.feeStatus})</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Payment Amount (₹)</label>
+                <input type="number" id="feeAmountInput" value="25000" placeholder="e.g. 25000" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Payment Mode</label>
+                <select id="feeModeSelect" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                  <option value="Online Portal">Online Portal / UPI</option>
+                  <option value="Cash / Counter">Cash / Bank Counter</option>
+                  <option value="Net Banking">Net Banking / NEFT</option>
+                  <option value="Credit/Debit Card">Credit / Debit Card</option>
+                </select>
+              </div>
+              <div class="self-end">
+                <button onclick="recordStudentFeePayment()" class="w-full px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="check-circle-2" class="w-4 h-4"></i> Record Payment
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grade-Wise Fee Breakdown Table -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl mb-8 overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Grade-Wise Fee Collection Breakdown</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Grade</th><th class="p-3">Total Students</th><th class="p-3">Fees Collected</th><th class="p-3">Pending Amount</th><th class="p-3">Upcoming Latest Target</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                <tr><td class="p-3 font-bold text-white">Grade 10</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,50,000</td><td class="p-3 text-emerald-400 font-mono">₹0 (All Clear)</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 9</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,30,000</td><td class="p-3 text-red-400 font-mono">₹20,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 8</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,40,000</td><td class="p-3 text-red-400 font-mono">₹10,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 7</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,20,000</td><td class="p-3 text-red-400 font-mono">₹30,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 6</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,35,000</td><td class="p-3 text-red-400 font-mono">₹15,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+                <tr><td class="p-3 font-bold text-white">Grade 5</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,10,000</td><td class="p-3 text-red-400 font-mono">₹40,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Live Transactions Table -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recent Transactions & Student Fee Details</h3>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr><th class="p-3">Transaction ID</th><th class="p-3">Student Name</th><th class="p-3">Roll No</th><th class="p-3">Amount Paid</th><th class="p-3">Payment Mode</th><th class="p-3">Payment Date</th><th class="p-3">Status</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800" id="txnsTableBody">
+                ${txns.map(t => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${t.id}</td>
+                    <td class="p-3 font-bold text-white">${t.name}</td>
+                    <td class="p-3 font-mono text-slate-400">${t.rollNo}</td>
+                    <td class="p-3 font-mono text-emerald-400 font-bold">${t.amount}</td>
+                    <td class="p-3 text-slate-300">${t.mode || 'Online Portal'}</td>
+                    <td class="p-3">${t.date}</td>
+                    <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">SUCCESS</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
       else if (viewKey === 'assigned_classes') {
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Periods</h2><p class="text-xs text-slate-400 mt-1">Review active assigned teaching periods across all assigned grade sections.</p></div>
@@ -1046,21 +1140,6 @@
               <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 8 - Section A</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 3</span></div>
               <p class="text-xs text-slate-300 font-semibold mt-1">Biological Sciences</p>
               <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 11:15 AM - 12:15 PM</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 7 - Section B</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 4</span></div>
-              <p class="text-xs text-slate-300 font-semibold mt-1">Environmental Science</p>
-              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 01:00 PM - 02:00 PM</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 6 - Section A</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 5</span></div>
-              <p class="text-xs text-slate-300 font-semibold mt-1">Basic Science Fundamentals</p>
-              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 02:15 PM - 03:15 PM</p>
-            </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 5 - Section B</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 6</span></div>
-              <p class="text-xs text-slate-300 font-semibold mt-1">Science Experiments & Activity</p>
-              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 03:30 PM - 04:15 PM</p>
             </div>
           </div>
         `;
@@ -1174,43 +1253,6 @@
         `;
       }
 
-      else if (viewKey === 'admin_fees_grade') {
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Analytics</h2><p class="text-xs text-slate-400 mt-1">Financial stats, latest collected fees, and upcoming transactions across Grades 5 through 10.</p></div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl mb-8 overflow-x-auto">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Grade-Wise Fee Collection Breakdown</h3>
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Grade</th><th class="p-3">Total Students</th><th class="p-3">Fees Collected</th><th class="p-3">Pending Amount</th><th class="p-3">Upcoming Latest Target</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                <tr><td class="p-3 font-bold text-white">Grade 10</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,45,000</td><td class="p-3 text-red-400 font-mono">₹5,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 9</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,30,000</td><td class="p-3 text-red-400 font-mono">₹20,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 8</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,40,000</td><td class="p-3 text-red-400 font-mono">₹10,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 7</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,20,000</td><td class="p-3 text-red-400 font-mono">₹30,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 6</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,35,000</td><td class="p-3 text-red-400 font-mono">₹15,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 5</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,10,000</td><td class="p-3 text-red-400 font-mono">₹40,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recent Transactions & Student Fee Details</h3>
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Transaction ID</th><th class="p-3">Student Name</th><th class="p-3">Roll No</th><th class="p-3">Amount Paid</th><th class="p-3">Payment Date</th><th class="p-3">Status</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                <tr><td class="p-3 font-mono text-indigo-400">TXN-8801</td><td class="p-3 font-bold text-white">Marcus Jenkins</td><td class="p-3 font-mono">101</td><td class="p-3 font-mono text-emerald-400">₹25,000</td><td class="p-3">August 10, 2026</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">SUCCESS</span></td></tr>
-                <tr><td class="p-3 font-mono text-indigo-400">TXN-8802</td><td class="p-3 font-bold text-white">Ethan Davis</td><td class="p-3 font-mono">103</td><td class="p-3 font-mono text-emerald-400">₹25,000</td><td class="p-3">August 11, 2026</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">SUCCESS</span></td></tr>
-                <tr><td class="p-3 font-mono text-indigo-400">TXN-8803</td><td class="p-3 font-bold text-white">Ava Wilson</td><td class="p-3 font-mono">104</td><td class="p-3 font-mono text-emerald-400">₹25,000</td><td class="p-3">August 12, 2026</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">SUCCESS</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
       else if (viewKey === 'parent_performance') {
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Performance Graphs & Analytics</h2><p class="text-xs text-slate-400 mt-1">Graphical analytics for Marcus Jenkins (Grade 10-A).</p></div>
@@ -1229,10 +1271,6 @@
                   <div class="flex justify-between mb-1"><span class="text-slate-400">Term 2 Attendance</span><span class="text-indigo-400 font-bold">96.0%</span></div>
                   <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-400 h-2.5 rounded-full" style="width: 96%"></div></div>
                 </div>
-                <div>
-                  <div class="flex justify-between mb-1"><span class="text-slate-400">Term 3 Target</span><span class="text-amber-400 font-bold">99.0%</span></div>
-                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-amber-400 h-2.5 rounded-full" style="width: 99%"></div></div>
-                </div>
               </div>
             </div>
 
@@ -1248,10 +1286,6 @@
                 <div>
                   <div class="flex justify-between mb-1"><span class="text-slate-400">Mathematics</span><span class="text-emerald-400 font-bold">98 / 100 (Outstanding)</span></div>
                   <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-500 h-2.5 rounded-full" style="width: 98%"></div></div>
-                </div>
-                <div>
-                  <div class="flex justify-between mb-1"><span class="text-slate-400">Social Studies</span><span class="text-indigo-400 font-bold">91 / 100 (A+)</span></div>
-                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 91%"></div></div>
                 </div>
               </div>
             </div>
@@ -1334,24 +1368,6 @@
             </div>
             <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Submit Complaint to Parent</button>
           </div>
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Active Complaints Log</h3>
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Date</th><th class="p-3">Student Name</th><th class="p-3">Issue Raised</th><th class="p-3">Parent Reply Status</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                ${complaintList.map(c => `
-                  <tr>
-                    <td class="p-3 text-slate-400 font-mono">${c.date}</td>
-                    <td class="p-3 font-bold text-white">${c.studentName} (${c.rollNo})</td>
-                    <td class="p-3 text-slate-300">${c.issue}</td>
-                    <td class="p-3">${c.parentReply ? `<span class="text-emerald-400 font-semibold">" ${c.parentReply} "</span>` : `<span class="text-amber-400 italic">Awaiting parent reply...</span>`}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
         `;
       }
 
@@ -1387,17 +1403,35 @@
       }
 
       else if (viewKey === 'term_fees') {
+        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        const marcus = studentList.find(s => s.id === '101') || { feeStatus: 'Paid' };
+
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Fees & Payment Receipts</h2><p class="text-xs text-slate-400 mt-1">Review term payments, due dates, and official fee receipts.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Fees & Payment Receipts</h2><p class="text-xs text-slate-400 mt-1">Review term payments, due dates, and pay online instantly.</p></div>
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Term Particulars</th><th class="p-3">Amount</th><th class="p-3">Due Date</th><th class="p-3">Payment Status</th><th class="p-3">Receipt</th></tr>
+                <tr><th class="p-3">Term Particulars</th><th class="p-3">Amount</th><th class="p-3">Due Date</th><th class="p-3">Payment Status</th><th class="p-3">Action</th></tr>
               </thead>
               <tbody class="divide-y divide-slate-800">
-                <tr><td class="p-3 font-bold text-white">Term 1 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3">June 15, 2026</td><td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">PAID</span></td><td class="p-3"><button class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded font-semibold text-[10px]">Download Receipt</button></td></tr>
-                <tr><td class="p-3 font-bold text-white">Term 2 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3">October 15, 2026</td><td class="p-3"><span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 rounded-full font-bold text-[10px]">UPCOMING</span></td><td class="p-3"><button class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-semibold text-[10px]">Pay Online</button></td></tr>
-                <tr><td class="p-3 font-bold text-white">Term 3 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3">February 15, 2027</td><td class="p-3"><span class="px-2.5 py-1 bg-slate-800 text-slate-400 rounded-full font-bold text-[10px]">SCHEDULED</span></td><td class="p-3"><span class="text-slate-500">-</span></td></tr>
+                <tr>
+                  <td class="p-3 font-bold text-white">Term 1 Fee</td>
+                  <td class="p-3 font-mono">₹25,000</td>
+                  <td class="p-3">June 15, 2026</td>
+                  <td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">PAID</span></td>
+                  <td class="p-3"><button onclick="alert('Downloading Official Term 1 Receipt...')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded font-semibold text-[10px]">Download Receipt</button></td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-bold text-white">Term 2 Fee</td>
+                  <td class="p-3 font-mono">₹25,000</td>
+                  <td class="p-3">October 15, 2026</td>
+                  <td class="p-3"><span id="parentTerm2Status" class="px-2.5 py-1 ${marcus.feeStatus === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'} rounded-full font-bold text-[10px]">${marcus.feeStatus === 'Paid' ? 'PAID' : 'DUE / PENDING'}</span></td>
+                  <td class="p-3">
+                    ${marcus.feeStatus === 'Paid' 
+                      ? `<button onclick="alert('Downloading Official Term 2 Receipt...')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded font-semibold text-[10px]">Download Receipt</button>` 
+                      : `<button onclick="processParentOnlineFeePayment('101')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-semibold text-[10px]">Pay Online (₹25,000)</button>`}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1414,7 +1448,6 @@
               </thead>
               <tbody class="divide-y divide-slate-800">
                 <tr><td class="p-3 font-bold text-white">General Science</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">92</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">95</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
-                <tr><td class="p-3 font-bold text-white">Social Studies</td><td class="p-3 font-mono">45</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">88</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">91</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
                 <tr><td class="p-3 font-bold text-white">Mathematics</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">96</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">98</td><td class="p-3"><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 rounded font-bold">O (Outstanding)</span></td></tr>
               </tbody>
             </table>
@@ -1427,6 +1460,66 @@
       }
 
       lucide.createIcons();
+    }
+
+    // Process Parent Online Fee Payment
+    function processParentOnlineFeePayment(rollNo) {
+      const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const index = studentList.findIndex(s => s.id === rollNo);
+
+      if (index !== -1) {
+        studentList[index].feeStatus = 'Paid';
+        localStorage.setItem('erp_students', JSON.stringify(studentList));
+
+        // Add to Transactions
+        const txns = JSON.parse(localStorage.getItem('erp_transactions') || '[]');
+        const newTxnId = `TXN-${Math.floor(1000 + Math.random() * 9000)}`;
+        txns.unshift({
+          id: newTxnId,
+          name: studentList[index].name,
+          rollNo: studentList[index].id,
+          amount: "₹25,000",
+          date: "August 14, 2026",
+          status: "SUCCESS",
+          mode: "Online Portal"
+        });
+        localStorage.setItem('erp_transactions', JSON.stringify(txns));
+
+        alert(`✅ Payment of ₹25,000 for ${studentList[index].name} completed successfully!\nTransaction ID: ${newTxnId}`);
+        renderView('term_fees');
+      }
+    }
+
+    // Admin Record Student Fee Payment
+    function recordStudentFeePayment() {
+      const rollNo = document.getElementById('feeStudentSelect').value;
+      const amountVal = document.getElementById('feeAmountInput').value.trim() || '25000';
+      const mode = document.getElementById('feeModeSelect').value;
+
+      const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const index = studentList.findIndex(s => s.id === rollNo);
+
+      if (index !== -1) {
+        studentList[index].feeStatus = 'Paid';
+        localStorage.setItem('erp_students', JSON.stringify(studentList));
+
+        // Add Transaction
+        const txns = JSON.parse(localStorage.getItem('erp_transactions') || '[]');
+        const newTxnId = `TXN-${Math.floor(1000 + Math.random() * 9000)}`;
+        txns.unshift({
+          id: newTxnId,
+          name: studentList[index].name,
+          rollNo: studentList[index].id,
+          amount: `₹${Number(amountVal).toLocaleString('en-IN')}`,
+          date: "August 14, 2026",
+          status: "SUCCESS",
+          mode: mode
+        });
+        localStorage.setItem('erp_transactions', JSON.stringify(txns));
+
+        alert(`✅ Fee Payment of ₹${amountVal} for ${studentList[index].name} (Roll No: ${rollNo}) successfully recorded!\nStatus: PAID`);
+        renderView('admin_fees_grade');
+      }
     }
 
     // Apply Filter Function for Attendance Roster
@@ -1480,7 +1573,7 @@
         id: Date.now(),
         title: title,
         target: target,
-        date: "August 13, 2026"
+        date: "August 14, 2026"
       });
 
       localStorage.setItem('erp_alerts', JSON.stringify(alerts));
@@ -1494,7 +1587,7 @@
       const toastText = document.getElementById('smsToastText');
       if (!toast || !toastText) return;
 
-      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 13-Aug-2026 at St. Jude's Academy."`;
+      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 14-Aug-2026 at St. Jude's Academy."`;
       
       toast.classList.remove('hidden');
       setTimeout(() => {
@@ -1502,7 +1595,7 @@
       }, 6000);
     }
 
-    // Set Present / Absent Explicitly with Backend API Integration + Parent Mobile Alert Trigger
+    // Set Present / Absent Explicitly with Parent Mobile Alert Trigger
     async function setStudentAttendance(rollNo, status, currentGrade = '10', currentSec = 'A') {
       const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
       const index = students.findIndex(s => s.id === rollNo);
@@ -1514,17 +1607,15 @@
         
         // When marked ABSENT: Automatically post to alerts and trigger parent SMS
         if (status === 'ABSENT') {
-          // 1. Post to Important Alerts for Parents
           const alerts = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
           alerts.unshift({
             id: Date.now(),
-            title: `Attendance Alert: ${students[index].name} (Roll No: ${students[index].id}) marked ABSENT on 13-Aug-2026`,
+            title: `Attendance Alert: ${students[index].name} (Roll No: ${students[index].id}) marked ABSENT on 14-Aug-2026`,
             target: 'PARENTS',
-            date: "August 13, 2026"
+            date: "August 14, 2026"
           });
           localStorage.setItem('erp_alerts', JSON.stringify(alerts));
 
-          // 2. Call FastAPI Backend
           try {
             fetch(`${API_BASE_URL}/api/attendance`, {
               method: 'POST',
@@ -1533,15 +1624,12 @@
                 rollNo: students[index].id,
                 studentName: students[index].name,
                 status: status,
-                date: "13-Aug-2026",
+                date: "14-Aug-2026",
                 parentPhone: "+919876543210"
               })
-            }).catch(err => console.log('FastAPI backend offline, running local SMS toast simulation.'));
-          } catch (e) {
-            console.log('Backend trigger skipped');
-          }
+            }).catch(err => console.log('FastAPI offline, running local simulation.'));
+          } catch (e) {}
 
-          // 3. Trigger simulated mobile SMS popup toast
           triggerParentSMSAlert(students[index].name, students[index].id, students[index].guardian);
         }
 
@@ -1567,7 +1655,7 @@
         rollNo: rollNo,
         studentName: student ? student.name : "Student",
         teacherName: "Dr. Sarah Jenkins (T-501)",
-        date: "August 13, 2026",
+        date: "August 14, 2026",
         issue: issue,
         parentReply: ""
       };
