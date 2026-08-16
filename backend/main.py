@@ -1,10 +1,12 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from datetime import datetime
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-import models, schemas, auth, database
+from pydantic import BaseModel
+from pymongo import MongoClient
 
 app = FastAPI()
 
+# Enable CORS for Vercel / Localhost
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,61 +15,91 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Database Tables
-models.Base.metadata.create_all(bind=database.engine)
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")  # Replace with MongoDB Atlas URI if deployed
+db = client["school_erp"]
 
-# 1. Register Endpoint (Allows ANY email and ANY password)
-@app.post("/register", response_model=schemas.Token)
-def register_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
-    # Check if user already exists
-    existing_user = db.query(models.User).filter(models.User.email == user.email).first()
-    if existing_user:
-        raise HTTPException(status_code=400, detail="This email is already registered.")
+class LoginRequest(BaseModel):
+    email: str
+    password: str
 
-    # Hash the password chosen by the user
-    hashed_pwd = auth.get_password_hash(user.password)
+class AttendancePayload(BaseModel):
+    rollNo: str
+    studentName: str
+    status: str
+    date: str
+    parentPhone: str = "+919876543210"
 
-    # Save new user to database
-    new_user = models.User(
-        email=user.email,
-        hashed_password=hashed_pwd,
-        full_name=user.full_name,
-        role=user.role.upper(),
-        parent_id=user.parent_id
-    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-
-    # Generate Access Token
-    token = auth.create_access_token(data={"sub": new_user.email, "role": new_user.role, "id": new_user.id})
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "role": new_user.role,
-        "full_name": new_user.full_name,
-        "user_id": new_user.id
-    }
-
-# 2. Login Endpoint (Authenticates ANY created email and password)
-@app.post("/token", response_model=schemas.Token)
-def login_for_access_token(form_data: schemas.UserLogin, db: Session = Depends(database.get_db)):
-    user = db.query(models.User).filter(models.User.email == form_data.email).first()
+@app.post("/token")
+async def login(data: LoginRequest, request: Request):
+    user_email = data.email.strip().lower()
     
-    if not user or not auth.verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+    # 1. Determine role & assign corresponding Indian student/staff credentials
+    role = "STUDENT"
+    full_name = "Ramu Varma"
+    
+    if "admin" in user_email or user_email == "admin@school.com":
+        role = "ADMIN"
+        full_name = "Rajesh Sharma (Admin / CEO)"
+    elif "t-501" in user_email or user_email == "teacher@school.com":
+        role = "TEACHER"
+        full_name = "Dr. Sunita Deshmukh"
+    elif "p-101" in user_email or user_email == "parent@school.com":
+        role = "PARENT"
+        full_name = "Kishore Varma"
+    elif user_email in ["101", "student@school.com", "ramu"]:
+        role = "STUDENT"
+        full_name = "Ramu Varma"
+    elif user_email in ["102", "raju"]:
+        role = "STUDENT"
+        full_name = "Raju Badhavath"
+    elif user_email in ["103", "manideep"]:
+        role = "STUDENT"
+        full_name = "Manideep Rao"
+    else:
+        role = "STUDENT"
+        full_name = f"Student ({data.email.upper()})"
 
-    access_token = auth.create_access_token(
-        data={"sub": user.email, "role": user.role, "id": user.id}
-    )
-    return {
-        "access_token": access_token,
-        "token_type": "bearer",
-        "role": user.role,
-        "full_name": user.full_name,
-        "user_id": user.id
+    # 2. Store Login Details in MongoDB 'login_history' collection
+    login_record = {
+        "id": f"LOG-{int(datetime.utcnow().timestamp())}",
+        "user_identifier": data.email,
+        "full_name": full_name,
+        "role": role,
+        "login_time": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "client_ip": request.client.host if request.client else "127.0.0.1",
+        "user_agent": request.headers.get("user-agent", "Unknown"),
+        "status": "SUCCESS"
     }
+    
+    # Insert record into MongoDB
+    try:
+        db.login_history.insert_one(login_record)
+        print(f"Logged into database: {login_record}")
+    except Exception as e:
+        print(f"Database write error: {e}")
+
+    # 3. Return session token and details
+    return {
+        "access_token": f"jwt-session-token-{role.lower()}-{int(datetime.utcnow().timestamp())}",
+        "token_type": "bearer",
+        "role": role,
+        "full_name": full_name,
+        "email": data.email
+    }
+
+@app.get("/api/login-history")
+async def get_login_history():
+    try:
+        logs = list(db.login_history.find({}, {"_id": 0}).sort("login_time", -1).limit(50))
+        return logs
+    except Exception as e:
+        return []
+
+@app.post("/api/attendance")
+async def record_attendance(data: AttendancePayload):
+    try:
+        db.attendance.insert_one(data.dict())
+        return {"status": "success", "message": "Attendance recorded in database"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}

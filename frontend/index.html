@@ -91,6 +91,8 @@
 
   <!-- ==================== VIEW 1: HERO LANDING PAGE ==================== -->
   <div id="landingView" class="relative min-h-screen overflow-hidden flex flex-col justify-between">
+    
+    <!-- Background Video -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <video
         id="bgVideo"
@@ -442,9 +444,27 @@
       { id: "TXN-8805", name: "Prashanth Naidu", rollNo: "105", amount: "₹25,000", date: "August 14, 2026", status: "SUCCESS", mode: "Cash / Counter" }
     ];
 
-    // Overwrite storage keys to remove old western cached names
+    const masterIndianTeachers = [
+      { id: "T-501", name: "Dr. Sunita Deshmukh", subject: "Science & Physics", grade: "Grade 8 - 10", email: "sunita.d@school.com" },
+      { id: "T-502", name: "Mrs. Anjali Sharma", subject: "Mathematics", grade: "Grade 9 - 10", email: "anjali.s@school.com" },
+      { id: "T-503", name: "Mr. Suresh Iyer", subject: "Social Studies & History", grade: "Grade 5 - 8", email: "suresh.i@school.com" },
+      { id: "T-504", name: "Ms. Kavita Nair", subject: "English Literature", grade: "Grade 5 - 10", email: "kavita.n@school.com" }
+    ];
+
+    const initialComplaints = [
+      { id: 1, rollNo: "101", studentName: "Ramu Varma", teacherName: "Dr. Sunita Deshmukh (T-501)", date: "August 10, 2026", issue: "Incomplete Physics homework submission for Chapter 3.", parentReply: "Apologies, Dr. Sunita. Ramu will complete and submit it by tomorrow morning." },
+      { id: 2, rollNo: "102", studentName: "Raju Badhavath", teacherName: "Mrs. Anjali Sharma (T-502)", date: "August 11, 2026", issue: "Arrived 20 minutes late for class assessment.", parentReply: "" }
+    ];
+
+    // Force overwrite storage keys to ensure clean cache
     localStorage.setItem('erp_students_clean', JSON.stringify(masterIndianStudents));
     localStorage.setItem('erp_txns_clean', JSON.stringify(masterIndianTxns));
+    if (!localStorage.getItem('erp_teachers_clean')) {
+      localStorage.setItem('erp_teachers_clean', JSON.stringify(masterIndianTeachers));
+    }
+    if (!localStorage.getItem('erp_complaints_clean')) {
+      localStorage.setItem('erp_complaints_clean', JSON.stringify(initialComplaints));
+    }
 
     function getStoredStudents() {
       return JSON.parse(localStorage.getItem('erp_students_clean') || '[]');
@@ -462,22 +482,20 @@
       localStorage.setItem('erp_txns_clean', JSON.stringify(txns));
     }
 
-    if (!localStorage.getItem('erp_teachers')) {
-      const initialTeachers = [
-        { id: "T-501", name: "Dr. Sunita Deshmukh", subject: "Science & Physics", grade: "Grade 8 - 10", email: "sunita.d@school.com" },
-        { id: "T-502", name: "Mrs. Anjali Sharma", subject: "Mathematics", grade: "Grade 9 - 10", email: "anjali.s@school.com" },
-        { id: "T-503", name: "Mr. Suresh Iyer", subject: "Social Studies & History", grade: "Grade 5 - 8", email: "suresh.i@school.com" },
-        { id: "T-504", name: "Ms. Kavita Nair", subject: "English Literature", grade: "Grade 5 - 10", email: "kavita.n@school.com" }
-      ];
-      localStorage.setItem('erp_teachers', JSON.stringify(initialTeachers));
+    function getStoredTeachers() {
+      return JSON.parse(localStorage.getItem('erp_teachers_clean') || '[]');
     }
 
-    if (!localStorage.getItem('erp_complaints')) {
-      const initialComplaints = [
-        { id: 1, rollNo: "101", studentName: "Ramu Varma", teacherName: "Dr. Sunita Deshmukh (T-501)", date: "August 10, 2026", issue: "Incomplete Physics homework submission for Chapter 3.", parentReply: "Apologies, Dr. Sunita. Ramu will complete and submit it by tomorrow morning." },
-        { id: 2, rollNo: "102", studentName: "Raju Badhavath", teacherName: "Mrs. Anjali Sharma (T-502)", date: "August 11, 2026", issue: "Arrived 20 minutes late for class assessment.", parentReply: "" }
-      ];
-      localStorage.setItem('erp_complaints', JSON.stringify(initialComplaints));
+    function saveStoredTeachers(teachers) {
+      localStorage.setItem('erp_teachers_clean', JSON.stringify(teachers));
+    }
+
+    function getStoredComplaints() {
+      return JSON.parse(localStorage.getItem('erp_complaints_clean') || '[]');
+    }
+
+    function saveStoredComplaints(complaints) {
+      localStorage.setItem('erp_complaints_clean', JSON.stringify(complaints));
     }
 
     if (!localStorage.getItem('erp_alerts')) {
@@ -1305,11 +1323,29 @@
         `;
       }
 
+      // ================= FACULTY DIRECTORY & HIRING =================
       else if (viewKey === 'teachers') {
-        const teacherList = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
+        const teacherList = getStoredTeachers();
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members and onboard new teaching staff.</p></div>
+
+          <!-- Add New Faculty Form -->
+          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
+            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Faculty Member</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <input type="text" id="addTeacherID" placeholder="Teacher ID (e.g. T-505)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherName" placeholder="Faculty Full Name (e.g. Dr. Rajesh Kulkarni)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherSubject" placeholder="Assigned Subject (e.g. Mathematics)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addTeacherGrade" placeholder="Assigned Grade (e.g. Grade 5 - 10)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="email" id="addTeacherEmail" placeholder="Faculty Email" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <button onclick="saveNewTeacher()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i> Add Faculty Member
+              </button>
+            </div>
+          </div>
+
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Registered Faculty List</h3>
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
                 <tr><th class="p-3">ID No</th><th class="p-3">Faculty Name</th><th class="p-3">Department/Subject</th><th class="p-3">Assigned Grade</th><th class="p-3">Email Address</th></tr>
@@ -1330,10 +1366,14 @@
         `;
       }
 
+      // ================= TEACHER COMPLAINTS (WITH DELETE FEATURE) =================
       else if (viewKey === 'teacher_complaints') {
         const studentList = getStoredStudents();
+        const complaintList = getStoredComplaints();
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Complaints</h2><p class="text-xs text-slate-400 mt-1">Submit disciplinary or academic complaints directly to parents.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Complaints</h2><p class="text-xs text-slate-400 mt-1">Submit disciplinary or academic complaints directly to parents. Delete errors if needed.</p></div>
+
+          <!-- Create Complaint Form -->
           <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
             <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="alert-circle" class="w-4 h-4"></i> Issue New Complaint</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -1345,33 +1385,71 @@
               </div>
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Complaint / Issue Note</label>
-                <input type="text" id="complaintText" placeholder="e.g. Incomplete homework" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+                <input type="text" id="complaintText" placeholder="e.g. Incomplete lab homework" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
               </div>
             </div>
-            <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Submit Complaint to Parent</button>
+            <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs flex items-center gap-2">
+              <i data-lucide="send" class="w-4 h-4"></i> Submit Complaint to Parent
+            </button>
+          </div>
+
+          <!-- Existing Complaints List with Delete Feature -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Submitted Student Complaints</h3>
+            <div class="space-y-3">
+              ${complaintList.length > 0 ? complaintList.map(c => `
+                <div class="p-4 bg-slate-800/60 rounded-xl border border-slate-700/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                  <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-white text-sm">${c.studentName} (Roll No: ${c.rollNo})</span>
+                      <span class="text-[10px] text-slate-400">• ${c.date}</span>
+                    </div>
+                    <p class="text-xs text-slate-300"><strong class="text-amber-400">Issue:</strong> ${c.issue}</p>
+                    ${c.parentReply ? `<p class="text-xs text-emerald-400"><strong class="text-emerald-300">Parent Reply:</strong> ${c.parentReply}</p>` : `<p class="text-[11px] text-slate-500 italic">No parent reply yet.</p>`}
+                  </div>
+                  <button onclick="deleteTeacherComplaint(${c.id})" class="px-3.5 py-1.5 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shrink-0">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Delete Complaint
+                  </button>
+                </div>
+              `).join('') : `<p class="text-xs text-slate-500 text-center py-4">No active complaints on record.</p>`}
+            </div>
           </div>
         `;
       }
 
+      // ================= PARENT COMPLAINTS (WITH DELETE / CLEAR FEATURE) =================
       else if (viewKey === 'parent_complaints') {
-        const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+        const complaintList = getStoredComplaints();
         const childComplaints = complaintList.filter(c => c.rollNo === '101');
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers. Reply or delete resolved records.</p></div>
           <div class="space-y-4">
-            ${childComplaints.map(c => `
+            ${childComplaints.length > 0 ? childComplaints.map(c => `
               <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                  <div><h3 class="text-sm font-bold text-white">${c.teacherName}</h3><p class="text-[10px] text-slate-400">Student: ${c.studentName} (Roll No: ${c.rollNo})</p></div>
-                  <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase rounded-full">Complaint</span>
+                  <div>
+                    <h3 class="text-sm font-bold text-white">${c.teacherName}</h3>
+                    <p class="text-[10px] text-slate-400">Date: ${c.date} • Student: ${c.studentName} (Roll No: ${c.rollNo})</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase rounded-full">Complaint</span>
+                    <button onclick="deleteParentComplaint(${c.id})" class="p-1.5 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white rounded-lg transition-colors" title="Delete complaint">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </div>
                 </div>
-                <div class="p-3 bg-slate-800/60 rounded-xl text-xs text-slate-200">${c.issue}</div>
-                <div class="flex gap-2">
-                  <input type="text" id="replyInput_${c.id}" value="${c.parentReply}" placeholder="Type reply..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-                  <button onclick="sendParentReply(${c.id})" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Send</button>
+                <div class="p-3 bg-slate-800/60 rounded-xl text-xs text-slate-200 border border-slate-700/50">
+                  <strong class="text-amber-300">Complaint Note:</strong> ${c.issue}
+                </div>
+                <div>
+                  <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Your Reply to Teacher</label>
+                  <div class="flex gap-2">
+                    <input type="text" id="replyInput_${c.id}" value="${c.parentReply}" placeholder="Type your response to the teacher..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+                    <button onclick="sendParentReply(${c.id})" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Send Reply</button>
+                  </div>
                 </div>
               </div>
-            `).join('')}
+            `).join('') : `<div class="p-8 text-center text-slate-500">No complaints reported for your child.</div>`}
           </div>
         `;
       }
@@ -1470,7 +1548,7 @@
         id: Date.now(),
         title: title,
         target: target,
-        date: "August 16, 2026"
+        date: "August 14, 2026"
       });
 
       localStorage.setItem('erp_alerts', JSON.stringify(alerts));
@@ -1483,7 +1561,7 @@
       const toastText = document.getElementById('smsToastText');
       if (!toast || !toastText) return;
 
-      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 16-Aug-2026 at St. Jude's Academy."`;
+      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 14-Aug-2026 at St. Jude's Academy."`;
       
       toast.classList.remove('hidden');
       setTimeout(() => {
@@ -1504,9 +1582,9 @@
           const alerts = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
           alerts.unshift({
             id: Date.now(),
-            title: `Attendance Alert: ${students[index].name} (Roll No: ${students[index].id}) marked ABSENT on 16-Aug-2026`,
+            title: `Attendance Alert: ${students[index].name} (Roll No: ${students[index].id}) marked ABSENT on 14-Aug-2026`,
             target: 'PARENTS',
-            date: "August 16, 2026"
+            date: "August 14, 2026"
           });
           localStorage.setItem('erp_alerts', JSON.stringify(alerts));
 
@@ -1518,7 +1596,7 @@
                 rollNo: students[index].id,
                 studentName: students[index].name,
                 status: status,
-                date: "16-Aug-2026",
+                date: "14-Aug-2026",
                 parentPhone: "+919876543210"
               })
             }).catch(err => console.log('FastAPI offline, running local simulation.'));
@@ -1561,6 +1639,26 @@
       }
     }
 
+    function saveNewTeacher() {
+      const id = document.getElementById('addTeacherID').value.trim();
+      const name = document.getElementById('addTeacherName').value.trim();
+      const subject = document.getElementById('addTeacherSubject').value.trim();
+      const grade = document.getElementById('addTeacherGrade').value.trim() || 'Grade 5 - 10';
+      const email = document.getElementById('addTeacherEmail').value.trim();
+
+      if (!id || !name || !subject) {
+        alert('Please fill in Teacher ID, Full Name, and Assigned Subject.');
+        return;
+      }
+
+      const teachers = getStoredTeachers();
+      teachers.push({ id, name, subject, grade, email: email || `${id.toLowerCase()}@school.com` });
+      saveStoredTeachers(teachers);
+
+      alert(`✅ Faculty member "${name}" (${subject}) successfully onboarded!`);
+      renderView('teachers');
+    }
+
     function submitTeacherComplaint() {
       const rollNo = document.getElementById('complaintRollNo').value;
       const issue = document.getElementById('complaintText').value.trim();
@@ -1572,7 +1670,7 @@
         return;
       }
 
-      const complaints = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+      const complaints = getStoredComplaints();
       complaints.push({
         id: Date.now(),
         rollNo: rollNo,
@@ -1583,9 +1681,29 @@
         parentReply: ""
       });
 
-      localStorage.setItem('erp_complaints', JSON.stringify(complaints));
+      saveStoredComplaints(complaints);
       alert(`Complaint for ${student ? student.name : 'Student'} submitted and sent to parent!`);
       renderView('teacher_complaints');
+    }
+
+    function deleteTeacherComplaint(complaintId) {
+      if (confirm('Are you sure you want to delete this complaint? You can then submit a corrected message.')) {
+        let complaints = getStoredComplaints();
+        complaints = complaints.filter(c => c.id !== complaintId);
+        saveStoredComplaints(complaints);
+        alert('Complaint deleted successfully.');
+        renderView('teacher_complaints');
+      }
+    }
+
+    function deleteParentComplaint(complaintId) {
+      if (confirm('Are you sure you want to delete this complaint record?')) {
+        let complaints = getStoredComplaints();
+        complaints = complaints.filter(c => c.id !== complaintId);
+        saveStoredComplaints(complaints);
+        alert('Complaint removed from records.');
+        renderView('parent_complaints');
+      }
     }
 
     function sendParentReply(complaintId) {
@@ -1595,12 +1713,12 @@
         return;
       }
 
-      const complaints = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+      const complaints = getStoredComplaints();
       const index = complaints.findIndex(c => c.id === complaintId);
 
       if (index !== -1) {
         complaints[index].parentReply = inputVal;
-        localStorage.setItem('erp_complaints', JSON.stringify(complaints));
+        saveStoredComplaints(complaints);
         alert('Your response has been sent to the teacher!');
         renderView('parent_complaints');
       }
