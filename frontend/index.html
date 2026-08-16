@@ -39,8 +39,8 @@
         180deg,
         rgba(255, 255, 255, 0.45) 0%,
         rgba(255, 255, 255, 0.15) 20%,
-        rgba(255, 255, 255, 0) 40%,
-        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 0.0) 40%,
+        rgba(255, 255, 255, 0.0) 60%,
         rgba(255, 255, 255, 0.15) 80%,
         rgba(255, 255, 255, 0.45) 100%
       );
@@ -91,8 +91,6 @@
 
   <!-- ==================== VIEW 1: HERO LANDING PAGE ==================== -->
   <div id="landingView" class="relative min-h-screen overflow-hidden flex flex-col justify-between">
-    
-    <!-- Background Video -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <video
         id="bgVideo"
@@ -152,7 +150,6 @@
       </div>
     </main>
   </div>
-
 
   <!-- ==================== VIEW 2: MODALS ==================== -->
 
@@ -250,11 +247,6 @@
           <h3 class="font-bold text-sm text-amber-300 mb-1">Our Core Mission</h3>
           <p>To empower every young learner with critical thinking, ethical integrity, and modern technological tools needed to excel in higher education and global careers.</p>
         </div>
-
-        <div class="p-4 bg-slate-800/60 rounded-2xl border border-slate-700/50">
-          <h3 class="font-bold text-sm text-amber-300 mb-1">Campus Infrastructure</h3>
-          <p>Equipped with state-of-the-art computer labs, digital smart classrooms, modern science facilities, and an integrated ERP tracking system connecting parents, teachers, and administration.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -345,7 +337,6 @@
       }
     });
 
-    // Helper Function for Local Credentials Fallback
     function executeLoginDemoFallback(inputVal) {
       const input = inputVal.toLowerCase();
       const match = credentialDirectory.find(u => u.id.toLowerCase() === input || u.alias.toLowerCase() === input);
@@ -367,104 +358,124 @@
       loadERPDashboard();
     }
 
-    // Preloaded Database with Students Per Grade (Grades 5 to 10)
-    if (!localStorage.getItem('erp_students')) {
-      const initialStudents = [
-        // GRADE 10 (12 Students)
-        { id: "101", name: "Marcus Jenkins", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Robert Jenkins" },
-        { id: "102", name: "Sophia Miller", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "David Miller" },
-        { id: "108", name: "Raju B", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Raju" },
-        { id: "221", name: "manideep", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "M. Rao" },
-        { id: "109", name: "Aarav Sharma", grade: "10", section: "A", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "S. Sharma" },
-        { id: "110", name: "Priya Patel", grade: "10", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "K. Patel" },
-        { id: "111", name: "Siddharth Verma", grade: "10", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Verma" },
-        { id: "112", name: "Ananya Iyer", grade: "10", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "V. Iyer" },
-        { id: "113", name: "Karan Gupta", grade: "10", section: "B", attendance: "91.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "N. Gupta" },
-        { id: "114", name: "Neha Singh", grade: "10", section: "B", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "A. Singh" },
-        { id: "115", name: "Vikram Malhotra", grade: "10", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Malhotra" },
-        { id: "116", name: "Diya Reddy", grade: "10", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "M. Reddy" },
+    // 100% INDIAN NAMES DATABASE (EXACTLY 10 STUDENTS PER GRADE: GRADES 5 TO 10)
+    const masterIndianStudents = [
+      // ================= GRADE 10 (10 Students) =================
+      { id: "101", name: "Ramu Varma", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Kishore Varma" },
+      { id: "102", name: "Raju Badhavath", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Raju" },
+      { id: "103", name: "Manideep Rao", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Raj Kumar Rao" },
+      { id: "104", name: "Priya Sharma", grade: "10", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Vivek Sharma" },
+      { id: "105", name: "Prashanth Naidu", grade: "10", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Ram Gopal Naidu" },
+      { id: "106", name: "Aarav Sharma", grade: "10", section: "B", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Suresh Sharma" },
+      { id: "107", name: "Sneha Reddy", grade: "10", section: "B", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Mahesh Reddy" },
+      { id: "108", name: "Kavya Saxena", grade: "10", section: "B", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Lalit Saxena" },
+      { id: "109", name: "Harsh Vardhan", grade: "10", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Prakash Vardhan" },
+      { id: "110", name: "Siddharth Verma", grade: "10", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Ramesh Verma" },
 
-        // GRADE 9 (11 Students)
-        { id: "103", name: "Ethan Davis", grade: "9", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Sarah Davis" },
-        { id: "117", name: "Rohan Kapoor", grade: "9", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "H. Kapoor" },
-        { id: "118", name: "Tanvi Joshi", grade: "9", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "S. Joshi" },
-        { id: "119", name: "Aditya Nair", grade: "9", section: "A", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "G. Nair" },
-        { id: "120", name: "Sneha Roy", grade: "9", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Roy" },
-        { id: "121", name: "Rahul Deshmukh", grade: "9", section: "A", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "M. Deshmukh" },
-        { id: "122", name: "Ishaan Mehta", grade: "9", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "T. Mehta" },
-        { id: "123", name: "Kavya Saxena", grade: "9", section: "B", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "L. Saxena" },
-        { id: "124", name: "Arjun Banerjee", grade: "9", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "C. Banerjee" },
-        { id: "125", name: "Riya Sen", grade: "9", section: "B", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Sen" },
-        { id: "126", name: "Devansh Rastogi", grade: "9", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Rastogi" },
+      // ================= GRADE 9 (10 Students) =================
+      { id: "201", name: "Ramu Kulkarni", grade: "9", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Nitin Kulkarni" },
+      { id: "202", name: "Rohan Kapoor", grade: "9", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Sanjay Kapoor" },
+      { id: "203", name: "Aditya Nair", grade: "9", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Harish Nair" },
+      { id: "204", name: "Ishaan Joshi", grade: "9", section: "A", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Suresh Joshi" },
+      { id: "205", name: "Kavya Menon", grade: "9", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Gopal Menon" },
+      { id: "206", name: "Raju Yadav", grade: "9", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Charan Yadav" },
+      { id: "207", name: "Sneha Roy", grade: "9", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Bimal Roy" },
+      { id: "208", name: "Rahul Deshmukh", grade: "9", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Milind Deshmukh" },
+      { id: "209", name: "Pooja Saxena", grade: "9", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Lalit Saxena" },
+      { id: "210", name: "Arjun Banerjee", grade: "9", section: "B", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Chirag Banerjee" },
 
-        // GRADE 8 (11 Students)
-        { id: "104", name: "Ava Wilson", grade: "8", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "James Wilson" },
-        { id: "127", name: "Kabir Khan", grade: "8", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Z. Khan" },
-        { id: "128", name: "Shruti Rao", grade: "8", section: "A", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "V. Rao" },
-        { id: "129", name: "Yash Agarwal", grade: "8", section: "A", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Agarwal" },
-        { id: "130", name: "Anish Kulkarni", grade: "8", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Kulkarni" },
-        { id: "131", name: "Avani Bhat", grade: "8", section: "A", attendance: "91.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "N. Bhat" },
-        { id: "132", name: "Manish Pandey", grade: "8", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "D. Pandey" },
-        { id: "133", name: "Nisha Pillai", grade: "8", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "S. Pillai" },
-        { id: "134", name: "Pranav Menon", grade: "8", section: "B", attendance: "93.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "M. Menon" },
-        { id: "135", name: "Tarun Chawla", grade: "8", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Chawla" },
-        { id: "136", name: "Simran Gill", grade: "8", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "J. Gill" },
+      // ================= GRADE 8 (10 Students) =================
+      { id: "301", name: "Ramu Naidu", grade: "8", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Prakash Naidu" },
+      { id: "302", name: "Avani Rao", grade: "8", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Jagdish Rao" },
+      { id: "303", name: "Kabir Khan", grade: "8", section: "A", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Zahid Khan" },
+      { id: "304", name: "Shruti Rao", grade: "8", section: "A", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Vasant Rao" },
+      { id: "305", name: "Yash Agarwal", grade: "8", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Rajeev Agarwal" },
+      { id: "306", name: "Raju Shinde", grade: "8", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Santosh Shinde" },
+      { id: "307", name: "Anish Kulkarni", grade: "8", section: "B", attendance: "91.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Pradeep Kulkarni" },
+      { id: "308", name: "Meera Bhat", grade: "8", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Nagesh Bhat" },
+      { id: "309", name: "Manish Pandey", grade: "8", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Dinesh Pandey" },
+      { id: "310", name: "Nisha Pillai", grade: "8", section: "B", attendance: "93.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Sankar Pillai" },
 
-        // GRADE 7 (11 Students)
-        { id: "105", name: "Liam Brown", grade: "7", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "Michael Brown" },
-        { id: "137", name: "Aman Tripathi", grade: "7", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "S. Tripathi" },
-        { id: "138", name: "Meera Das", grade: "7", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "A. Das" },
-        { id: "139", name: "Varun Nambiar", grade: "7", section: "A", attendance: "94.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "K. Nambiar" },
-        { id: "140", name: "Sanya Dutta", grade: "7", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Dutta" },
-        { id: "141", name: "Sahil Bose", grade: "7", section: "A", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "T. Bose" },
-        { id: "142", name: "Bhavya Trivedi", grade: "7", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "H. Trivedi" },
-        { id: "143", name: "Chirag Hegde", grade: "7", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Hegde" },
-        { id: "144", name: "Deepak Saini", grade: "7", section: "B", attendance: "91.5%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "M. Saini" },
-        { id: "145", name: "Esha Fernandez", grade: "7", section: "B", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Fernandez" },
-        { id: "146", name: "Farhan Qureshi", grade: "7", section: "B", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "A. Qureshi" },
+      // ================= GRADE 7 (10 Students) =================
+      { id: "401", name: "Ramu Patel", grade: "7", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Pending", guardian: "Mukesh Patel" },
+      { id: "402", name: "Aman Tripathi", grade: "7", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Manoj Tripathi" },
+      { id: "403", name: "Varun Tripathi", grade: "7", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Satish Tripathi" },
+      { id: "404", name: "Meera Das", grade: "7", section: "A", attendance: "94.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Anand Das" },
+      { id: "405", name: "Varun Nambiar", grade: "7", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Kannan Nambiar" },
+      { id: "406", name: "Raju Gaikwad", grade: "7", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Laxman Gaikwad" },
+      { id: "407", name: "Sanya Dutta", grade: "7", section: "B", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Bijoy Dutta" },
+      { id: "408", name: "Sahil Bose", grade: "7", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Tarun Bose" },
+      { id: "409", name: "Bhavya Trivedi", grade: "7", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Harish Trivedi" },
+      { id: "410", name: "Chirag Hegde", grade: "7", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Raman Hegde" },
 
-        // GRADE 6 (11 Students)
-        { id: "106", name: "Olivia Taylor", grade: "6", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Emma Taylor" },
-        { id: "223", name: "Raju Reddy", grade: "6", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Reddy" },
-        { id: "147", name: "Gaurav Solanki", grade: "6", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "L. Solanki" },
-        { id: "148", name: "Harini Sundaram", grade: "6", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "M. Sundaram" },
-        { id: "149", name: "Inderpal Singh", grade: "6", section: "A", attendance: "92.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "G. Singh" },
-        { id: "150", name: "Jahnvi Kaushik", grade: "6", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "R. Kaushik" },
-        { id: "151", name: "Kunal Ahuja", grade: "6", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "S. Ahuja" },
-        { id: "152", name: "Lavanya Reddy", grade: "6", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "D. Reddy" },
-        { id: "153", name: "Mohit Bansal", grade: "6", section: "B", attendance: "91.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "C. Bansal" },
-        { id: "154", name: "Nidhi Chaudhury", grade: "6", section: "B", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "V. Chaudhury" },
-        { id: "155", name: "Omkar Kadam", grade: "6", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Y. Kadam" },
+      // ================= GRADE 6 (10 Students) =================
+      { id: "501", name: "Ramu Chauhan", grade: "6", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Ravi Chauhan" },
+      { id: "502", name: "Harini Sundaram", grade: "6", section: "A", attendance: "100%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "E. Sundaram" },
+      { id: "503", name: "Raju Reddy", grade: "6", section: "A", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Reddy" },
+      { id: "504", name: "Gaurav Solanki", grade: "6", section: "A", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Laxman Solanki" },
+      { id: "505", name: "Divya Sundaram", grade: "6", section: "A", attendance: "92.5%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Murugan Sundaram" },
+      { id: "506", name: "Manideep Sharma", grade: "6", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Suresh Sharma" },
+      { id: "507", name: "Inderpal Singh", grade: "6", section: "B", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Gurmeet Singh" },
+      { id: "508", name: "Jahnvi Kaushik", grade: "6", section: "B", attendance: "97.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Rajan Kaushik" },
+      { id: "509", name: "Kunal Ahuja", grade: "6", section: "B", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Sanjay Ahuja" },
+      { id: "510", name: "Lavanya Reddy", grade: "6", section: "B", attendance: "95.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Dharma Reddy" },
 
-        // GRADE 5 (10 Students)
-        { id: "107", name: "Noah Anderson", grade: "5", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Daniel Anderson" },
-        { id: "156", name: "Parth Somani", grade: "5", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "K. Somani" },
-        { id: "157", name: "Rachna Prasad", grade: "5", section: "A", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "G. Prasad" },
-        { id: "158", name: "Samarth Shukla", grade: "5", section: "A", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "N. Shukla" },
-        { id: "159", name: "Trisha Madhav", grade: "5", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "B. Madhav" },
-        { id: "160", name: "Utkarsh Vats", grade: "5", section: "B", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "R. Vats" },
-        { id: "161", name: "Vanshika Tandon", grade: "5", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "P. Tandon" },
-        { id: "162", name: "Yashwant Rao", grade: "5", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "M. Rao" },
-        { id: "163", name: "Zoya Siddiqui", grade: "5", section: "B", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "H. Siddiqui" },
-        { id: "164", name: "Aarohi Kulkarni", grade: "5", section: "B", attendance: "96.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "T. Kulkarni" }
-      ];
-      localStorage.setItem('erp_students', JSON.stringify(initialStudents));
+      // ================= GRADE 5 (10 Students) =================
+      { id: "601", name: "Ramu Goud", grade: "5", section: "A", attendance: "92.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Tarun Goud" },
+      { id: "602", name: "Parth Somani", grade: "5", section: "A", attendance: "98.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Dinesh Somani" },
+      { id: "603", name: "Samarth Somani", grade: "5", section: "A", attendance: "96.5%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Karan Somani" },
+      { id: "604", name: "Rachna Prasad", grade: "5", section: "A", attendance: "94.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Gokul Prasad" },
+      { id: "605", name: "Samarth Shukla", grade: "5", section: "A", attendance: "99.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Nitin Shukla" },
+      { id: "606", name: "Raju Meena", grade: "5", section: "B", attendance: "93.0%", attendanceStatus: "ABSENT", feeStatus: "Paid", guardian: "Kailash Meena" },
+      { id: "607", name: "Trisha Madhav", grade: "5", section: "B", attendance: "95.0%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Balram Madhav" },
+      { id: "608", name: "Aarav Kulkarni", grade: "5", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Tanmay Kulkarni" },
+      { id: "609", name: "Utkarsh Vats", grade: "5", section: "B", attendance: "97.5%", attendanceStatus: "PRESENT", feeStatus: "Paid", guardian: "Rajan Vats" },
+      { id: "610", name: "Vanshika Tandon", grade: "5", section: "B", attendance: "98.0%", attendanceStatus: "PRESENT", feeStatus: "Pending", guardian: "Pradeep Tandon" }
+    ];
+
+    // Transactions with Indian names
+    const masterIndianTxns = [
+      { id: "TXN-8801", name: "Ramu Varma", rollNo: "101", amount: "₹25,000", date: "August 10, 2026", status: "SUCCESS", mode: "Online Portal" },
+      { id: "TXN-8802", name: "Rohan Kapoor", rollNo: "201", amount: "₹25,000", date: "August 11, 2026", status: "SUCCESS", mode: "Net Banking" },
+      { id: "TXN-8803", name: "Raju Badhavath", rollNo: "102", amount: "₹25,000", date: "August 12, 2026", status: "SUCCESS", mode: "Cash / Counter" },
+      { id: "TXN-8804", name: "Manideep Rao", rollNo: "103", amount: "₹25,000", date: "August 13, 2026", status: "SUCCESS", mode: "Online Portal" },
+      { id: "TXN-8805", name: "Prashanth Naidu", rollNo: "105", amount: "₹25,000", date: "August 14, 2026", status: "SUCCESS", mode: "Cash / Counter" }
+    ];
+
+    // Overwrite storage keys to remove old western cached names
+    localStorage.setItem('erp_students_clean', JSON.stringify(masterIndianStudents));
+    localStorage.setItem('erp_txns_clean', JSON.stringify(masterIndianTxns));
+
+    function getStoredStudents() {
+      return JSON.parse(localStorage.getItem('erp_students_clean') || '[]');
+    }
+
+    function saveStoredStudents(students) {
+      localStorage.setItem('erp_students_clean', JSON.stringify(students));
+    }
+
+    function getStoredTxns() {
+      return JSON.parse(localStorage.getItem('erp_txns_clean') || '[]');
+    }
+
+    function saveStoredTxns(txns) {
+      localStorage.setItem('erp_txns_clean', JSON.stringify(txns));
     }
 
     if (!localStorage.getItem('erp_teachers')) {
       const initialTeachers = [
-        { id: "T-501", name: "Dr. Sarah Jenkins", subject: "Science & Physics", grade: "Grade 8 - 10", email: "sarah.j@school.com" },
-        { id: "T-502", name: "Mrs. Clara Barton", subject: "Mathematics", grade: "Grade 9 - 10", email: "clara.b@school.com" },
-        { id: "T-503", name: "Mr. Arthur Pendelton", subject: "Social Studies & History", grade: "Grade 5 - 8", email: "arthur.p@school.com" },
-        { id: "T-504", name: "Ms. Elena Rostova", subject: "English Literature", grade: "Grade 5 - 10", email: "elena.r@school.com" }
+        { id: "T-501", name: "Dr. Sunita Deshmukh", subject: "Science & Physics", grade: "Grade 8 - 10", email: "sunita.d@school.com" },
+        { id: "T-502", name: "Mrs. Anjali Sharma", subject: "Mathematics", grade: "Grade 9 - 10", email: "anjali.s@school.com" },
+        { id: "T-503", name: "Mr. Suresh Iyer", subject: "Social Studies & History", grade: "Grade 5 - 8", email: "suresh.i@school.com" },
+        { id: "T-504", name: "Ms. Kavita Nair", subject: "English Literature", grade: "Grade 5 - 10", email: "kavita.n@school.com" }
       ];
       localStorage.setItem('erp_teachers', JSON.stringify(initialTeachers));
     }
 
     if (!localStorage.getItem('erp_complaints')) {
       const initialComplaints = [
-        { id: 1, rollNo: "101", studentName: "Marcus Jenkins", teacherName: "Dr. Sarah Jenkins", date: "August 10, 2026", issue: "Incomplete Physics homework submission for Chapter 3.", parentReply: "Apologies, Dr. Sarah. Marcus will complete and submit it by tomorrow morning." },
-        { id: 2, rollNo: "102", studentName: "Sophia Miller", teacherName: "Mrs. Clara Barton", date: "August 11, 2026", issue: "Arrived 20 minutes late for class assessment.", parentReply: "" }
+        { id: 1, rollNo: "101", studentName: "Ramu Varma", teacherName: "Dr. Sunita Deshmukh (T-501)", date: "August 10, 2026", issue: "Incomplete Physics homework submission for Chapter 3.", parentReply: "Apologies, Dr. Sunita. Ramu will complete and submit it by tomorrow morning." },
+        { id: 2, rollNo: "102", studentName: "Raju Badhavath", teacherName: "Mrs. Anjali Sharma (T-502)", date: "August 11, 2026", issue: "Arrived 20 minutes late for class assessment.", parentReply: "" }
       ];
       localStorage.setItem('erp_complaints', JSON.stringify(initialComplaints));
     }
@@ -477,25 +488,15 @@
       localStorage.setItem('erp_alerts', JSON.stringify(initialAlerts));
     }
 
-    if (!localStorage.getItem('erp_transactions')) {
-      const initialTxns = [
-        { id: "TXN-8801", name: "Marcus Jenkins", rollNo: "101", amount: "₹25,000", date: "August 10, 2026", status: "SUCCESS", mode: "Online Portal" },
-        { id: "TXN-8802", name: "Ethan Davis", rollNo: "103", amount: "₹25,000", date: "August 11, 2026", status: "SUCCESS", mode: "Net Banking" },
-        { id: "TXN-8803", name: "Ava Wilson", rollNo: "104", amount: "₹25,000", date: "August 12, 2026", status: "SUCCESS", mode: "Cash / Counter" }
-      ];
-      localStorage.setItem('erp_transactions', JSON.stringify(initialTxns));
-    }
-
     const credentialDirectory = [
-      { id: "admin@school.com", alias: "ceo@school.com", name: "Executive Admin / CEO", role: "ADMIN" },
-      { id: "t-501", alias: "teacher@school.com", name: "Dr. Sarah Jenkins (ID: T-501)", role: "TEACHER" },
-      { id: "p-101", alias: "parent@school.com", name: "Robert Jenkins (Parent ID: P-101)", role: "PARENT" },
-      { id: "101", alias: "student@school.com", name: "Marcus Jenkins (Roll No: 101)", role: "STUDENT" }
+      { id: "admin@school.com", alias: "ceo@school.com", name: "Rajesh Sharma (Admin / CEO)", role: "ADMIN" },
+      { id: "t-501", alias: "teacher@school.com", name: "Dr. Sunita Deshmukh (ID: T-501)", role: "TEACHER" },
+      { id: "p-101", alias: "parent@school.com", name: "Kishore Varma (Parent ID: P-101)", role: "PARENT" },
+      { id: "101", alias: "student@school.com", name: "Ramu Varma (Roll No: 101)", role: "STUDENT" }
     ];
 
     lucide.createIcons();
 
-    // Helper to generate dynamic alert banners for Student, Parent, and Teacher dashboards
     function getAlertsHTMLForRole(role) {
       const alertList = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
       const filteredAlerts = alertList.filter(a => a.target === 'ALL' || a.target === `${role}S`);
@@ -522,7 +523,7 @@
       `;
     }
 
-    // Video Handler
+    // Video Animation Handler
     const video = document.getElementById('bgVideo');
     let fadeAnimId = null;
     let isFadingOut = false;
@@ -747,11 +748,11 @@
                 <div class="space-y-3 text-xs">
                   <div>
                     <div class="flex justify-between mb-1"><span class="text-slate-400">Grade 10 Attendance</span><span class="text-emerald-400 font-bold">98.5%</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-400 h-2 rounded-full" style="width: 98.5%"></div></div>
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-400 h-2.5 rounded-full" style="width: 98.5%"></div></div>
                   </div>
                   <div>
                     <div class="flex justify-between mb-1"><span class="text-slate-400">Grade 9 Attendance</span><span class="text-indigo-400 font-bold">94.2%</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-indigo-400 h-2 rounded-full" style="width: 94.2%"></div></div>
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-400 h-2.5 rounded-full" style="width: 94.2%"></div></div>
                   </div>
                 </div>
               </div>
@@ -763,11 +764,11 @@
                 <div class="space-y-3 text-xs">
                   <div>
                     <div class="flex justify-between mb-1"><span class="text-slate-400">Pass Percentage</span><span class="text-indigo-400 font-bold">96.5%</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-indigo-500 h-2 rounded-full" style="width: 96.5%"></div></div>
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 96.5%"></div></div>
                   </div>
                   <div>
                     <div class="flex justify-between mb-1"><span class="text-slate-400">Distinction Rate</span><span class="text-emerald-400 font-bold">42.0%</span></div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-emerald-400 h-2 rounded-full" style="width: 42%"></div></div>
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-400 h-2.5 rounded-full" style="width: 42%"></div></div>
                   </div>
                 </div>
               </div>
@@ -819,14 +820,14 @@
             </div>
           `;
         } else if (currentUserRole === 'PARENT') {
-          const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-          const marcus = studentList.find(s => s.id === '101') || { attendance: '98.5%', attendanceStatus: 'PRESENT' };
-          const isAbsent = marcus.attendanceStatus === 'ABSENT';
+          const studentList = getStoredStudents();
+          const child = studentList.find(s => s.id === '101') || { name: 'Ramu Varma', attendance: '98.5%', attendanceStatus: 'PRESENT' };
+          const isAbsent = child.attendanceStatus === 'ABSENT';
 
           canvas.innerHTML = `
             <div class="mb-6">
               <h2 class="text-2xl font-bold text-white">Welcome Back, ${user} 👋</h2>
-              <p class="text-xs text-slate-400 mt-1">Parent Portal for Marcus Jenkins (Grade 10-A)</p>
+              <p class="text-xs text-slate-400 mt-1">Parent Portal for ${child.name} (Grade 10-A)</p>
             </div>
 
             <!-- URGENT ABSENCE MOBILE ALERT NOTIFICATION BANNER -->
@@ -841,7 +842,7 @@
                       🚨 URGENT: Student Absence Mobile Notification Alert
                     </h3>
                     <p class="text-xs text-red-200 mt-0.5 font-medium">
-                      Your child <strong>Marcus Jenkins (Roll No: 101)</strong> was marked <strong>ABSENT</strong> by Dr. Sarah Jenkins today. An automated SMS notification has been dispatched to your mobile phone.
+                      Your child <strong>${child.name} (Roll No: 101)</strong> was marked <strong>ABSENT</strong> by Dr. Sunita Deshmukh today. An automated SMS notification has been dispatched to your mobile phone.
                     </p>
                   </div>
                 </div>
@@ -855,7 +856,7 @@
               <div class="bg-slate-900 border ${isAbsent ? 'border-red-500/60 bg-red-950/20' : 'border-slate-800'} p-5 rounded-2xl">
                 <span class="text-xs font-semibold uppercase text-slate-400">Live Attendance Status</span>
                 <p class="text-3xl font-extrabold ${isAbsent ? 'text-red-400' : 'text-emerald-400'} mt-2">
-                  ${marcus.attendance} (${marcus.attendanceStatus})
+                  ${child.attendance} (${child.attendanceStatus})
                 </p>
               </div>
               <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
@@ -865,8 +866,8 @@
             </div>
           `;
         } else { // STUDENT
-          const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-          const marcus = studentList.find(s => s.id === '101') || { attendance: '98.5%', attendanceStatus: 'PRESENT' };
+          const studentList = getStoredStudents();
+          const student = studentList.find(s => s.id === '101') || { name: 'Ramu Varma', attendance: '98.5%', attendanceStatus: 'PRESENT' };
 
           canvas.innerHTML = `
             <div class="mb-6">
@@ -877,13 +878,14 @@
             <!-- DISPLAY IMPORTANT ALERTS FOR STUDENTS -->
             ${getAlertsHTMLForRole('STUDENT')}
 
+            <!-- OVERALL ATTENDANCE PROGRESS BAR & 4-CORE SUBJECT BREAKDOWN -->
             <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl mb-8">
               <div class="flex justify-between items-center mb-4">
                 <h3 class="text-sm font-bold text-white uppercase tracking-wider">Overall Attendance Representation</h3>
-                <span class="text-2xl font-extrabold text-emerald-400">${marcus.attendance}</span>
+                <span class="text-2xl font-extrabold text-emerald-400">${student.attendance}</span>
               </div>
               <div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden mb-6">
-                <div class="bg-gradient-to-r from-emerald-500 to-indigo-500 h-full rounded-full" style="width: 98.5%"></div>
+                <div class="bg-gradient-to-r from-emerald-500 to-indigo-500 h-full rounded-full" style="width: ${student.attendance === '100%' ? '100%' : '98.5%'}"></div>
               </div>
 
               <h4 class="text-xs font-bold text-slate-300 uppercase mb-3">Subject-Wise Attendance Breakdown</h4>
@@ -912,8 +914,7 @@
 
       // ================= CLASS & SECTION ATTENDANCE =================
       else if (viewKey === 'attendance_select') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        
+        const studentList = getStoredStudents();
         const filteredStudents = studentList.filter(s => 
           String(s.grade) === String(gradeFilter) && 
           String(s.section).toUpperCase() === String(secFilter).toUpperCase()
@@ -978,9 +979,86 @@
         `;
       }
 
+      // ================= CLASS-WISE & SECTION-WISE STUDENT GRADEBOOK =================
+      else if (viewKey === 'marks_grades') {
+        const studentList = getStoredStudents();
+        const filteredStudents = studentList.filter(s => 
+          String(s.grade) === String(gradeFilter) && 
+          String(s.section).toUpperCase() === String(secFilter).toUpperCase()
+        );
+
+        canvas.innerHTML = `
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-white">Student Gradebook (Class & Section Wise)</h2>
+            <p class="text-xs text-slate-400 mt-1">Select class & section to edit and save evaluation marks for Formative (FA1–4) and Summative (SA1–2) assessments.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl mb-6 flex flex-wrap gap-4 items-center">
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Class Grade</label>
+              <select id="gradebookGrade" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option value="10" ${gradeFilter === '10' ? 'selected' : ''}>Grade 10</option>
+                <option value="9" ${gradeFilter === '9' ? 'selected' : ''}>Grade 9</option>
+                <option value="8" ${gradeFilter === '8' ? 'selected' : ''}>Grade 8</option>
+                <option value="7" ${gradeFilter === '7' ? 'selected' : ''}>Grade 7</option>
+                <option value="6" ${gradeFilter === '6' ? 'selected' : ''}>Grade 6</option>
+                <option value="5" ${gradeFilter === '5' ? 'selected' : ''}>Grade 5</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Section</label>
+              <select id="gradebookSection" class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white">
+                <option value="A" ${secFilter === 'A' ? 'selected' : ''}>Section A</option>
+                <option value="B" ${secFilter === 'B' ? 'selected' : ''}>Section B</option>
+              </select>
+            </div>
+            <div class="self-end">
+              <button onclick="applyGradebookFilter()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-lg transition-all">Load Gradebook</button>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Evaluation Sheet: Grade ${gradeFilter} - Section ${secFilter}</h3>
+              <span class="text-xs text-slate-400 font-semibold">${filteredStudents.length} Students Listed</span>
+            </div>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                <tr>
+                  <th class="p-3">Roll No</th>
+                  <th class="p-3">Student Name</th>
+                  <th class="p-3">FA-1 (50)</th>
+                  <th class="p-3">FA-2 (50)</th>
+                  <th class="p-3">SA-1 (100)</th>
+                  <th class="p-3">FA-3 (50)</th>
+                  <th class="p-3">FA-4 (50)</th>
+                  <th class="p-3">SA-2 (100)</th>
+                  <th class="p-3">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${filteredStudents.length > 0 ? filteredStudents.map(s => `
+                  <tr>
+                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
+                    <td class="p-3 font-bold text-white">${s.name}</td>
+                    <td class="p-3"><input type="number" id="fa1_${s.id}" value="48" class="w-14 bg-slate-800 border border-slate-700 p-1.5 rounded-lg text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="fa2_${s.id}" value="46" class="w-14 bg-slate-800 border border-slate-700 p-1.5 rounded-lg text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="sa1_${s.id}" value="92" class="w-14 bg-slate-800 border border-slate-700 p-1.5 rounded-lg text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="fa3_${s.id}" value="47" class="w-14 bg-slate-800 border border-slate-700 p-1.5 rounded-lg text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="fa4_${s.id}" value="49" class="w-14 bg-slate-800 border border-slate-700 p-1.5 rounded-lg text-white text-center" /></td>
+                    <td class="p-3"><input type="number" id="sa2_${s.id}" value="95" class="w-14 bg-slate-800 border border-slate-700 p-1.5 rounded-lg text-white text-center" /></td>
+                    <td class="p-3"><button onclick="saveStudentGrade('${s.id}')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white text-[11px] font-bold shadow-md">Save Grade</button></td>
+                  </tr>
+                `).join('') : `<tr><td colspan="9" class="p-4 text-center text-slate-500 italic">No students registered in Grade ${gradeFilter} - Section ${secFilter}.</td></tr>`}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
       // ================= ADMIN GRADE-WISE STUDENTS =================
       else if (viewKey === 'students_grade') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
+        const studentList = getStoredStudents();
         const grades = ["10", "9", "8", "7", "6", "5"];
 
         canvas.innerHTML = `
@@ -991,7 +1069,7 @@
             </div>
             <div class="relative w-full sm:w-72">
               <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
-              <input type="text" id="gradeStudentSearch" onkeyup="filterGradeStudents()" placeholder="Search Name or Roll No..." class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <input type="text" id="gradeStudentSearch" onkeyup="filterGradeStudents()" placeholder="Search Indian Name or Roll No..." class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             </div>
           </div>
 
@@ -1013,7 +1091,7 @@
                         <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">Section</th><th class="p-3">Guardian</th><th class="p-3">Attendance</th><th class="p-3">Fee Status</th></tr>
                       </thead>
                       <tbody class="divide-y divide-slate-800">
-                        ${studentsInGrade.length > 0 ? studentsInGrade.map(s => `
+                        ${studentsInGrade.map(s => `
                           <tr class="student-row" data-name="${s.name.toLowerCase()}" data-roll="${s.id}">
                             <td class="p-3 font-mono text-indigo-400">${s.id}</td>
                             <td class="p-3 font-bold text-white">${s.name}</td>
@@ -1022,7 +1100,7 @@
                             <td class="p-3 text-emerald-400 font-semibold">${s.attendance}</td>
                             <td class="p-3"><span class="px-2.5 py-1 ${s.feeStatus === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'} rounded-full text-[10px] font-bold uppercase">${s.feeStatus}</span></td>
                           </tr>
-                        `).join('') : `<tr><td colspan="6" class="p-3 text-center text-slate-500 italic">No students registered in Grade ${g} yet.</td></tr>`}
+                        `).join('')}
                       </tbody>
                     </table>
                   </div>
@@ -1033,24 +1111,16 @@
         `;
       }
 
-      // ================= REVENUE & FEES WITH INTERACTIVE PAYMENT RECORDING =================
+      // ================= REVENUE & FEES WITH PAYMENT RECORDING =================
       else if (viewKey === 'admin_fees_grade') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        const txns = JSON.parse(localStorage.getItem('erp_transactions') || '[]');
+        const studentList = getStoredStudents();
+        const txns = getStoredTxns();
 
         canvas.innerHTML = `
-          <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Analytics</h2>
-              <p class="text-xs text-slate-400 mt-1">Financial stats, latest collected fees, and incoming student fee submissions.</p>
-            </div>
-          </div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Grade-Wise Revenue & Fee Analytics</h2><p class="text-xs text-slate-400 mt-1">Financial stats, latest collected fees, and incoming student fee submissions.</p></div>
 
-          <!-- Interactive Record Fee Payment Form -->
           <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
-            <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-              <i data-lucide="plus-circle" class="w-4 h-4"></i> Record Student Fee Payment
-            </h3>
+            <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="w-4 h-4"></i> Record Student Fee Payment</h3>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4">
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Select Student</label>
@@ -1060,7 +1130,7 @@
               </div>
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Payment Amount (₹)</label>
-                <input type="number" id="feeAmountInput" value="25000" placeholder="e.g. 25000" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+                <input type="number" id="feeAmountInput" value="25000" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
               </div>
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Payment Mode</label>
@@ -1068,50 +1138,28 @@
                   <option value="Online Portal">Online Portal / UPI</option>
                   <option value="Cash / Counter">Cash / Bank Counter</option>
                   <option value="Net Banking">Net Banking / NEFT</option>
-                  <option value="Credit/Debit Card">Credit / Debit Card</option>
                 </select>
               </div>
               <div class="self-end">
-                <button onclick="recordStudentFeePayment()" class="w-full px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-lg transition-all flex items-center justify-center gap-2">
-                  <i data-lucide="check-circle-2" class="w-4 h-4"></i> Record Payment
-                </button>
+                <button onclick="recordStudentFeePayment()" class="w-full px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Record Payment</button>
               </div>
             </div>
           </div>
 
-          <!-- Grade-Wise Fee Breakdown Table -->
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl mb-8 overflow-x-auto">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Grade-Wise Fee Collection Breakdown</h3>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recent Transactions</h3>
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Grade</th><th class="p-3">Total Students</th><th class="p-3">Fees Collected</th><th class="p-3">Pending Amount</th><th class="p-3">Upcoming Latest Target</th></tr>
+                <tr><th class="p-3">Transaction ID</th><th class="p-3">Student Name</th><th class="p-3">Roll No</th><th class="p-3">Amount</th><th class="p-3">Mode</th><th class="p-3">Date</th><th class="p-3">Status</th></tr>
               </thead>
               <tbody class="divide-y divide-slate-800">
-                <tr><td class="p-3 font-bold text-white">Grade 10</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,50,000</td><td class="p-3 text-emerald-400 font-mono">₹0 (All Clear)</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 9</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,30,000</td><td class="p-3 text-red-400 font-mono">₹20,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 8</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,40,000</td><td class="p-3 text-red-400 font-mono">₹10,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 7</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,20,000</td><td class="p-3 text-red-400 font-mono">₹30,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 6</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,35,000</td><td class="p-3 text-red-400 font-mono">₹15,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-                <tr><td class="p-3 font-bold text-white">Grade 5</td><td class="p-3">250</td><td class="p-3 text-emerald-400 font-mono font-bold">₹2,10,000</td><td class="p-3 text-red-400 font-mono">₹40,000</td><td class="p-3 text-indigo-400 font-mono">₹2,50,000</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Live Transactions Table -->
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recent Transactions & Student Fee Details</h3>
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Transaction ID</th><th class="p-3">Student Name</th><th class="p-3">Roll No</th><th class="p-3">Amount Paid</th><th class="p-3">Payment Mode</th><th class="p-3">Payment Date</th><th class="p-3">Status</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800" id="txnsTableBody">
                 ${txns.map(t => `
                   <tr>
                     <td class="p-3 font-mono text-indigo-400">${t.id}</td>
                     <td class="p-3 font-bold text-white">${t.name}</td>
                     <td class="p-3 font-mono text-slate-400">${t.rollNo}</td>
                     <td class="p-3 font-mono text-emerald-400 font-bold">${t.amount}</td>
-                    <td class="p-3 text-slate-300">${t.mode || 'Online Portal'}</td>
+                    <td class="p-3 text-slate-300">${t.mode || 'Online'}</td>
                     <td class="p-3">${t.date}</td>
                     <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">SUCCESS</span></td>
                   </tr>
@@ -1124,8 +1172,8 @@
 
       else if (viewKey === 'assigned_classes') {
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Periods</h2><p class="text-xs text-slate-400 mt-1">Review active assigned teaching periods across all assigned grade sections.</p></div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Assigned Classes & Periods</h2><p class="text-xs text-slate-400 mt-1">Review active assigned teaching periods.</p></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
               <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 10 - Section A</h3><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-semibold">Period 1</span></div>
               <p class="text-xs text-slate-300 font-semibold mt-1">Physics & Wave Optics</p>
@@ -1136,82 +1184,52 @@
               <p class="text-xs text-slate-300 font-semibold mt-1">General Chemistry Practical</p>
               <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 09:45 AM - 10:45 AM</p>
             </div>
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Grade 8 - Section A</h3><span class="px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-semibold">Period 3</span></div>
-              <p class="text-xs text-slate-300 font-semibold mt-1">Biological Sciences</p>
-              <p class="text-xs font-semibold text-indigo-400 mt-2">Time: 11:15 AM - 12:15 PM</p>
-            </div>
           </div>
         `;
       }
 
-      else if (viewKey === 'marks_grades') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Gradebook (Teacher Edit Portal)</h2><p class="text-xs text-slate-400 mt-1">Input, modify, and save evaluation marks for Formative (FA1-4) and Summative (SA1-2) assessments.</p></div>
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Roll No</th><th class="p-3">Student Name</th><th class="p-3">FA-1 (50)</th><th class="p-3">FA-2 (50)</th><th class="p-3">SA-1 (100)</th><th class="p-3">FA-3 (50)</th><th class="p-3">FA-4 (50)</th><th class="p-3">SA-2 (100)</th><th class="p-3">Action</th></tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800">
-                ${studentList.map(s => `
-                  <tr>
-                    <td class="p-3 font-mono text-indigo-400">${s.id}</td>
-                    <td class="p-3 font-bold text-white">${s.name}</td>
-                    <td class="p-3"><input type="number" id="fa1_${s.id}" value="48" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
-                    <td class="p-3"><input type="number" id="fa2_${s.id}" value="46" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
-                    <td class="p-3"><input type="number" id="sa1_${s.id}" value="92" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
-                    <td class="p-3"><input type="number" id="fa3_${s.id}" value="47" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
-                    <td class="p-3"><input type="number" id="fa4_${s.id}" value="49" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
-                    <td class="p-3"><input type="number" id="sa2_${s.id}" value="95" class="w-14 bg-slate-800 border border-slate-700 p-1 rounded text-white text-center" /></td>
-                    <td class="p-3"><button onclick="saveStudentGrade('${s.id}')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 rounded text-white text-[10px] font-bold">Save Grade</button></td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
+      // ================= 7 CORE SUBJECTS & COURSE PORTIONS =================
       else if (viewKey === 'subject_courses') {
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Enrolled Courses & Subject Portions</h2><p class="text-xs text-slate-400 mt-1">Complete syllabus coverage across 7 core academic subjects.</p></div>
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-white">Enrolled Courses & Academic Portions</h2>
+            <p class="text-xs text-slate-400 mt-1">Comprehensive syllabus and curriculum distribution across all 7 core subjects.</p>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">General Science</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• Physics: Optics & Magnetism<br>• Chemistry: Chemical Reactions<br>• Biology: Respiration & Genetics</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">1. Mathematics</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• Quadratic Progressions & Polynomials<br>• Triangles & Coordinate Geometry<br>• Trigonometric Identities & Statistics</p>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Social Studies</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• History: Freedom Movement<br>• Geography: Natural Resources<br>• Civics: Indian Constitution</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">2. Physical Sciences (Physics & Chem)</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• Light: Reflection & Wave Optics<br>• Chemical Reactions, Acids & Bases<br>• Electricity & Magnetic Effects of Current</p>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Mathematics</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• Algebra: Quadratic Progressions<br>• Geometry: Triangles & Coordinate</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">3. Biology & Life Sciences</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• Cellular Respiration & Life Processes<br>• Control & Coordination in Animals<br>• Heredity, Genetics & Ecosystems</p>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">English Literature</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• Prose & Poetry Analysis, Grammar, Essays</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">4. Social Sciences & Civics</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• Modern Indian History & Nationalism<br>• Resources, Agriculture & Geography<br>• Democratic Politics & Constitutional Law</p>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Computer Science</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• Python Programming & HTML5/CSS Basics</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">5. English Literature & Grammar</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• First Flight Prose & Poetry Critiques<br>• Formal Letter & Analytical Paragraph Writing<br>• Advanced Syntax & Applied Grammar</p>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Environmental Studies</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• Ecosystems & Sustainable Development</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">6. Second Language (Hindi / Regional)</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• Sparsh & Sanchayan Text Analysis<br>• Sandhi, Samas & Vyakaran<br>• Essay Writing & Comprehension Passages</p>
             </div>
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">Second Language</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
-              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Coverage:</p>
-              <p class="text-xs text-slate-400">• Grammar, Prose Comprehension & Writing</p>
+              <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-white text-base">7. Computer Science & Coding</h3><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] rounded font-bold">Grade 10</span></div>
+              <p class="text-xs text-slate-300 font-semibold mb-1">Portion Modules:</p>
+              <p class="text-xs text-slate-400">• Python Fundamentals & Data Structures<br>• HTML5, CSS3 & Responsive Web Design<br>• Cyber Ethics, Networks & Database SQL</p>
             </div>
           </div>
         `;
@@ -1221,7 +1239,6 @@
         const alertList = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Important Alerts & System Circulars</h2><p class="text-xs text-slate-400 mt-1">Broadcast key announcements to Students, Teachers, and Parents.</p></div>
-
           <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
             <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="bell-plus" class="w-4 h-4"></i> Add New Important Alert</h3>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
@@ -1235,16 +1252,12 @@
               <button onclick="createNewAlert()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Publish Alert</button>
             </div>
           </div>
-
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
             <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Published Circulars</h3>
             <div class="space-y-3">
               ${alertList.map(a => `
                 <div class="p-4 bg-slate-800/60 rounded-xl border border-slate-700/50 flex justify-between items-center">
-                  <div>
-                    <h4 class="font-bold text-white text-sm">${a.title}</h4>
-                    <p class="text-[10px] text-slate-400 mt-0.5">Published on: ${a.date}</p>
-                  </div>
+                  <div><h4 class="font-bold text-white text-sm">${a.title}</h4><p class="text-[10px] text-slate-400 mt-0.5">Date: ${a.date}</p></div>
                   <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-[10px] font-bold uppercase">For: ${a.target}</span>
                 </div>
               `).join('')}
@@ -1255,38 +1268,20 @@
 
       else if (viewKey === 'parent_performance') {
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Performance Graphs & Analytics</h2><p class="text-xs text-slate-400 mt-1">Graphical analytics for Marcus Jenkins (Grade 10-A).</p></div>
-          
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Performance Graphs & Analytics</h2><p class="text-xs text-slate-400 mt-1">Graphical analytics for Ramu Varma (Grade 10-A).</p></div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <h3 class="text-xs font-bold text-slate-300 uppercase mb-4 flex items-center gap-2">
-                <i data-lucide="line-chart" class="w-4 h-4 text-emerald-400"></i> Attendance Graphical Trend (Term-Wise)
-              </h3>
+              <h3 class="text-xs font-bold text-slate-300 uppercase mb-4 flex items-center gap-2"><i data-lucide="line-chart" class="w-4 h-4 text-emerald-400"></i> Term-Wise Attendance</h3>
               <div class="space-y-4 text-xs">
-                <div>
-                  <div class="flex justify-between mb-1"><span class="text-slate-400">Term 1 Attendance</span><span class="text-emerald-400 font-bold">98.5%</span></div>
-                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-400 h-2.5 rounded-full" style="width: 98.5%"></div></div>
-                </div>
-                <div>
-                  <div class="flex justify-between mb-1"><span class="text-slate-400">Term 2 Attendance</span><span class="text-indigo-400 font-bold">96.0%</span></div>
-                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-400 h-2.5 rounded-full" style="width: 96%"></div></div>
-                </div>
+                <div><div class="flex justify-between mb-1"><span class="text-slate-400">Term 1</span><span class="text-emerald-400 font-bold">98.5%</span></div><div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-400 h-2.5 rounded-full" style="width: 98.5%"></div></div></div>
+                <div><div class="flex justify-between mb-1"><span class="text-slate-400">Term 2</span><span class="text-indigo-400 font-bold">96.0%</span></div><div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-400 h-2.5 rounded-full" style="width: 96%"></div></div></div>
               </div>
             </div>
-
             <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
-              <h3 class="text-xs font-bold text-slate-300 uppercase mb-4 flex items-center gap-2">
-                <i data-lucide="bar-chart-2" class="w-4 h-4 text-indigo-400"></i> Overall Subject Performance (GPA & Marks)
-              </h3>
+              <h3 class="text-xs font-bold text-slate-300 uppercase mb-4 flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-4 h-4 text-indigo-400"></i> Subject Performance</h3>
               <div class="space-y-4 text-xs">
-                <div>
-                  <div class="flex justify-between mb-1"><span class="text-slate-400">General Science</span><span class="text-indigo-400 font-bold">95 / 100 (A+)</span></div>
-                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 95%"></div></div>
-                </div>
-                <div>
-                  <div class="flex justify-between mb-1"><span class="text-slate-400">Mathematics</span><span class="text-emerald-400 font-bold">98 / 100 (Outstanding)</span></div>
-                  <div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-500 h-2.5 rounded-full" style="width: 98%"></div></div>
-                </div>
+                <div><div class="flex justify-between mb-1"><span class="text-slate-400">Science</span><span class="text-indigo-400 font-bold">95 / 100</span></div><div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 95%"></div></div></div>
+                <div><div class="flex justify-between mb-1"><span class="text-slate-400">Mathematics</span><span class="text-emerald-400 font-bold">98 / 100</span></div><div class="w-full bg-slate-800 h-2.5 rounded-full"><div class="bg-emerald-500 h-2.5 rounded-full" style="width: 98%"></div></div></div>
               </div>
             </div>
           </div>
@@ -1295,13 +1290,12 @@
 
       else if (viewKey === 'student_info_search') {
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Search & Comprehensive Academic Details</h2><p class="text-xs text-slate-400 mt-1">Search student records or enroll a new student into the school directory (Admin Only).</p></div>
-          
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Search & Comprehensive Academic Details</h2><p class="text-xs text-slate-400 mt-1">Enroll a new student into the school directory.</p></div>
           <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
             <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Student Entry</h3>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
               <input type="text" id="addRollNo" placeholder="Roll No (e.g. 108)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addStudentName" placeholder="Full Student Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+              <input type="text" id="addStudentName" placeholder="Full Student Indian Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
               <select id="addStudentGrade" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white"><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10" selected>Grade 10</option></select>
               <input type="text" id="addStudentSec" placeholder="Section (A/B)" value="A" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
               <input type="text" id="addGuardian" placeholder="Parent/Guardian Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
@@ -1314,18 +1308,7 @@
       else if (viewKey === 'teachers') {
         const teacherList = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members and add new teacher entries (Admin Only).</p></div>
-          <div class="bg-slate-900 border border-indigo-500/30 p-6 rounded-2xl mb-8 shadow-xl">
-            <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Add New Faculty Member</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-              <input type="text" id="addTeacherID" placeholder="Teacher ID (e.g. T-505)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addTeacherName" placeholder="Faculty Full Name" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addTeacherSubject" placeholder="Assigned Subject (e.g. Mathematics)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="text" id="addTeacherGrade" placeholder="Assigned Grade (e.g. Grade 5-10)" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <input type="email" id="addTeacherEmail" placeholder="Faculty Email" class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-              <button onclick="saveNewTeacher()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Add Faculty Member</button>
-            </div>
-          </div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Faculty Directory & Hiring</h2><p class="text-xs text-slate-400 mt-1">Manage existing faculty members.</p></div>
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
@@ -1348,8 +1331,7 @@
       }
 
       else if (viewKey === 'teacher_complaints') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
+        const studentList = getStoredStudents();
         canvas.innerHTML = `
           <div class="mb-6"><h2 class="text-2xl font-bold text-white">Student Complaints</h2><p class="text-xs text-slate-400 mt-1">Submit disciplinary or academic complaints directly to parents.</p></div>
           <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl mb-8 shadow-xl">
@@ -1363,7 +1345,7 @@
               </div>
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Complaint / Issue Note</label>
-                <input type="text" id="complaintText" placeholder="e.g. Incomplete lab work, repeated tardiness" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+                <input type="text" id="complaintText" placeholder="e.g. Incomplete homework" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
               </div>
             </div>
             <button onclick="submitTeacherComplaint()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">Submit Complaint to Parent</button>
@@ -1375,63 +1357,36 @@
         const complaintList = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
         const childComplaints = complaintList.filter(c => c.rollNo === '101');
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers and reply directly.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Teacher Complaints & Reply Center</h2><p class="text-xs text-slate-400 mt-1">Review feedback and complaints submitted by subject teachers.</p></div>
           <div class="space-y-4">
-            ${childComplaints.length > 0 ? childComplaints.map(c => `
+            ${childComplaints.map(c => `
               <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                  <div>
-                    <h3 class="text-sm font-bold text-white">${c.teacherName}</h3>
-                    <p class="text-[10px] text-slate-400">Date: ${c.date} • Student: ${c.studentName} (Roll No: ${c.rollNo})</p>
-                  </div>
-                  <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase rounded-full">Teacher Complaint</span>
+                  <div><h3 class="text-sm font-bold text-white">${c.teacherName}</h3><p class="text-[10px] text-slate-400">Student: ${c.studentName} (Roll No: ${c.rollNo})</p></div>
+                  <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase rounded-full">Complaint</span>
                 </div>
-                <div class="p-3 bg-slate-800/60 rounded-xl text-xs text-slate-200 border border-slate-700/50">
-                  <strong class="text-amber-300">Complaint Note:</strong> ${c.issue}
-                </div>
-                <div>
-                  <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Your Reply to Teacher</label>
-                  <div class="flex gap-2">
-                    <input type="text" id="replyInput_${c.id}" value="${c.parentReply}" placeholder="Type your response to the teacher..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
-                    <button onclick="sendParentReply(${c.id})" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Send Reply</button>
-                  </div>
+                <div class="p-3 bg-slate-800/60 rounded-xl text-xs text-slate-200">${c.issue}</div>
+                <div class="flex gap-2">
+                  <input type="text" id="replyInput_${c.id}" value="${c.parentReply}" placeholder="Type reply..." class="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white" />
+                  <button onclick="sendParentReply(${c.id})" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs">Send</button>
                 </div>
               </div>
-            `).join('') : `<div class="p-8 text-center text-slate-500">No complaints reported for your child.</div>`}
+            `).join('')}
           </div>
         `;
       }
 
       else if (viewKey === 'term_fees') {
-        const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-        const marcus = studentList.find(s => s.id === '101') || { feeStatus: 'Paid' };
-
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Fees & Payment Receipts</h2><p class="text-xs text-slate-400 mt-1">Review term payments, due dates, and pay online instantly.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Term-Wise Fees & Payment Receipts</h2><p class="text-xs text-slate-400 mt-1">Review term payments and official fee receipts.</p></div>
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
-                <tr><th class="p-3">Term Particulars</th><th class="p-3">Amount</th><th class="p-3">Due Date</th><th class="p-3">Payment Status</th><th class="p-3">Action</th></tr>
+                <tr><th class="p-3">Term Particulars</th><th class="p-3">Amount</th><th class="p-3">Status</th></tr>
               </thead>
               <tbody class="divide-y divide-slate-800">
-                <tr>
-                  <td class="p-3 font-bold text-white">Term 1 Fee</td>
-                  <td class="p-3 font-mono">₹25,000</td>
-                  <td class="p-3">June 15, 2026</td>
-                  <td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">PAID</span></td>
-                  <td class="p-3"><button onclick="alert('Downloading Official Term 1 Receipt...')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded font-semibold text-[10px]">Download Receipt</button></td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-bold text-white">Term 2 Fee</td>
-                  <td class="p-3 font-mono">₹25,000</td>
-                  <td class="p-3">October 15, 2026</td>
-                  <td class="p-3"><span id="parentTerm2Status" class="px-2.5 py-1 ${marcus.feeStatus === 'Paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'} rounded-full font-bold text-[10px]">${marcus.feeStatus === 'Paid' ? 'PAID' : 'DUE / PENDING'}</span></td>
-                  <td class="p-3">
-                    ${marcus.feeStatus === 'Paid' 
-                      ? `<button onclick="alert('Downloading Official Term 2 Receipt...')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded font-semibold text-[10px]">Download Receipt</button>` 
-                      : `<button onclick="processParentOnlineFeePayment('101')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-semibold text-[10px]">Pay Online (₹25,000)</button>`}
-                  </td>
-                </tr>
+                <tr><td class="p-3 font-bold text-white">Term 1 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">PAID</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Term 2 Fee</td><td class="p-3 font-mono">₹25,000</td><td class="p-3"><span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-full font-bold text-[10px]">PAID</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1440,7 +1395,7 @@
 
       else if (viewKey === 'report_cards_marks') {
         canvas.innerHTML = `
-          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Report Cards & Assessment Marks</h2><p class="text-xs text-slate-400 mt-1">Official marksheet breakdown for Formative (FA) and Summative (SA) assessments.</p></div>
+          <div class="mb-6"><h2 class="text-2xl font-bold text-white">Report Cards & Assessment Marks</h2><p class="text-xs text-slate-400 mt-1">Official marksheet breakdown.</p></div>
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
@@ -1448,7 +1403,7 @@
               </thead>
               <tbody class="divide-y divide-slate-800">
                 <tr><td class="p-3 font-bold text-white">General Science</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">46</td><td class="p-3 font-mono">92</td><td class="p-3 font-mono">47</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">95</td><td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded font-bold">A+</span></td></tr>
-                <tr><td class="p-3 font-bold text-white">Mathematics</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">96</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">98</td><td class="p-3"><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 rounded font-bold">O (Outstanding)</span></td></tr>
+                <tr><td class="p-3 font-bold text-white">Mathematics</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">49</td><td class="p-3 font-mono">96</td><td class="p-3 font-mono">48</td><td class="p-3 font-mono">50</td><td class="p-3 font-mono">98</td><td class="p-3"><span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 rounded font-bold">O</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1462,74 +1417,29 @@
       lucide.createIcons();
     }
 
-    // Process Parent Online Fee Payment
-    function processParentOnlineFeePayment(rollNo) {
-      const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-      const index = studentList.findIndex(s => s.id === rollNo);
-
-      if (index !== -1) {
-        studentList[index].feeStatus = 'Paid';
-        localStorage.setItem('erp_students', JSON.stringify(studentList));
-
-        // Add to Transactions
-        const txns = JSON.parse(localStorage.getItem('erp_transactions') || '[]');
-        const newTxnId = `TXN-${Math.floor(1000 + Math.random() * 9000)}`;
-        txns.unshift({
-          id: newTxnId,
-          name: studentList[index].name,
-          rollNo: studentList[index].id,
-          amount: "₹25,000",
-          date: "August 14, 2026",
-          status: "SUCCESS",
-          mode: "Online Portal"
-        });
-        localStorage.setItem('erp_transactions', JSON.stringify(txns));
-
-        alert(`✅ Payment of ₹25,000 for ${studentList[index].name} completed successfully!\nTransaction ID: ${newTxnId}`);
-        renderView('term_fees');
-      }
-    }
-
-    // Admin Record Student Fee Payment
-    function recordStudentFeePayment() {
-      const rollNo = document.getElementById('feeStudentSelect').value;
-      const amountVal = document.getElementById('feeAmountInput').value.trim() || '25000';
-      const mode = document.getElementById('feeModeSelect').value;
-
-      const studentList = JSON.parse(localStorage.getItem('erp_students') || '[]');
-      const index = studentList.findIndex(s => s.id === rollNo);
-
-      if (index !== -1) {
-        studentList[index].feeStatus = 'Paid';
-        localStorage.setItem('erp_students', JSON.stringify(studentList));
-
-        // Add Transaction
-        const txns = JSON.parse(localStorage.getItem('erp_transactions') || '[]');
-        const newTxnId = `TXN-${Math.floor(1000 + Math.random() * 9000)}`;
-        txns.unshift({
-          id: newTxnId,
-          name: studentList[index].name,
-          rollNo: studentList[index].id,
-          amount: `₹${Number(amountVal).toLocaleString('en-IN')}`,
-          date: "August 14, 2026",
-          status: "SUCCESS",
-          mode: mode
-        });
-        localStorage.setItem('erp_transactions', JSON.stringify(txns));
-
-        alert(`✅ Fee Payment of ₹${amountVal} for ${studentList[index].name} (Roll No: ${rollNo}) successfully recorded!\nStatus: PAID`);
-        renderView('admin_fees_grade');
-      }
-    }
-
-    // Apply Filter Function for Attendance Roster
     function applyAttendanceFilter() {
       const g = document.getElementById('filterGrade').value;
       const s = document.getElementById('filterSection').value;
       renderView('attendance_select', g, s);
     }
 
-    // Filter Grade-Wise Students Search Bar
+    function applyGradebookFilter() {
+      const g = document.getElementById('gradebookGrade').value;
+      const s = document.getElementById('gradebookSection').value;
+      renderView('marks_grades', g, s);
+    }
+
+    function saveStudentGrade(rollNo) {
+      const fa1 = document.getElementById(`fa1_${rollNo}`).value;
+      const fa2 = document.getElementById(`fa2_${rollNo}`).value;
+      const sa1 = document.getElementById(`sa1_${rollNo}`).value;
+      const fa3 = document.getElementById(`fa3_${rollNo}`).value;
+      const fa4 = document.getElementById(`fa4_${rollNo}`).value;
+      const sa2 = document.getElementById(`sa2_${rollNo}`).value;
+
+      alert(`✅ Grades updated for Roll No: ${rollNo}!\nFA1: ${fa1}, FA2: ${fa2}, SA1: ${sa1}, FA3: ${fa3}, FA4: ${fa4}, SA2: ${sa2}`);
+    }
+
     function filterGradeStudents() {
       const query = (document.getElementById('gradeStudentSearch').value || '').toLowerCase().trim();
       const studentRows = document.querySelectorAll('.student-row');
@@ -1546,19 +1456,6 @@
       });
     }
 
-    // Save Student Grade (Teacher Edit Portal)
-    function saveStudentGrade(rollNo) {
-      const fa1 = document.getElementById(`fa1_${rollNo}`).value;
-      const fa2 = document.getElementById(`fa2_${rollNo}`).value;
-      const sa1 = document.getElementById(`sa1_${rollNo}`).value;
-      const fa3 = document.getElementById(`fa3_${rollNo}`).value;
-      const fa4 = document.getElementById(`fa4_${rollNo}`).value;
-      const sa2 = document.getElementById(`sa2_${rollNo}`).value;
-
-      alert(`Grade updated for Roll No ${rollNo}!\nFA1: ${fa1}, FA2: ${fa2}, SA1: ${sa1}, FA3: ${fa3}, FA4: ${fa4}, SA2: ${sa2}`);
-    }
-
-    // Admin Create New Alert
     function createNewAlert() {
       const title = document.getElementById('alertTitleInput').value.trim();
       const target = document.getElementById('alertTargetSelect').value;
@@ -1573,7 +1470,7 @@
         id: Date.now(),
         title: title,
         target: target,
-        date: "August 14, 2026"
+        date: "August 16, 2026"
       });
 
       localStorage.setItem('erp_alerts', JSON.stringify(alerts));
@@ -1581,13 +1478,12 @@
       renderView('important_alerts');
     }
 
-    // Trigger Simulated Parent SMS Alert Notification Toast
     function triggerParentSMSAlert(studentName, rollNo, guardian) {
       const toast = document.getElementById('smsToast');
       const toastText = document.getElementById('smsToastText');
       if (!toast || !toastText) return;
 
-      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 14-Aug-2026 at St. Jude's Academy."`;
+      toastText.innerText = `SMS Sent to Parent (${guardian}): "Alert! ${studentName} (Roll No: ${rollNo}) has been marked ABSENT on 16-Aug-2026 at St. Jude's Academy."`;
       
       toast.classList.remove('hidden');
       setTimeout(() => {
@@ -1595,24 +1491,22 @@
       }, 6000);
     }
 
-    // Set Present / Absent Explicitly with Parent Mobile Alert Trigger
     async function setStudentAttendance(rollNo, status, currentGrade = '10', currentSec = 'A') {
-      const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const students = getStoredStudents();
       const index = students.findIndex(s => s.id === rollNo);
 
       if (index !== -1) {
         students[index].attendanceStatus = status;
         students[index].attendance = status === 'PRESENT' ? '98.5%' : '92.0%';
-        localStorage.setItem('erp_students', JSON.stringify(students));
+        saveStoredStudents(students);
         
-        // When marked ABSENT: Automatically post to alerts and trigger parent SMS
         if (status === 'ABSENT') {
           const alerts = JSON.parse(localStorage.getItem('erp_alerts') || '[]');
           alerts.unshift({
             id: Date.now(),
-            title: `Attendance Alert: ${students[index].name} (Roll No: ${students[index].id}) marked ABSENT on 14-Aug-2026`,
+            title: `Attendance Alert: ${students[index].name} (Roll No: ${students[index].id}) marked ABSENT on 16-Aug-2026`,
             target: 'PARENTS',
-            date: "August 14, 2026"
+            date: "August 16, 2026"
           });
           localStorage.setItem('erp_alerts', JSON.stringify(alerts));
 
@@ -1624,7 +1518,7 @@
                 rollNo: students[index].id,
                 studentName: students[index].name,
                 status: status,
-                date: "14-Aug-2026",
+                date: "16-Aug-2026",
                 parentPhone: "+919876543210"
               })
             }).catch(err => console.log('FastAPI offline, running local simulation.'));
@@ -1637,11 +1531,40 @@
       }
     }
 
-    // Submit Teacher Complaint
+    function recordStudentFeePayment() {
+      const rollNo = document.getElementById('feeStudentSelect').value;
+      const amountVal = document.getElementById('feeAmountInput').value.trim() || '25000';
+      const mode = document.getElementById('feeModeSelect').value;
+
+      const studentList = getStoredStudents();
+      const index = studentList.findIndex(s => s.id === rollNo);
+
+      if (index !== -1) {
+        studentList[index].feeStatus = 'Paid';
+        saveStoredStudents(studentList);
+
+        const txns = getStoredTxns();
+        const newTxnId = `TXN-${Math.floor(1000 + Math.random() * 9000)}`;
+        txns.unshift({
+          id: newTxnId,
+          name: studentList[index].name,
+          rollNo: studentList[index].id,
+          amount: `₹${Number(amountVal).toLocaleString('en-IN')}`,
+          date: "August 16, 2026",
+          status: "SUCCESS",
+          mode: mode
+        });
+        saveStoredTxns(txns);
+
+        alert(`✅ Fee Payment of ₹${amountVal} for ${studentList[index].name} (Roll No: ${rollNo}) recorded!\nStatus: PAID`);
+        renderView('admin_fees_grade');
+      }
+    }
+
     function submitTeacherComplaint() {
       const rollNo = document.getElementById('complaintRollNo').value;
       const issue = document.getElementById('complaintText').value.trim();
-      const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const students = getStoredStudents();
       const student = students.find(s => s.id === rollNo);
 
       if (!issue) {
@@ -1650,23 +1573,21 @@
       }
 
       const complaints = JSON.parse(localStorage.getItem('erp_complaints') || '[]');
-      const newEntry = {
+      complaints.push({
         id: Date.now(),
         rollNo: rollNo,
         studentName: student ? student.name : "Student",
-        teacherName: "Dr. Sarah Jenkins (T-501)",
-        date: "August 14, 2026",
+        teacherName: "Dr. Sunita Deshmukh (T-501)",
+        date: "August 16, 2026",
         issue: issue,
         parentReply: ""
-      };
+      });
 
-      complaints.push(newEntry);
       localStorage.setItem('erp_complaints', JSON.stringify(complaints));
       alert(`Complaint for ${student ? student.name : 'Student'} submitted and sent to parent!`);
       renderView('teacher_complaints');
     }
 
-    // Send Parent Reply to Complaint
     function sendParentReply(complaintId) {
       const inputVal = document.getElementById(`replyInput_${complaintId}`).value.trim();
       if (!inputVal) {
@@ -1685,7 +1606,6 @@
       }
     }
 
-    // Admin Add Student
     function saveNewStudent() {
       const id = document.getElementById('addRollNo').value.trim();
       const name = document.getElementById('addStudentName').value.trim();
@@ -1698,33 +1618,12 @@
         return;
       }
 
-      const students = JSON.parse(localStorage.getItem('erp_students') || '[]');
+      const students = getStoredStudents();
       students.push({ id, name, grade, section, attendance: '100%', attendanceStatus: 'PRESENT', feeStatus: 'Paid', guardian });
-      localStorage.setItem('erp_students', JSON.stringify(students));
+      saveStoredStudents(students);
 
       alert(`Student ${name} successfully enrolled into Grade ${grade}-${section}!`);
       renderView('students_grade');
-    }
-
-    // Admin Add Teacher
-    function saveNewTeacher() {
-      const id = document.getElementById('addTeacherID').value.trim();
-      const name = document.getElementById('addTeacherName').value.trim();
-      const subject = document.getElementById('addTeacherSubject').value.trim();
-      const grade = document.getElementById('addTeacherGrade').value.trim() || 'Grade 5 - 10';
-      const email = document.getElementById('addTeacherEmail').value.trim();
-
-      if (!id || !name || !subject) {
-        alert('Please fill in Teacher ID, Name, and Subject.');
-        return;
-      }
-
-      const teachers = JSON.parse(localStorage.getItem('erp_teachers') || '[]');
-      teachers.push({ id, name, subject, grade, email });
-      localStorage.setItem('erp_teachers', JSON.stringify(teachers));
-
-      alert(`Faculty member ${name} (${subject}) successfully added!`);
-      renderView('teachers');
     }
 
     if (localStorage.getItem('token') || localStorage.getItem('erp_token')) {
